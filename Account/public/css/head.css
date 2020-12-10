@@ -1,0 +1,9 @@
+.overlay  .container{
+    margin-top: 
+    3em;
+    margin-bottom: 10em;
+}
+.rgba-gradient{
+    background: rgb(48,57,71);
+    background: linear-gradient(138deg, rgba(48,57,71,0.9247899843531162) 0%, rgba(108,51,173,0.7623249983587185) 44%, rgba(33,144,175,0.5886555305716037) 89%, rgba(10,188,224,0.41218494233630953) 100%);
+}

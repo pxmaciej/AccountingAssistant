@@ -13,14 +13,14 @@
                 </ul>
                 <p class="text-muted small mb-4 mb-lg-0">© Biuro Dominik Kozłowski 2020. All Rights Reserved.</p>
             </div>
-            <div class="col">
+            <div class="col my-auto">
                 <p style="color: rgb(255,255,255);"><strong>Biuro Rachunkowe Dominik Kozłowski</strong><br></p>
                 <p style="color: rgb(255,255,255);">ul. Senatorska 48/8<br>59-220 Legnica<br>NIP:&nbsp;6912551566<br></p>
             </div>
-            <div class="col">
+            <div class="col my-auto">
                 <p style="color: rgb(255,255,255);">Telefony: <br>kom. 666&nbsp;077&nbsp;573<br>email: kozlowski@mojastrona.pl</p>
             </div>
-            <div class="col"><img src="assets/img/logoBiuroDuze_l.png" style="height: 170px;"></div>
+            <div class="col my-auto"><img src={{ asset('/image/logoBiuroDuze_l.png') }} style="height: 170px;"></div>
             <div class="col-lg-6 my-auto h-100 text-center text-lg-right">
                 <ul class="list-inline mb-0">
                     <li class="list-inline-item"><a href="#"></a></li>

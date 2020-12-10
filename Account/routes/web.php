@@ -16,3 +16,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('pages.index');
 });
+Route::get('/kontakt',function(){
+    return view('pages.kontakt');
+});
+Route::get('/oferta',function(){
+    return view('pages.oferta');
+});
