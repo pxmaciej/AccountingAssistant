@@ -48,6 +48,12 @@
         <td>30 zł</td>
       </tr>
   </tbody>
+    <tr>
+      <th scope="row"></th>
+      <td></td>
+      <td></td>
+      <td>(zależne od ilości faktur)</td>
+    </tr>
 </table>
 </div>
 

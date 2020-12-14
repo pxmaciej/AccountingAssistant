@@ -63,33 +63,33 @@
     <div class="container-fluid p-4">
         <div class="row no-gutters">
             <div class="col-lg-6 order-lg-2 text-white showcase-img" style="background: url({{ URL::asset('/image/multitask.png') }}) no-repeat; background-position:center;min-height:30em; "><span></span></div>
-            <div class="col-lg-6 my-auto order-lg-1 showcase-text p-5">
+            <div class="col-lg-6 my-auto order-lg-1 showcase-text" style="padding: 10em;">
                 <h2>Nasze Biuro Rachunkowe Oferuje</h2>
-                <p class="lead mb-0">Bardzo poszukiwany przez klientów wgląd do wszystkich danych on-line. Zapewniamy stały i bezpieczny dostęp do danych księgowych oraz skanów dokumentów on-line. Dzięki księgowości on-line cały czas na bieżąco możesz monitorować stan
+                <p class="lead mb-0" style="text-align: justify;">Bardzo poszukiwany przez klientów wgląd do wszystkich danych on-line. Zapewniamy stały i bezpieczny dostęp do danych księgowych oraz skanów dokumentów on-line. Dzięki księgowości on-line cały czas na bieżąco możesz monitorować stan
                     zobowiązań i należności, a także poziom kosztów i przychodów.</p>
             </div>
         </div>
         <div class="row no-gutters">
             <div class="col-lg-6 text-white showcase-img" style="background: url({{ URL::asset('/image/workplace.png') }})no-repeat;background-position:center;min-height:30em;"><span></span></div>
-            <div class="col-lg-6 my-auto order-lg-1 showcase-text p-5">
+            <div class="col-lg-6 my-auto order-lg-1 showcase-text "  style="padding: 10em;">
                 <h2>Księgowość uproszczona on-line<br></h2>
-                <p class="lead mb-0">każdemu klientowi udostępniamy bezpłatnie aplikację do wystawiania faktur sprzedażowych on-line. Aplikacja ta pozwala wystawić fakturę sprzedaży, a także ją wydrukować lub wysłać bezpośrednio do odbiorcy. Na dedykowanym panelu
+                <p class="lead mb-0" style="text-align: justify;">Każdemu klientowi udostępniamy bezpłatnie aplikację do wystawiania faktur sprzedażowych on-line. Aplikacja ta pozwala wystawić fakturę sprzedaży, a także ją wydrukować lub wysłać bezpośrednio do odbiorcy. Na dedykowanym panelu
                     klienta można zobaczyć skany wszystkich zaksięgowanych faktur kosztowych i zakupowych. Panel dla klienta umożliwia też kontrolowanie zobowiązań i należności oraz prowadzenie kasy gotówkowej. Informację o podatkach umieszczamy
                     na panelu klienta, wysyłamy powiadomienie sms oraz tradycyjnie e-mailem.</p>
             </div>
         </div>
         <div class="row no-gutters">
             <div class="col-lg-6 order-lg-2 text-white showcase-img" style="background: url({{ URL::asset('/image/office.png') }})no-repeat;background-position:center;min-height:30em;"><span></span></div>
-            <div class="col-lg-6 my-auto order-lg-1 showcase-text p-5">
+            <div class="col-lg-6 my-auto order-lg-1 showcase-text "  style="padding: 10em;">
                 <h2>Księgowość uproszczona tradycyjna<br></h2>
-                <p class="lead mb-0">odbieramy w biurze lub możliwy jest przyjazd po faktury do firmy w Legnicy i okolicach (dodatkowa płatność). Wszystkie wiadomości dotyczące zobowiązań podatkowych przekazujemy e-mailem lub SMS.</p>
+                <p class="lead mb-0" style="text-align: justify;">Odbieramy w biurze lub możliwy jest przyjazd po faktury do firmy w Legnicy i okolicach (dodatkowa płatność). Wszystkie wiadomości dotyczące zobowiązań podatkowych przekazujemy e-mailem lub SMS.</p>
             </div>
         </div>
         <div class="row no-gutters">
             <div class="col-lg-6 text-white showcase-img" style="background: url({{ URL::asset('/image/audit.png') }})no-repeat;background-position:center;min-height:30em;"><span></span></div>
-            <div class="col-lg-6 my-auto order-lg-1 showcase-text p-5">
+            <div class="col-lg-6 my-auto order-lg-1 showcase-text "  style="padding: 10em;">
                 <h2 id="onas">O nas<br></h2>
-                <p class="lead mb-0">Jesteśmy młodym zespołem, stawiającym na nowoczesne rozwiązania. 
+                <p class="lead mb-0" style="text-align: justify;">Jesteśmy młodym zespołem, stawiającym na nowoczesne rozwiązania. 
                     W naszej pracy kładziemy nacisk na efektywność i szybkość działania. 
                     Szanujemy czas naszego klienta, dlatego staramy się zminimalizować potrzebę 
                     bezpośredniego dostarczania przez niego dokumentów do minimum i komunikacji twarzą 

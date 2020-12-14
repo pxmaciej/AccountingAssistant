@@ -22,3 +22,6 @@ Route::get('/kontakt',function(){
 Route::get('/oferta',function(){
     return view('pages.oferta');
 });
+Route::get('/polityka-prywatnosci',function(){
+    return view('pages.polityka');
+});
