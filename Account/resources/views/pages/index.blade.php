@@ -1,11 +1,11 @@
 @extends('layouts.app')
 @section('content')
-<section class="features-icons bg-light text-center mt-5">
+<section class="features-icons bg-light text-center">
     <div class="container">
         <div class="row">
             <div class="col-lg-3">
                 <div class="mx-auto features-icons-item mb-5 mb-lg-0 mb-lg-3">
-                    <div class="d-flex features-icons-icon"><i class="icon-book-open m-auto" data-bs-hover-animate="pulse" style="color: rgb(48,57,71);font-size:100px;"></i></div>
+                    <div class="d-flex features-icons-icon"><i class="icon-book-open m-auto" style="color: rgb(48,57,71);font-size:100px;"></i></div>
                     <h3 class="mt-3">RACHUNKOWOŚĆ<br></h3>
                     <ul>
                         <li style="text-align: left;">Prowadzenie Podatkowej Księgi Przychodów i Rozchodów; Ewidencji Ryczałtowych</li>
@@ -19,7 +19,7 @@
             </div>
             <div class="col-lg-3">
                 <div class="mx-auto features-icons-item mb-5 mb-lg-0 mb-lg-3">
-                    <div class="d-flex features-icons-icon"><i class="icon-calculator m-auto" data-bs-hover-animate="pulse" style="color: rgb(48,57,71);font-size:100px;"></i></div>
+                    <div class="d-flex features-icons-icon"><i class="icon-calculator m-auto" style="color: rgb(48,57,71);font-size:100px;"></i></div>
                     <h3 class="mt-3">PODATKI<br></h3>
                     <ul>
                         <li style="text-align: left;">Obliczanie wysokości należnych podatków dochodowych w ujęciu okresowym (zaliczki miesięczne/kwartalne)</li>
@@ -30,7 +30,7 @@
             </div>
             <div class="col-lg-3">
                 <div class="mx-auto features-icons-item mb-5 mb-lg-0 mb-lg-3">
-                    <div class="d-flex features-icons-icon"><i class="icon-briefcase m-auto" data-bs-hover-animate="pulse" style="color: rgb(48,57,71);font-size:100px;"></i></div>
+                    <div class="d-flex features-icons-icon"><i class="icon-briefcase m-auto" style="color: rgb(48,57,71);font-size:100px;"></i></div>
                     <h3 class="mt-3">KADRY I PŁACE<br></h3>
                 </div>
                 <ul>
@@ -45,7 +45,7 @@
             </div>
             <div class="col-lg-3">
                 <div class="mx-auto features-icons-item mb-5 mb-lg-0 mb-lg-3">
-                    <div class="d-flex features-icons-icon"><i class="icon-cloud-upload m-auto" data-bs-hover-animate="pulse" style="color: rgb(48,57,71);font-size:100px;"></i></div>
+                    <div class="d-flex features-icons-icon"><i class="icon-cloud-upload m-auto" style="color: rgb(48,57,71);font-size:100px;"></i></div>
                     <h3 class="mt-2">KSIĘGOWOŚĆ<br>ONLINE<br></h3>
                 </div>
                 <ul>
@@ -59,45 +59,56 @@
         </div>
     </div>
 </section>
-<section class="showcase">
-    <div class="container-fluid p-4">
+<section class="showcase mb-3">
+    <div class="container-fluid">
         <div class="row no-gutters">
-            <div class="col-lg-6 order-lg-2 text-white showcase-img" style="background: url({{ URL::asset('/image/multitask.png') }}) no-repeat; background-position:center;min-height:30em; "><span></span></div>
-            <div class="col-lg-6 my-auto order-lg-1 showcase-text" style="padding: 10em;">
-                <h2>Nasze Biuro Rachunkowe Oferuje</h2>
-                <p class="lead mb-0" style="text-align: justify;">Bardzo poszukiwany przez klientów wgląd do wszystkich danych on-line. Zapewniamy stały i bezpieczny dostęp do danych księgowych oraz skanów dokumentów on-line. Dzięki księgowości on-line cały czas na bieżąco możesz monitorować stan
-                    zobowiązań i należności, a także poziom kosztów i przychodów.</p>
+            <div class="col-lg-6 order-lg-2 mb-3 d-flex justify-content-center"><img src="{{ asset('/image/multitask.png') }}" class="img-fluid" alt="Multitasking"></div>
+            <div class="col-lg-6 my-auto order-lg-1 showcase-text p-lg-5">
+                <div class="p-lg-5">
+                    <h2>Nasze Biuro Rachunkowe Oferuje</h2>
+                    <p class="lead text-justify" >Bardzo poszukiwany przez klientów wgląd do wszystkich danych on-line. Zapewniamy stały i bezpieczny dostęp do danych księgowych oraz skanów dokumentów on-line. Dzięki księgowości on-line cały czas na bieżąco możesz monitorować stan
+                        zobowiązań i należności, a także poziom kosztów i przychodów.</p>
+                </div>
             </div>
         </div>
         <div class="row no-gutters">
-            <div class="col-lg-6 text-white showcase-img" style="background: url({{ URL::asset('/image/workplace.png') }})no-repeat;background-position:center;min-height:30em;"><span></span></div>
-            <div class="col-lg-6 my-auto order-lg-1 showcase-text "  style="padding: 10em;">
-                <h2>Księgowość uproszczona on-line<br></h2>
-                <p class="lead mb-0" style="text-align: justify;">Każdemu klientowi udostępniamy bezpłatnie aplikację do wystawiania faktur sprzedażowych on-line. Aplikacja ta pozwala wystawić fakturę sprzedaży, a także ją wydrukować lub wysłać bezpośrednio do odbiorcy. Na dedykowanym panelu
+            <div class="col-lg-6 mb-3 d-flex justify-content-center" ><img src="{{ asset('/image/workplace.png') }}" class="img-fluid" alt="Multitasking"></div>
+            <div class="col-lg-6 my-auto order-lg-1 showcase-text p-lg-5 ">
+                <div class="p-lg-5">
+                   <h2>Księgowość uproszczona on-line<br></h2>
+                    <p class="lead text-justify" >Każdemu klientowi udostępniamy bezpłatnie aplikację do wystawiania faktur sprzedażowych on-line. Aplikacja ta pozwala wystawić fakturę sprzedaży, a także ją wydrukować lub wysłać bezpośrednio do odbiorcy. Na dedykowanym panelu
                     klienta można zobaczyć skany wszystkich zaksięgowanych faktur kosztowych i zakupowych. Panel dla klienta umożliwia też kontrolowanie zobowiązań i należności oraz prowadzenie kasy gotówkowej. Informację o podatkach umieszczamy
                     na panelu klienta, wysyłamy powiadomienie sms oraz tradycyjnie e-mailem.</p>
+                </div>
+
             </div>
         </div>
         <div class="row no-gutters">
-            <div class="col-lg-6 order-lg-2 text-white showcase-img" style="background: url({{ URL::asset('/image/office.png') }})no-repeat;background-position:center;min-height:30em;"><span></span></div>
-            <div class="col-lg-6 my-auto order-lg-1 showcase-text "  style="padding: 10em;">
-                <h2>Księgowość uproszczona tradycyjna<br></h2>
-                <p class="lead mb-0" style="text-align: justify;">Odbieramy w biurze lub możliwy jest przyjazd po faktury do firmy w Legnicy i okolicach (dodatkowa płatność). Wszystkie wiadomości dotyczące zobowiązań podatkowych przekazujemy e-mailem lub SMS.</p>
+            <div class="col-lg-6 order-lg-2 mb-3 d-flex justify-content-center"><img src="{{ asset('/image/office.png') }}" class="img-fluid" alt="Multitasking"></div>
+            <div class="col-lg-6 my-auto order-lg-1 showcase-text p-lg-5 ">
+                <div class="p-lg-5">
+                    <h2>Księgowość uproszczona tradycyjna<br></h2>
+                <p class="lead text-justify" >Odbieramy w biurze lub możliwy jest przyjazd po faktury do firmy w Legnicy i okolicach (dodatkowa płatność). Wszystkie wiadomości dotyczące zobowiązań podatkowych przekazujemy e-mailem lub SMS.</p>
+                </div>
+
             </div>
         </div>
         <div class="row no-gutters">
-            <div class="col-lg-6 text-white showcase-img" style="background: url({{ URL::asset('/image/audit.png') }})no-repeat;background-position:center;min-height:30em;"><span></span></div>
-            <div class="col-lg-6 my-auto order-lg-1 showcase-text "  style="padding: 10em;">
-                <h2 id="onas">O nas<br></h2>
-                <p class="lead mb-0" style="text-align: justify;">Jesteśmy młodym zespołem, stawiającym na nowoczesne rozwiązania. 
-                    W naszej pracy kładziemy nacisk na efektywność i szybkość działania. 
-                    Szanujemy czas naszego klienta, dlatego staramy się zminimalizować potrzebę 
-                    bezpośredniego dostarczania przez niego dokumentów do minimum i komunikacji twarzą 
+            <div class="col-lg-6 mb-3 d-flex justify-content-center"><img src="{{ asset('/image/audit.png') }}" class="img-fluid" alt="Multitasking"></div>
+            <div class="col-lg-6 my-auto order-lg-1 showcase-text p-lg-5 ">
+                <div class="p-lg-5">
+                 <h2 id="onas">O nas<br></h2>
+                <p class="lead text-justify" >Jesteśmy młodym zespołem, stawiającym na nowoczesne rozwiązania.
+                    W naszej pracy kładziemy nacisk na efektywność i szybkość działania.
+                    Szanujemy czas naszego klienta, dlatego staramy się zminimalizować potrzebę
+                    bezpośredniego dostarczania przez niego dokumentów do minimum i komunikacji twarzą
                     w twarz na rzecz komunikacji elektronicznej. Nasze biuro rachunkowe oferuje, bardzo
-                     poszukiwany przez klientów, wgląd do wszystkich danych on-line. 
+                     poszukiwany przez klientów, wgląd do wszystkich danych on-line.
                      Zapewniamy stały i bezpieczny dostęp do danych księgowych oraz skanów dokumentów on-line.
                       Pozwala to klientom na bieżąco monitorować
                      stan zobowiązań i należności, a także poziom swoich przychodów i kosztów, oraz wszelkich rozliczeń.</p>
+                </div>
+
             </div>
         </div>
     </div>
