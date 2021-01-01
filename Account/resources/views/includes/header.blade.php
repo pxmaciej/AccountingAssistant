@@ -1,6 +1,6 @@
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" style="background: #273353!important;">
-    <a class="navbar-brand" href="#"><img class="p-0 m-0" style="max-height: 50px;" src={{ asset('image/LogoBiuroMale.png') }}></a>
+    <a class="navbar-brand" href="/"><img class="p-0 m-0" style="max-height: 50px;" src={{ asset('image/LogoBiuroMale.png') }}></a>
     <button class="navbar-toggler  " type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
