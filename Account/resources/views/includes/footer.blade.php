@@ -1,4 +1,4 @@
-<footer class="footer text-white" style="background: #323232;">
+<footer class="footer bottom text-white" style="background: #323232;">
     <div class="container">
         <div class="row">
             <div class="col-lg-6 my-auto text-center text-lg-left">

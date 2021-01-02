@@ -25,3 +25,7 @@ Route::get('/oferta',function(){
 Route::get('/polityka-prywatnosci',function(){
     return view('pages.polityka');
 });
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
