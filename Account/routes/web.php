@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\UploadFileController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,5 +28,11 @@ Route::get('/polityka-prywatnosci',function(){
 });
 
 Auth::routes();
+
+Route::get('expenses', function(){
+    return view('expenses');
+});
+
+Route::resource('/uploadExpenses', UploadFileController::class);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

@@ -16,6 +16,7 @@
                                 <div class="row">
                                     <div class="col-md-6 col-xl-3 mb-4">
                                         <div class="card shadow border-left-primary py-2">
+                                            <a href="/expenses">
                                             <div class="card-body">
                                                 <div class="row align-items-center no-gutters">
                                                     <div class="col mr-2">
@@ -25,6 +26,7 @@
                                                     <div class="col-auto"><i class="fas fa-calendar fa-2x text-gray-300"></i></div>
                                                 </div>
                                             </div>
+                                            </a>
                                         </div>
                                     </div>
                                     <div class="col-md-6 col-xl-3 mb-4">
