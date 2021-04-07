@@ -35,4 +35,6 @@ Route::get('expenses', function(){
 
 Route::resource('/uploadExpenses', UploadFileController::class);
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [App\Http\Controllers\Controller::class, 'index'])->name('home');
+
+Route::get('/getDeatails', GetComponentDetailController::class);
