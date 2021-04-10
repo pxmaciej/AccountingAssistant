@@ -6,35 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
-/**
- * @OA\Post(
- * path="/api/auth/login",
- * summary="Sign in",
- * description="Login by email, password",
- * operationId="authLogin",
- * tags={"auth"},
- * @OA\RequestBody(
- *    required=true,
- *    description="Pass user credentials",
- *    @OA\JsonContent(
- *       required={"email","password"},
- *       @OA\Property(property="email", type="string", format="email", example="user@user"),
- *       @OA\Property(property="password", type="string", format="password", example="zaq1@WSX"),
- *    ),
- * ),
- *  @OA\Response(
- *    response=200,
- *    description="Success"
- *     ),
- * @OA\Response(
- *    response=422,
- *    description="Wrong credentials response",
- *    @OA\JsonContent(
- *       @OA\Property(property="message", type="string", example="Sorry, wrong email address or password. Please try again")
- *        ),
- *     )
- * )
- */
+
 class LoginController extends Controller
 {
     /*
