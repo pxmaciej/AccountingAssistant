@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\TestingController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -25,4 +26,6 @@ Route::group([
     Route::post('logout', [App\Http\Controllers\AuthController::class, 'logout']);
     Route::post('refresh', [App\Http\Controllers\AuthController::class, 'refresh']);
     Route::post('profile', [App\Http\Controllers\AuthController::class, 'profile']);
+    Route::get('/testing' ,[App\Http\Controllers\TestingController::class]);
 });
+
