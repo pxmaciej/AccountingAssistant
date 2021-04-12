@@ -8,6 +8,143 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
+
+
+/**
+ * @OA\Post(
+ * path="/api/auth/login",
+ *
+ * description="Login by email, password",
+ * operationId="Login",
+ * tags={"auth"},
+ * @OA\RequestBody(
+ *    required=true,
+ *    description="Pass user credentials",
+ *    @OA\JsonContent(
+ *       required={"email","password"},
+ *       @OA\Property(property="email", type="string", format="email", example="user@user"),
+ *       @OA\Property(property="password", type="string", format="password", example="zaq1@WSX"),
+ *    ),
+ * ),
+ *  @OA\Response(
+ *    response=200,
+ *    description="Success"
+ *     ),
+ * @OA\Response(
+ *    response=401,
+ *    description="Wrong credentials response",
+ *    @OA\JsonContent(
+ *       @OA\Property(property="message", type="string", example="Unauthorized")
+ *        ),
+ *     ),
+ * @OA\Response(
+ *    response=422,
+ *    description="Wrong credentials response",
+ *    @OA\JsonContent(
+ *       @OA\Property(property="message", type="string", example="Validation errors")
+ *        ),
+ *     )
+ * )
+ */
+
+ /**
+ * @OA\Post(
+ * path="/api/auth/register",
+ *
+ * description="Register by email, password",
+ * operationId="register",
+ * tags={"auth"},
+ * @OA\RequestBody(
+ *    required=true,
+ *    description="user credentials",
+ *    @OA\JsonContent(
+ *       required={"name", "email","password", "password_confirmation"},
+ *       @OA\Property(property="name", type="string", format="text", example="user"),
+ *       @OA\Property(property="email", type="string", format="email", example="user@user"),
+ *       @OA\Property(property="password", type="string", format="password", example="zaq1@WSX"),
+ *       @OA\Property(property="password_confirmation", type="string", format="password", example="zaq1@WSX"),
+ *    ),
+ * ),
+ *  @OA\Response(
+ *    response=200,
+ *    description="Success"
+ *     ),
+ * @OA\Response(
+ *    response=400,
+ *    description="Bad Request",
+ *    @OA\JsonContent(
+ *       @OA\Property(property="message", type="string", example="The email has already been taken")
+ *        ),
+ *     )
+ * )
+ */
+
+ /**
+ * @OA\Post(
+ * path="/api/auth/refresh",
+ *
+ * description="Refresh user token",
+ * operationId="authRefresh",
+ * tags={"auth"},
+ * security={{ "apiAuth": {} }},
+ * @OA\Response(
+ *    response=200,
+ *    description="Success"
+ *     ),
+ * @OA\Response(
+ *    response=401,
+ *    description="Returns when user is not authenticated",
+ *    @OA\JsonContent(
+ *       @OA\Property(property="message", type="string", example="Not authorized"),
+ *    )
+ * )
+ * )
+ */
+
+ /**
+ * @OA\Post(
+ * path="/api/auth/profile",
+ *
+ * description="Get user Profile",
+ * operationId="authProfile",
+ * tags={"auth"},
+ * security={{ "apiAuth": {} }},
+ * @OA\Response(
+ *    response=200,
+ *    description="Success"
+ *     ),
+ * @OA\Response(
+ *    response=401,
+ *    description="Returns when user is not authenticated",
+ *    @OA\JsonContent(
+ *       @OA\Property(property="message", type="string", example="Not authorized"),
+ *    )
+ * )
+ * )
+ */
+
+ /**
+ * @OA\Post(
+ * path="/api/auth/logout",
+ *
+ * description="Logout user and invalidate token",
+ * operationId="logout",
+ * tags={"auth"},
+ * security={{ "apiAuth": {} }},
+ * @OA\Response(
+ *    response=200,
+ *    description="Success"
+ *     ),
+ * @OA\Response(
+ *    response=401,
+ *    description="Returns when user is not authenticated",
+ *    @OA\JsonContent(
+ *       @OA\Property(property="message", type="string", example="Not authorized"),
+ *    )
+ * )
+ * )
+ */
+
 class AuthController extends Controller
 {
 
@@ -69,8 +206,7 @@ class AuthController extends Controller
         ], 201);
     }
 
-
-    /**
+   /**
      * Log the user out (Invalidate the token).
      *
      * @return \Illuminate\Http\JsonResponse
