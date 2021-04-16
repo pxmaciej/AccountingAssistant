@@ -3,11 +3,88 @@
 namespace App\Http\Controllers;
 
 use App\Models\UploadFile;
+use GuzzleHttp\Middleware;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
+/**
+ * @OA\Post(
+ * path="/api/file/store",
+ *
+ * description="Store file",
+ * operationId="store",
+ * tags={"file"},
+ * security={{ "apiAuth": {} }},
+ * @OA\RequestBody(
+*       @OA\MediaType(
+*           mediaType="multipart/form-data",
+*           @OA\Schema(
+*               type="object",
+*               @OA\Property(property="file", type="array",
+*                  @OA\Items( type="string", format="binary",)),
+*               @OA\Property(property="user_id", type="integer", format="int64", example="1")
+*           ),
+*       )
+* ),
+ *  @OA\Response(
+ *    response=200,
+ *    description="Success"
+ *  )
+ * )
+*/
+
+/**
+ * @OA\Post(
+ * path="/api/file/show",
+ *
+ * description="Show file",
+ * operationId="show",
+ * tags={"file"},
+ * security={{ "apiAuth": {} }},
+ * @OA\RequestBody(),
+ *
+ *  @OA\Response(
+ *    response=200,
+ *    description="Success"
+ *  )
+ * )
+*/
+
+
+
+/**
+ * @OA\Delete(
+ * path="/api/file/destroy",
+ *
+ * description="delete file",
+ * operationId="delete",
+ * tags={"file"},
+ * security={{ "apiAuth": {} }},
+ * @OA\RequestBody(
+ *  @OA\JsonContent(
+ *       @OA\Property(property="file_id", type="integer", format="int64", example="1")
+ *    )
+ * ),
+ *
+ *  @OA\Response(
+ *    response=200,
+ *    description="Success"
+ *  )
+ * )
+*/
+
 class UploadFileController extends Controller
 {
+    /**
+     * Create a new AuthController instance.
+     *
+     * @return void
+     */
+    public function __construct() {
+       $this->middleware('auth');
+    }
+
+
     /**
      * Display a listing of the resource.
      *
@@ -36,16 +113,20 @@ class UploadFileController extends Controller
      */
     public function store(Request $request)
     {
-        $file = $request->file('uploadedfile');
+        $file = $request->file('file');
         $filename = $file->getClientOriginalName();
         $filename = time().'.'. $filename;
-        $fileuser = Auth::user()->id;
+        $fileuser = $request->user_id;
         $file->storeAs('public', $filename);
         UploadFile::create([
             'user_id' => $fileuser,
             'file' => $filename,
         ]);
-        return back()->with('file_created', 'Faktury został przesłane!');
+        return response()->json([
+            'status' => '200',
+            'user_id' => $fileuser,
+            'file' => $filename
+            ]);
     }
 
     /**
@@ -56,7 +137,10 @@ class UploadFileController extends Controller
      */
     public function show(UploadFile $uploadFile)
     {
-        //
+        $savedfile = UploadFile::orderBy('id','DESC')->get();
+        return response()->json([
+            $savedfile
+            ]);
     }
 
     /**
@@ -77,9 +161,25 @@ class UploadFileController extends Controller
      * @param  \App\Models\UploadFile  $uploadFile
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, UploadFile $uploadFile)
-    {
-        //
+    public function update(Request $request)
+    {  /**
+        *$editedFile = UploadFile::find($request->file_id);
+        *$deletedFilename = $editedFile->file_name;
+        *$deletedFilepath = public_path('storage/'.$deletedFilename);
+        *unlink($deletedFilepath);
+
+        *$file = $request->file('update_file');
+        *$filename = $file->getClientOriginalName();
+        *$filename = time().'.'. $filename;
+        *$editedFile->file_name = $filename;
+        *$editedFile->save();
+        *$file->storeAs('public', $filename);
+
+
+        *return response()->json([
+        *    'status' => '200'
+        *    ]);
+        */
     }
 
     /**
@@ -88,8 +188,17 @@ class UploadFileController extends Controller
      * @param  \App\Models\UploadFile  $uploadFile
      * @return \Illuminate\Http\Response
      */
-    public function destroy(UploadFile $uploadFile)
+    public function destroy(Request $request)
     {
-        //
+        $deleteFile = UploadFile::find($request->file_id);
+        $deletedFilename = $deleteFile->file;
+        $deletedFilepath = public_path('storage/'.$deletedFilename);
+        unlink($deletedFilepath);
+        $deleteFile->delete();
+
+
+        return response()->json([
+            'status' => '200'
+            ]);
     }
 }

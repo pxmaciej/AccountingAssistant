@@ -252,9 +252,115 @@
                     }
                 ]
             }
+        },
+        "/api/file/store": {
+            "post": {
+                "tags": [
+                    "file"
+                ],
+                "description": "Store file",
+                "operationId": "store",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "properties": {
+                                    "file": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "string",
+                                            "format": "binary"
+                                        }
+                                    },
+                                    "user_id": {
+                                        "type": "integer",
+                                        "format": "int64",
+                                        "example": "1"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/file/show": {
+            "post": {
+                "tags": [
+                    "file"
+                ],
+                "description": "Show file",
+                "operationId": "show",
+                "requestBody": {},
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/file/destroy": {
+            "delete": {
+                "tags": [
+                    "file"
+                ],
+                "description": "delete file",
+                "operationId": "delete",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "file_id": {
+                                        "type": "integer",
+                                        "format": "int64",
+                                        "example": "1"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            }
         }
     },
     "components": {
+        "schemas": {
+            "UploadFile": {
+                "title": "UploaFile",
+                "description": "Upload File",
+                "xml": {
+                    "name": "UploadFile"
+                }
+            }
+        },
         "securitySchemes": {
             "apiAuth": {
                 "type": "http",

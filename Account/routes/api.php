@@ -27,4 +27,15 @@ Route::group([
     Route::post('refresh', [App\Http\Controllers\AuthController::class, 'refresh']);
     Route::post('profile', [App\Http\Controllers\AuthController::class, 'userProfile']);
 });
+Route::group([
+
+    'middleware' => 'api',
+    'prefix' => 'file'
+
+], function ($router) {
+    Route::post('store', [App\Http\Controllers\UploadFileController::class, 'store']);
+    Route::post('show', [App\Http\Controllers\UploadFileController::class, 'show']);
+    Route::post('update', [App\Http\Controllers\UploadFileController::class, 'update']);
+    Route::delete('destroy', [App\Http\Controllers\UploadFileController::class, 'destroy']);
+});
 
