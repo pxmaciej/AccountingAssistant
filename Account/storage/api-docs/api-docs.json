@@ -218,6 +218,86 @@
                 ]
             }
         },
+        "/api/expense/store": {
+            "post": {
+                "tags": [
+                    "expense"
+                ],
+                "description": "Store expense",
+                "operationId": "store",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "user_id": {
+                                        "type": "integer",
+                                        "format": "int64",
+                                        "example": "1"
+                                    },
+                                    "number": {
+                                        "type": "string",
+                                        "example": "125/B/45HK"
+                                    },
+                                    "date_issue": {
+                                        "type": "date",
+                                        "format": "date",
+                                        "example": "1998-09-24 10:02:20"
+                                    },
+                                    "seller": {
+                                        "type": "string",
+                                        "example": "Mechanik Zbyszek"
+                                    },
+                                    "nip": {
+                                        "type": "integer",
+                                        "format": "int64",
+                                        "example": "9999999999"
+                                    },
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Silnik"
+                                    },
+                                    "netto": {
+                                        "type": "double",
+                                        "format": "double",
+                                        "example": "400000"
+                                    },
+                                    "vat": {
+                                        "type": "integer",
+                                        "format": "int64",
+                                        "example": "23"
+                                    },
+                                    "brutto": {
+                                        "type": "double",
+                                        "format": "double",
+                                        "example": "492000"
+                                    },
+                                    "category": {
+                                        "type": "string",
+                                        "example": "Naprawy"
+                                    },
+                                    "paid": {
+                                        "type": "boolean",
+                                        "example": "true"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            }
+        },
         "/api/file/store": {
             "post": {
                 "tags": [
