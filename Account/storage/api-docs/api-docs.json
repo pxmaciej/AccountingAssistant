@@ -183,41 +183,6 @@
                 ]
             }
         },
-        "/api/auth/profile": {
-            "post": {
-                "tags": [
-                    "auth"
-                ],
-                "description": "Get user Profile",
-                "operationId": "authProfile",
-                "responses": {
-                    "200": {
-                        "description": "Success"
-                    },
-                    "401": {
-                        "description": "Returns when user is not authenticated",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "message": {
-                                            "type": "string",
-                                            "example": "Not authorized"
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    }
-                },
-                "security": [
-                    {
-                        "apiAuth": []
-                    }
-                ]
-            }
-        },
         "/api/auth/logout": {
             "post": {
                 "tags": [
@@ -352,15 +317,6 @@
         }
     },
     "components": {
-        "schemas": {
-            "UploadFile": {
-                "title": "UploaFile",
-                "description": "Upload File",
-                "xml": {
-                    "name": "UploadFile"
-                }
-            }
-        },
         "securitySchemes": {
             "apiAuth": {
                 "type": "http",

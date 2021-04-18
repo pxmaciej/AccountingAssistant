@@ -103,28 +103,6 @@ use Illuminate\Support\Facades\Validator;
 
  /**
  * @OA\Post(
- * path="/api/auth/profile",
- *
- * description="Get user Profile",
- * operationId="authProfile",
- * tags={"auth"},
- * security={{ "apiAuth": {} }},
- * @OA\Response(
- *    response=200,
- *    description="Success"
- *     ),
- * @OA\Response(
- *    response=401,
- *    description="Returns when user is not authenticated",
- *    @OA\JsonContent(
- *       @OA\Property(property="message", type="string", example="Not authorized"),
- *    )
- * )
- * )
- */
-
- /**
- * @OA\Post(
  * path="/api/auth/logout",
  *
  * description="Logout user and invalidate token",
