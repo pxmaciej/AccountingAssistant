@@ -183,13 +183,13 @@
                 ]
             }
         },
-        "/api/auth/profile": {
+        "/api/auth/logout": {
             "post": {
                 "tags": [
                     "auth"
                 ],
-                "description": "Get user Profile",
-                "operationId": "authProfile",
+                "description": "Logout user and invalidate token",
+                "operationId": "logout",
                 "responses": {
                     "200": {
                         "description": "Success"
@@ -218,32 +218,94 @@
                 ]
             }
         },
-        "/api/auth/logout": {
+        "/api/file/store": {
             "post": {
                 "tags": [
-                    "auth"
+                    "file"
                 ],
-                "description": "Logout user and invalidate token",
-                "operationId": "logout",
+                "description": "Store file",
+                "operationId": "store",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "properties": {
+                                    "file": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "string",
+                                            "format": "binary"
+                                        }
+                                    },
+                                    "user_id": {
+                                        "type": "integer",
+                                        "format": "int64",
+                                        "example": "1"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
                 "responses": {
                     "200": {
                         "description": "Success"
-                    },
-                    "401": {
-                        "description": "Returns when user is not authenticated",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "message": {
-                                            "type": "string",
-                                            "example": "Not authorized"
-                                        }
-                                    },
-                                    "type": "object"
-                                }
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/file/show": {
+            "post": {
+                "tags": [
+                    "file"
+                ],
+                "description": "Show file",
+                "operationId": "show",
+                "requestBody": {},
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/file/destroy": {
+            "delete": {
+                "tags": [
+                    "file"
+                ],
+                "description": "delete file",
+                "operationId": "delete",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "file_id": {
+                                        "type": "integer",
+                                        "format": "int64",
+                                        "example": "1"
+                                    }
+                                },
+                                "type": "object"
                             }
                         }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success"
                     }
                 },
                 "security": [

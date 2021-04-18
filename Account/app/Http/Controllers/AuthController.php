@@ -103,28 +103,6 @@ use Illuminate\Support\Facades\Validator;
 
  /**
  * @OA\Post(
- * path="/api/auth/profile",
- *
- * description="Get user Profile",
- * operationId="authProfile",
- * tags={"auth"},
- * security={{ "apiAuth": {} }},
- * @OA\Response(
- *    response=200,
- *    description="Success"
- *     ),
- * @OA\Response(
- *    response=401,
- *    description="Returns when user is not authenticated",
- *    @OA\JsonContent(
- *       @OA\Property(property="message", type="string", example="Not authorized"),
- *    )
- * )
- * )
- */
-
- /**
- * @OA\Post(
  * path="/api/auth/logout",
  *
  * description="Logout user and invalidate token",
@@ -246,7 +224,7 @@ class AuthController extends Controller
         return response()->json([
             'access_token' => $token,
             'token_type' => 'bearer',
-            'expires_in' => auth()->factory()->getTTL() * 60,
+            'expires_in' => auth()->factory()->getTTL() * 6000,
             'user' => auth()->user()
         ]);
     }
