@@ -19,7 +19,7 @@ class CreateExpensesTable extends Migration
             $table->string('number');
             $table->date('date_issue');
             $table->string('seller');
-            $table->integer('nip');
+            $table->bigInteger('nip');
             $table->string('name');
             $table->double('netto');
             $table->integer('vat');
