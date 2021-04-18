@@ -39,3 +39,14 @@ Route::group([
     Route::delete('destroy', [App\Http\Controllers\UploadFileController::class, 'destroy']);
 });
 
+Route::group([
+
+    'middleware' => 'api',
+    'prefix' => 'expense'
+
+], function ($router) {
+    Route::post('store', [App\Http\Controllers\ExpenseController::class, 'store']);
+    Route::post('show', [App\Http\Controllers\ExpenseController::class, 'show']);
+    Route::post('update', [App\Http\Controllers\ExpenseController::class, 'update']);
+    Route::delete('destroy', [App\Http\Controllers\ExpenseController::class, 'destroy']);
+});
