@@ -34,9 +34,9 @@ Route::group([
 
 ], function ($router) {
     Route::post('store', [App\Http\Controllers\UploadFileController::class, 'store']);
-    Route::post('show', [App\Http\Controllers\UploadFileController::class, 'show']);
+    Route::get('show/{user_id}', [App\Http\Controllers\UploadFileController::class, 'show']);
     Route::post('update', [App\Http\Controllers\UploadFileController::class, 'update']);
-    Route::delete('destroy', [App\Http\Controllers\UploadFileController::class, 'destroy']);
+    Route::delete('destroy/{file_id}', [App\Http\Controllers\UploadFileController::class, 'destroy']);
 });
 
 Route::group([

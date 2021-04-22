@@ -442,6 +442,38 @@
                 ]
             }
         },
+        "/api/file/show/{user_id}": {
+            "get": {
+                "tags": [
+                    "file"
+                ],
+                "description": "Show file",
+                "operationId": "show",
+                "parameters": [
+                    {
+                        "name": "user_id",
+                        "in": "path",
+                        "description": "ID user",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        },
+                        "example": "1"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            }
+        },
         "/api/file/store": {
             "post": {
                 "tags": [
@@ -484,49 +516,26 @@
                 ]
             }
         },
-        "/api/file/show": {
-            "post": {
-                "tags": [
-                    "file"
-                ],
-                "description": "Show file",
-                "operationId": "show",
-                "requestBody": {},
-                "responses": {
-                    "200": {
-                        "description": "Success"
-                    }
-                },
-                "security": [
-                    {
-                        "apiAuth": []
-                    }
-                ]
-            }
-        },
-        "/api/file/destroy": {
+        "/api/file/destroy/{file_id}": {
             "delete": {
                 "tags": [
                     "file"
                 ],
                 "description": "delete file",
                 "operationId": "delete",
-                "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "properties": {
-                                    "file_id": {
-                                        "type": "integer",
-                                        "format": "int64",
-                                        "example": "1"
-                                    }
-                                },
-                                "type": "object"
-                            }
-                        }
+                "parameters": [
+                    {
+                        "name": "file_id",
+                        "in": "path",
+                        "description": "ID file",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        },
+                        "example": "1"
                     }
-                },
+                ],
                 "responses": {
                     "200": {
                         "description": "Success"

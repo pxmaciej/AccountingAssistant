@@ -8,6 +8,32 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 /**
+ * @OA\Get(
+ * path="/api/file/show/{user_id}",
+ *
+ * description="Show file",
+ * operationId="show",
+ * tags={"file"},
+ * security={{ "apiAuth": {} }},
+ *  @OA\Parameter(
+ *    description="ID user",
+ *    in="path",
+ *    name="user_id",
+ *    required=true,
+ *    example="1",
+ *    @OA\Schema(
+ *       type="integer",
+ *       format="int64"
+ *    )
+ * ),
+ *  @OA\Response(
+ *    response=200,
+ *    description="Success"
+ *  )
+ * )
+*/
+
+/**
  * @OA\Post(
  * path="/api/file/store",
  *
@@ -34,35 +60,22 @@ use Illuminate\Support\Facades\Auth;
 */
 
 /**
- * @OA\Post(
- * path="/api/file/show",
- *
- * description="Show file",
- * operationId="show",
- * tags={"file"},
- * security={{ "apiAuth": {} }},
- * @OA\RequestBody(),
- *
- *  @OA\Response(
- *    response=200,
- *    description="Success"
- *  )
- * )
-*/
-
-
-
-/**
  * @OA\Delete(
- * path="/api/file/destroy",
+ * path="/api/file/destroy/{file_id}",
  *
  * description="delete file",
  * operationId="delete",
  * tags={"file"},
  * security={{ "apiAuth": {} }},
- * @OA\RequestBody(
- *  @OA\JsonContent(
- *       @OA\Property(property="file_id", type="integer", format="int64", example="1")
+ * @OA\Parameter(
+ *    description="ID file",
+ *    in="path",
+ *    name="file_id",
+ *    required=true,
+ *    example="1",
+ *    @OA\Schema(
+ *       type="integer",
+ *       format="int64"
  *    )
  * ),
  *
@@ -135,9 +148,10 @@ class UploadFileController extends Controller
      * @param  \App\Models\UploadFile  $uploadFile
      * @return \Illuminate\Http\Response
      */
-    public function show(UploadFile $uploadFile)
+    public function show($user_id)
     {
-        $savedfile = UploadFile::orderBy('id','DESC')->get();
+        $savedfile = UploadFile::where('user_id', 'like', '%'.$user_id.'%')->get();
+
         return response()->json([
             $savedfile
             ]);
@@ -188,9 +202,9 @@ class UploadFileController extends Controller
      * @param  \App\Models\UploadFile  $uploadFile
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request)
+    public function destroy($file_id)
     {
-        $deleteFile = UploadFile::find($request->file_id);
+        $deleteFile = UploadFile::find($file_id);
         $deletedFilename = $deleteFile->file;
         $deletedFilepath = public_path('storage/'.$deletedFilename);
         unlink($deletedFilepath);
