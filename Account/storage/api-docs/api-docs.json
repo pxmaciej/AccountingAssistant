@@ -218,6 +218,38 @@
                 ]
             }
         },
+        "/api/expense/show/{user_id}": {
+            "get": {
+                "tags": [
+                    "expense"
+                ],
+                "description": "Show expense",
+                "operationId": "show",
+                "parameters": [
+                    {
+                        "name": "user_id",
+                        "in": "path",
+                        "description": "ID user",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        },
+                        "example": "1"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            }
+        },
         "/api/expense/store": {
             "post": {
                 "tags": [
@@ -299,7 +331,7 @@
             }
         },
         "/api/expense/update": {
-            "post": {
+            "patch": {
                 "tags": [
                     "expense"
                 ],
@@ -378,64 +410,26 @@
                 ]
             }
         },
-        "/api/expense/show": {
-            "post": {
-                "tags": [
-                    "expense"
-                ],
-                "description": "Show expense",
-                "operationId": "show",
-                "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "properties": {
-                                    "user_id": {
-                                        "type": "integer",
-                                        "format": "int64",
-                                        "example": "1"
-                                    }
-                                },
-                                "type": "object"
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "Success"
-                    }
-                },
-                "security": [
-                    {
-                        "apiAuth": []
-                    }
-                ]
-            }
-        },
-        "/api/expense/destroy": {
+        "/api/expense/destroy/{expense_id}": {
             "delete": {
                 "tags": [
                     "expense"
                 ],
                 "description": "Destroy expense",
                 "operationId": "destroy",
-                "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "properties": {
-                                    "expense_id": {
-                                        "type": "integer",
-                                        "format": "int64",
-                                        "example": "1"
-                                    }
-                                },
-                                "type": "object"
-                            }
-                        }
+                "parameters": [
+                    {
+                        "name": "expense_id",
+                        "in": "path",
+                        "description": "ID expense",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        },
+                        "example": "1"
                     }
-                },
+                ],
                 "responses": {
                     "200": {
                         "description": "Success"

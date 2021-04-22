@@ -8,6 +8,32 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
 /**
+ * @OA\Get(
+ * path="/api/expense/show/{user_id}",
+ *
+ * description="Show expense",
+ * operationId="show",
+ * tags={"expense"},
+ * security={{ "apiAuth": {} }},
+ *  @OA\Parameter(
+ *    description="ID user",
+ *    in="path",
+ *    name="user_id",
+ *    required=true,
+ *    example="1",
+ *    @OA\Schema(
+ *       type="integer",
+ *       format="int64"
+ *    )
+ * ),
+ *  @OA\Response(
+ *    response=200,
+ *    description="Success"
+ *  )
+ * )
+*/
+
+/**
  * @OA\Post(
  * path="/api/expense/store",
  *
@@ -39,7 +65,7 @@ use Illuminate\Support\Facades\Validator;
 */
 
  /**
- * @OA\Post(
+ * @OA\Patch(
  * path="/api/expense/update",
  *
  * description="Update expense",
@@ -68,41 +94,26 @@ use Illuminate\Support\Facades\Validator;
  *  )
  * )
 */
- /**
- * @OA\Post(
- * path="/api/expense/show",
- *
- * description="Show expense",
- * operationId="show",
- * tags={"expense"},
- * security={{ "apiAuth": {} }},
- * @OA\RequestBody(
-*  @OA\JsonContent(
- *       @OA\Property(property="user_id", type="integer", format="int64", example="1"),
- *    )
-*
-* ),
- *  @OA\Response(
- *    response=200,
- *    description="Success"
- *  )
- * )
-*/
 
  /**
  * @OA\Delete(
- * path="/api/expense/destroy",
+ * path="/api/expense/destroy/{expense_id}",
  *
  * description="Destroy expense",
  * operationId="destroy",
  * tags={"expense"},
  * security={{ "apiAuth": {} }},
- * @OA\RequestBody(
-*  @OA\JsonContent(
- *       @OA\Property(property="expense_id", type="integer", format="int64", example="1"),
+ *  @OA\Parameter(
+ *    description="ID expense",
+ *    in="path",
+ *    name="expense_id",
+ *    required=true,
+ *    example="1",
+ *    @OA\Schema(
+ *       type="integer",
+ *       format="int64"
  *    )
-*
-* ),
+ * ),
  *  @OA\Response(
  *    response=200,
  *    description="Success"
@@ -200,15 +211,10 @@ class ExpenseController extends Controller
      * @param  \App\Models\Expense  $request
      * @return \Illuminate\Http\Response
      */
-    public function show(Expense $request)
+    public function show($user_id)
     {
-        $id = $request->user_id;
-        $show =Expense::where('user_id',$id)->first();
-
-        return response()->json([
-            $show
-        ]);
-
+        $show = Expense::where('user_id', 'like', '%'.$user_id.'%')->get();
+        return response()->json([$show]);;
     }
 
     /**
@@ -264,9 +270,9 @@ class ExpenseController extends Controller
      * @param  \App\Models\Expense  $request
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Expense $request)
+    public function destroy($expense_id)
     {
-        $destroy = Expense::find($request->expense_id);
+        $destroy = Expense::find($expense_id);
         $destroy->delete();
         return response()->json(['200' => 'success']);
     }

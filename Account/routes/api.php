@@ -46,7 +46,7 @@ Route::group([
 
 ], function ($router) {
     Route::post('store', [App\Http\Controllers\ExpenseController::class, 'store']);
-    Route::post('show', [App\Http\Controllers\ExpenseController::class, 'show']);
-    Route::post('update', [App\Http\Controllers\ExpenseController::class, 'update']);
-    Route::delete('destroy', [App\Http\Controllers\ExpenseController::class, 'destroy']);
+    Route::get('show/{user_id}', [App\Http\Controllers\ExpenseController::class, 'show']);
+    Route::patch('update', [App\Http\Controllers\ExpenseController::class, 'update']);
+    Route::delete('destroy/{expense_id}', [App\Http\Controllers\ExpenseController::class, 'destroy']);
 });
