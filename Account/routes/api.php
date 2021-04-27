@@ -34,9 +34,9 @@ Route::group([
 
 ], function ($router) {
     Route::post('store', [App\Http\Controllers\UploadFileController::class, 'store']);
-    Route::post('show', [App\Http\Controllers\UploadFileController::class, 'show']);
+    Route::get('show/{user_id}', [App\Http\Controllers\UploadFileController::class, 'show']);
     Route::post('update', [App\Http\Controllers\UploadFileController::class, 'update']);
-    Route::delete('destroy', [App\Http\Controllers\UploadFileController::class, 'destroy']);
+    Route::delete('destroy/{file_id}', [App\Http\Controllers\UploadFileController::class, 'destroy']);
 });
 
 Route::group([
@@ -46,7 +46,7 @@ Route::group([
 
 ], function ($router) {
     Route::post('store', [App\Http\Controllers\ExpenseController::class, 'store']);
-    Route::post('show', [App\Http\Controllers\ExpenseController::class, 'show']);
-    Route::post('update', [App\Http\Controllers\ExpenseController::class, 'update']);
-    Route::delete('destroy', [App\Http\Controllers\ExpenseController::class, 'destroy']);
+    Route::get('show/{user_id}', [App\Http\Controllers\ExpenseController::class, 'show']);
+    Route::patch('update', [App\Http\Controllers\ExpenseController::class, 'update']);
+    Route::delete('destroy/{expense_id}', [App\Http\Controllers\ExpenseController::class, 'destroy']);
 });
