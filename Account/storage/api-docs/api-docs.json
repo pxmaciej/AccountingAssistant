@@ -442,6 +442,230 @@
                 ]
             }
         },
+        "/api/income/show/{user_id}": {
+            "get": {
+                "tags": [
+                    "income"
+                ],
+                "description": "Show income",
+                "operationId": "show",
+                "parameters": [
+                    {
+                        "name": "user_id",
+                        "in": "path",
+                        "description": "ID user",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        },
+                        "example": "1"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/income/store": {
+            "post": {
+                "tags": [
+                    "income"
+                ],
+                "description": "Store income",
+                "operationId": "store",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "user_id": {
+                                        "type": "integer",
+                                        "format": "int64",
+                                        "example": "1"
+                                    },
+                                    "number": {
+                                        "type": "string",
+                                        "example": "125/B/45HK"
+                                    },
+                                    "date_issue": {
+                                        "type": "date",
+                                        "format": "date",
+                                        "example": "1998-09-24 10:02:20"
+                                    },
+                                    "buyer": {
+                                        "type": "string",
+                                        "example": "Mechanik Zbyszek"
+                                    },
+                                    "nip": {
+                                        "type": "integer",
+                                        "format": "int64",
+                                        "example": "9999999999"
+                                    },
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Silnik"
+                                    },
+                                    "netto": {
+                                        "type": "double",
+                                        "format": "double",
+                                        "example": "40000.00"
+                                    },
+                                    "vat": {
+                                        "type": "integer",
+                                        "format": "int64",
+                                        "example": "23"
+                                    },
+                                    "brutto": {
+                                        "type": "double",
+                                        "format": "double",
+                                        "example": "49200.00"
+                                    },
+                                    "category": {
+                                        "type": "string",
+                                        "example": "Naprawy"
+                                    },
+                                    "paid": {
+                                        "type": "boolean",
+                                        "example": "true"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/income/update": {
+            "patch": {
+                "tags": [
+                    "income"
+                ],
+                "description": "Update income",
+                "operationId": "update",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "income_id": {
+                                        "type": "integer",
+                                        "format": "int64",
+                                        "example": "1"
+                                    },
+                                    "number": {
+                                        "type": "string",
+                                        "example": "126/CN/655"
+                                    },
+                                    "date_issue": {
+                                        "type": "date",
+                                        "format": "date",
+                                        "example": "2021-04-18 10:02:20"
+                                    },
+                                    "buyer": {
+                                        "type": "string",
+                                        "example": "Mechanik Zbysio"
+                                    },
+                                    "nip": {
+                                        "type": "integer",
+                                        "format": "int64",
+                                        "example": "9999999999"
+                                    },
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Silnik v2"
+                                    },
+                                    "netto": {
+                                        "type": "double",
+                                        "format": "double",
+                                        "example": "400.00"
+                                    },
+                                    "vat": {
+                                        "type": "integer",
+                                        "format": "int64",
+                                        "example": "23"
+                                    },
+                                    "brutto": {
+                                        "type": "double",
+                                        "format": "double",
+                                        "example": "492.00"
+                                    },
+                                    "category": {
+                                        "type": "string",
+                                        "example": "Serwis"
+                                    },
+                                    "paid": {
+                                        "type": "boolean",
+                                        "example": "false"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/income/destroy/{income_id}": {
+            "delete": {
+                "tags": [
+                    "income"
+                ],
+                "description": "Destroy income",
+                "operationId": "destroy",
+                "parameters": [
+                    {
+                        "name": "income_id",
+                        "in": "path",
+                        "description": "ID income",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        },
+                        "example": "1"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            }
+        },
         "/api/file/show/{user_id}": {
             "get": {
                 "tags": [
