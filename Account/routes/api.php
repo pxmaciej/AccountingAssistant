@@ -50,3 +50,15 @@ Route::group([
     Route::patch('update', [App\Http\Controllers\ExpenseController::class, 'update']);
     Route::delete('destroy/{expense_id}', [App\Http\Controllers\ExpenseController::class, 'destroy']);
 });
+
+Route::group([
+
+    'middleware' => 'api',
+    'prefix' => 'income'
+
+], function ($router) {
+    Route::post('store', [App\Http\Controllers\IncomeController::class, 'store']);
+    Route::get('show/{user_id}', [App\Http\Controllers\IncomeController::class, 'show']);
+    Route::patch('update', [App\Http\Controllers\IncomeController::class, 'update']);
+    Route::delete('destroy/{expense_id}', [App\Http\Controllers\IncomeController::class, 'destroy']);
+});
