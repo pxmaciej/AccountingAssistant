@@ -60,6 +60,7 @@ use Illuminate\Support\Facades\Validator;
  *    @OA\JsonContent(
  *       required={"name", "email","password", "password_confirmation"},
  *       @OA\Property(property="name", type="string", format="text", example="user"),
+ *       @OA\Property(property="role", type="string", format="text", example="admin"),
  *       @OA\Property(property="email", type="string", format="email", example="user@user"),
  *       @OA\Property(property="password", type="string", format="password", example="zaq1@WSX"),
  *       @OA\Property(property="password_confirmation", type="string", format="password", example="zaq1@WSX"),
@@ -85,6 +86,49 @@ use Illuminate\Support\Facades\Validator;
  *
  * description="Refresh user token",
  * operationId="authRefresh",
+ * tags={"auth"},
+ * security={{ "apiAuth": {} }},
+ * @OA\Response(
+ *    response=200,
+ *    description="Success"
+ *     ),
+ * @OA\Response(
+ *    response=401,
+ *    description="Returns when user is not authenticated",
+ *    @OA\JsonContent(
+ *       @OA\Property(property="message", type="string", example="Not authorized"),
+ *    )
+ * )
+ * )
+ */
+/**
+ * @OA\Post(
+ * path="/api/auth/profile",
+ *
+ * description="Get user profile",
+ * operationId="userProfile",
+ * tags={"auth"},
+ * security={{ "apiAuth": {} }},
+ * @OA\Response(
+ *    response=200,
+ *    description="Success"
+ *     ),
+ * @OA\Response(
+ *    response=401,
+ *    description="Returns when user is not authenticated",
+ *    @OA\JsonContent(
+ *       @OA\Property(property="message", type="string", example="Not authorized"),
+ *    )
+ * )
+ * )
+ */
+
+/**
+ * @OA\Get(
+ * path="/api/auth/users",
+ *
+ * description="Get all user profile, admin only",
+ * operationId="alluserProfile",
  * tags={"auth"},
  * security={{ "apiAuth": {} }},
  * @OA\Response(
@@ -165,6 +209,7 @@ class AuthController extends Controller
     public function register(Request $request) {
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|between:2,100',
+            'role' => 'string',
             'email' => 'required|string|email|max:100|unique:users',
             'password' => 'required|string|confirmed|min:6',
         ]);
@@ -213,6 +258,15 @@ class AuthController extends Controller
         return response()->json(auth()->user());
     }
 
+    /**
+     * Get the all user profile.
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function allUserProfile() {
+        $users = User::all()->except(Auth::id());
+        return response()->json($users);
+    }
     /**
      * Get the token array structure.
      *

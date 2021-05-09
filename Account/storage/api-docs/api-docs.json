@@ -104,6 +104,11 @@
                                         "format": "text",
                                         "example": "user"
                                     },
+                                    "role": {
+                                        "type": "string",
+                                        "format": "text",
+                                        "example": "admin"
+                                    },
                                     "email": {
                                         "type": "string",
                                         "format": "email",
@@ -183,6 +188,76 @@
                 ]
             }
         },
+        "/api/auth/profile": {
+            "post": {
+                "tags": [
+                    "auth"
+                ],
+                "description": "Get user profile",
+                "operationId": "userProfile",
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "401": {
+                        "description": "Returns when user is not authenticated",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Not authorized"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/auth/users": {
+            "get": {
+                "tags": [
+                    "auth"
+                ],
+                "description": "Get all user profile, admin only",
+                "operationId": "alluserProfile",
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "401": {
+                        "description": "Returns when user is not authenticated",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Not authorized"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            }
+        },
         "/api/auth/logout": {
             "post": {
                 "tags": [
@@ -190,6 +265,41 @@
                 ],
                 "description": "Logout user and invalidate token",
                 "operationId": "logout",
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "401": {
+                        "description": "Returns when user is not authenticated",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Not authorized"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/expense/index": {
+            "get": {
+                "tags": [
+                    "expense"
+                ],
+                "description": "Get all user expense, admin only",
+                "operationId": "index",
                 "responses": {
                     "200": {
                         "description": "Success"
@@ -442,6 +552,41 @@
                 ]
             }
         },
+        "/api/income/index": {
+            "get": {
+                "tags": [
+                    "income"
+                ],
+                "description": "Get all user income, admin only",
+                "operationId": "index",
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "401": {
+                        "description": "Returns when user is not authenticated",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Not authorized"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            }
+        },
         "/api/income/show/{user_id}": {
             "get": {
                 "tags": [
@@ -657,6 +802,41 @@
                 "responses": {
                     "200": {
                         "description": "Success"
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/file/index": {
+            "get": {
+                "tags": [
+                    "file"
+                ],
+                "description": "Get all user file, admin only",
+                "operationId": "index",
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "401": {
+                        "description": "Returns when user is not authenticated",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Not authorized"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
                     }
                 },
                 "security": [

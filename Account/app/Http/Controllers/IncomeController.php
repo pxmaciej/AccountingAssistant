@@ -5,6 +5,29 @@ namespace App\Http\Controllers;
 use App\Models\Income;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
+
+/**
+ * @OA\Get(
+ * path="/api/income/index",
+ *
+ * description="Get all user income, admin only",
+ * operationId="index",
+ * tags={"income"},
+ * security={{ "apiAuth": {} }},
+ * @OA\Response(
+ *    response=200,
+ *    description="Success"
+ *     ),
+ * @OA\Response(
+ *    response=401,
+ *    description="Returns when user is not authenticated",
+ *    @OA\JsonContent(
+ *       @OA\Property(property="message", type="string", example="Not authorized"),
+ *    )
+ * )
+ * )
+ */
+
 /**
  * @OA\Get(
  * path="/api/income/show/{user_id}",
@@ -128,7 +151,8 @@ class IncomeController extends Controller
      */
     public function index()
     {
-        //
+        $show = Income::get();
+        return response()->json([$show]);;
     }
 
     /**
