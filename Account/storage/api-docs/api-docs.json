@@ -2,7 +2,7 @@
     "openapi": "3.0.0",
     "info": {
         "title": "L5 OpenApi",
-        "description": "L5 Swagger OpenApi description",
+        "description": "L5 Swagger dla ksiegowych",
         "version": "1.0.0"
     },
     "paths": {

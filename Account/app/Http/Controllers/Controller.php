@@ -11,7 +11,7 @@ use Illuminate\Routing\Controller as BaseController;
  * @OA\Info(
  *      version="1.0.0",
  *      title="L5 OpenApi",
- *      description="L5 Swagger OpenApi description"
+ *      description="L5 Swagger dla ksiegowych"
  * )
  *
  */
