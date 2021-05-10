@@ -9,6 +9,28 @@ use Illuminate\Support\Facades\Validator;
 
 /**
  * @OA\Get(
+ * path="/api/expense/index",
+ *
+ * description="Get all user expense, admin only",
+ * operationId="index",
+ * tags={"expense"},
+ * security={{ "apiAuth": {} }},
+ * @OA\Response(
+ *    response=200,
+ *    description="Success"
+ *     ),
+ * @OA\Response(
+ *    response=401,
+ *    description="Returns when user is not authenticated",
+ *    @OA\JsonContent(
+ *       @OA\Property(property="message", type="string", example="Not authorized"),
+ *    )
+ * )
+ * )
+ */
+
+/**
+ * @OA\Get(
  * path="/api/expense/show/{user_id}",
  *
  * description="Show expense",
@@ -139,7 +161,8 @@ class ExpenseController extends Controller
      */
     public function index()
     {
-        //
+        $show = Expense::get();
+        return response()->json([$show]);;
     }
 
     /**

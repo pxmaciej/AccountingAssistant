@@ -9,6 +9,28 @@ use Illuminate\Support\Facades\Auth;
 
 /**
  * @OA\Get(
+ * path="/api/file/index",
+ *
+ * description="Get all user file, admin only",
+ * operationId="index",
+ * tags={"file"},
+ * security={{ "apiAuth": {} }},
+ * @OA\Response(
+ *    response=200,
+ *    description="Success"
+ *     ),
+ * @OA\Response(
+ *    response=401,
+ *    description="Returns when user is not authenticated",
+ *    @OA\JsonContent(
+ *       @OA\Property(property="message", type="string", example="Not authorized"),
+ *    )
+ * )
+ * )
+ */
+
+/**
+ * @OA\Get(
  * path="/api/file/show/{user_id}",
  *
  * description="Show file",
@@ -105,7 +127,10 @@ class UploadFileController extends Controller
      */
     public function index()
     {
-        //
+        $savedfile = UploadFile::get();
+        return response()->json([
+            $savedfile
+            ]);
     }
 
     /**
