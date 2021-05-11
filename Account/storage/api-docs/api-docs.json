@@ -901,6 +901,201 @@
                 ]
             }
         },
+        "/api/payment/index": {
+            "get": {
+                "tags": [
+                    "payment"
+                ],
+                "description": "Get all user payment, admin only",
+                "operationId": "index",
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "401": {
+                        "description": "Returns when user is not authenticated",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Not authorized"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/payment/show/{user_id}": {
+            "get": {
+                "tags": [
+                    "payment"
+                ],
+                "description": "Show payment",
+                "operationId": "show",
+                "parameters": [
+                    {
+                        "name": "user_id",
+                        "in": "path",
+                        "description": "ID user",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        },
+                        "example": "1"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/payment/store": {
+            "post": {
+                "tags": [
+                    "payment"
+                ],
+                "description": "Store payment admin only",
+                "operationId": "store",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "user_id": {
+                                        "type": "integer",
+                                        "format": "int64",
+                                        "example": "1"
+                                    },
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Płatność zus"
+                                    },
+                                    "category": {
+                                        "type": "string",
+                                        "example": "ZUS"
+                                    },
+                                    "value": {
+                                        "type": "double",
+                                        "format": "double",
+                                        "example": "400.00"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/payment/update": {
+            "patch": {
+                "tags": [
+                    "payment"
+                ],
+                "description": "Update payment admin only",
+                "operationId": "update",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "payment_id": {
+                                        "type": "integer",
+                                        "format": "int64",
+                                        "example": "1"
+                                    },
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Silnik v2"
+                                    },
+                                    "category": {
+                                        "type": "string",
+                                        "example": "ZUS"
+                                    },
+                                    "value": {
+                                        "type": "double",
+                                        "format": "double",
+                                        "example": "400.00"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/payment/destroy/{payment_id}": {
+            "delete": {
+                "tags": [
+                    "payment"
+                ],
+                "description": "Destroy payment admin only",
+                "operationId": "destroy",
+                "parameters": [
+                    {
+                        "name": "payment_id",
+                        "in": "path",
+                        "description": "ID payment",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        },
+                        "example": "1"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            }
+        },
         "/api/file/index": {
             "get": {
                 "tags": [

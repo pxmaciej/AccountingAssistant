@@ -346,6 +346,7 @@ class AuthController extends Controller
             $edited->role = $request->role;
             $edited->email = $request->email;
             $edited->password = bcrypt($request->password);
+            $edited->save();
 
         return response()->json([
             'message' => 'User successfully updated',

@@ -68,3 +68,16 @@ Route::group([
     Route::patch('update', [App\Http\Controllers\IncomeController::class, 'update']);
     Route::delete('destroy/{expense_id}', [App\Http\Controllers\IncomeController::class, 'destroy']);
 });
+
+Route::group([
+
+    'middleware' => 'api',
+    'prefix' => 'payment'
+
+], function ($router) {
+    Route::get('index', [App\Http\Controllers\PaymentController::class, 'index'])->middleware('roles:admin');
+    Route::post('store', [App\Http\Controllers\PaymentController::class, 'store'])->middleware('roles:admin');
+    Route::get('show/{user_id}', [App\Http\Controllers\PaymentController::class, 'show']);
+    Route::patch('update', [App\Http\Controllers\PaymentController::class, 'update'])->middleware('roles:admin');
+    Route::delete('destroy/{payment_id}', [App\Http\Controllers\PaymentController::class, 'destroy'])->middleware('roles:admin');
+});
