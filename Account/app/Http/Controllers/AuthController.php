@@ -146,6 +146,32 @@ use Illuminate\Support\Facades\Validator;
  */
 
  /**
+ * @OA\Patch(
+ * path="/api/auth/update",
+ *
+ * description="Update user",
+ * operationId="update",
+ * tags={"auth"},
+ * security={{ "apiAuth": {} }},
+ * @OA\RequestBody(
+*  @OA\JsonContent(
+ *       @OA\Property(property="user_id", type="integer", format="int64", example="1"),
+ *       @OA\Property(property="name", type="string",  example="Maciej"),
+ *       @OA\Property(property="role", type="string",  example="user"),
+ *       @OA\Property(property="email", type="string", format="email", example="user@user"),
+ *       @OA\Property(property="password", type="string", format="password", example="zaq1@WSX"),
+ *       @OA\Property(property="password_confirmation", type="string", format="password", example="zaq1@WSX"),
+ *    )
+*
+* ),
+ *  @OA\Response(
+ *    response=200,
+ *    description="Success"
+ *  )
+ * )
+*/
+
+ /**
  * @OA\Post(
  * path="/api/auth/logout",
  *
@@ -166,6 +192,33 @@ use Illuminate\Support\Facades\Validator;
  * )
  * )
  */
+
+
+ /**
+ * @OA\Delete(
+ * path="/api/auth/destroy/{user_id}",
+ *
+ * description="Destroy user",
+ * operationId="destroy",
+ * tags={"auth"},
+ * security={{ "apiAuth": {} }},
+ *  @OA\Parameter(
+ *    description="ID user",
+ *    in="path",
+ *    name="user_id",
+ *    required=true,
+ *    example="1",
+ *    @OA\Schema(
+ *       type="integer",
+ *       format="int64"
+ *    )
+ * ),
+ *  @OA\Response(
+ *    response=200,
+ *    description="Success"
+ *  )
+ * )
+*/
 
 class AuthController extends Controller
 {
@@ -268,6 +321,38 @@ class AuthController extends Controller
         return response()->json($users);
     }
     /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\auth  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request)
+    {
+        $edited = User::find($request->user_id);
+
+        $validator = Validator::make($request->all(), [
+            'name' => 'string|between:2,100',
+            'role' => 'string',
+            'email' => 'string|email|max:100',
+            'password' => 'string|confirmed|min:6',
+        ]);
+        if ($validator->fails()) {
+            return response()->json(['error' => $validator->messages()],401);
+
+        }
+
+            $edited->name = $request->name;
+            $edited->role = $request->role;
+            $edited->email = $request->email;
+            $edited->password = bcrypt($request->password);
+
+        return response()->json([
+            'message' => 'User successfully updated',
+            'user' => $edited
+        ], 201);
+    }
+    /**
      * Get the token array structure.
      *
      * @param  string $token
@@ -281,5 +366,18 @@ class AuthController extends Controller
             'expires_in' => auth()->factory()->getTTL() * 6000,
             'user' => auth()->user()
         ]);
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\Models\auth  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($user_id)
+    {
+        $destroy = User::find($user_id);
+        $destroy->delete();
+        return response()->json(['200' => 'success']);
     }
 }
