@@ -49,26 +49,5 @@
   </nav>
 
 
-<div class="jarallax">
-    <header class="my-5 text-white text-center jarallax-img" style="background: url({{ URL::asset('image/baner.jpg') }});background-size: cover; background-attachment: fixed;">
-        <div class="mask rgba-gradient align-items-center">
-        <div class="overlay">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-xl-12 mx-auto m-5 justify-content-lg-center">
-                        <h1 class="headertext mb-2 text-justify">Usługę księgowości uproszczonej kierujemy do małych firm, zobligowanych do prowadzenia księgi
-                            przychodów i rozchodów lub ewidencji na potrzeby podatku ryczałtowego od przychodów ewidencjonowanych.</h1>
-                        </div>
-                        <div class="col-md-10 col-lg-8 col-xl-7 mx-auto mb-5">
-                            <form>
-                                <div class="form-row">
-                                    <div class="col-12 col-md-9 mb-2 mb-md-0"><input class="form-control form-control-lg" type="email" placeholder="Wpisz email"></div>
-                                    <div class="col-12 col-md-3"><button class="btn btn-primary btn-block btn-lg mb-3" type="Sign-up">Zapisz się!</button></div>
-                                </div>
-                            </form>
-                        </div>
-                </div>
-        </div>
-    </header>
-</div>
+
 

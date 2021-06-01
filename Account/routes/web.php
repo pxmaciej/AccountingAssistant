@@ -30,10 +30,4 @@ Route::get('/polityka-prywatnosci',function(){
 
 Auth::routes();
 
-Route::get('expenses', function(){
-    return view('expenses');
-});
-
-Route::resource('/uploadExpenses', UploadFileController::class);
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->middleware('auth');
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->middleware('api');
