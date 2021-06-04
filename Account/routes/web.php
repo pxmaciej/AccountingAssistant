@@ -28,6 +28,4 @@ Route::get('/polityka-prywatnosci',function(){
     return view('pages.polityka');
 });
 
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->middleware('api');
+Route::view('/{app?}', 'home')->where('app', '.*')->middleware('api');

@@ -351,7 +351,7 @@ class AuthController extends Controller
         return response()->json([
             'message' => 'User successfully updated',
             'user' => $edited
-        ], 201);
+        ], 200);
     }
     /**
      * Get the token array structure.
@@ -367,6 +367,10 @@ class AuthController extends Controller
             'expires_in' => auth()->factory()->getTTL() * 6000,
             'user' => auth()->user()
         ]);
+    }
+
+    public function checkToken() {
+        return response()->json(['success' => true], 200);
     }
 
     /**

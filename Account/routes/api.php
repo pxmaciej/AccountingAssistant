@@ -23,11 +23,12 @@ Route::group([
 
     Route::get('users', [App\Http\Controllers\AuthController::class, 'allUserProfile'])->middleware('roles:admin');
     Route::post('login', [App\Http\Controllers\AuthController::class, 'login']);
+    Route::post('checkToken', [App\Http\Controllers\AuthController::class, 'checkToken']);
     Route::post('register', [App\Http\Controllers\AuthController::class, 'register']);
     Route::patch('update', [App\Http\Controllers\AuthController::class, 'update']);
     Route::post('logout', [App\Http\Controllers\AuthController::class, 'logout']);
     Route::post('refresh', [App\Http\Controllers\AuthController::class, 'refresh']);
-    Route::post('profile', [App\Http\Controllers\AuthController::class, 'userProfile']);
+    Route::get('profile', [App\Http\Controllers\AuthController::class, 'userProfile']);
     Route::delete('destroy/{user_id}', [App\Http\Controllers\AuthController::class, 'destroy']);
 });
 Route::group([
