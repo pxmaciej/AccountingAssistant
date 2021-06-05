@@ -78,11 +78,11 @@ export default {
             axios.post('api/auth/login', this.credentials)
             .then(res => {
                 this.$store.commit('setToken', res.data.access_token);
-                 this.$router.push('/dashboard');
+                this.$router.push('/dashboard');
                 })
             .catch(err => {
                 console.log(err.data);
-            })
+            });
         }
     }
 }

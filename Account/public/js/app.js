@@ -5060,7 +5060,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "App"
 });
@@ -5078,112 +5077,7 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+/* harmony import */ var _components_formFile_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/formFile.vue */ "./resources/js/app/components/formFile.vue");
 //
 //
 //
@@ -5334,11 +5228,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Dashboard",
+  components: {
+    formFile: _components_formFile_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
+  },
   data: function data() {
     return {
-      loading: true
+      loading: true,
+      user: []
     };
   },
   mounted: function mounted() {
@@ -5357,6 +5256,11 @@ __webpack_require__.r(__webpack_exports__);
         _this.$store.commit('clearToken');
 
         _this.$router.push('/login');
+      });
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('api/auth/profile', {
+        token: this.$store.state.token
+      }).then(function (res) {
+        _this.user = res.data;
       });
     } else {
       this.loading = false;
@@ -5479,6 +5383,56 @@ __webpack_require__.r(__webpack_exports__);
         _this2.$router.push('/dashboard');
       })["catch"](function (err) {
         console.log(err.data);
+      });
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/app/components/formFile.vue?vue&type=script&lang=js&":
+/*!***********************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/app/components/formFile.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: "formFile",
+  props: ['user'],
+  data: function data() {
+    return {
+      file: file
+    };
+  },
+  methods: {
+    onFileSelected: function onFileSelected(event) {
+      this.file = event.target.files[0];
+    },
+    onUpload: function onUpload() {
+      var fd = new FormData();
+      console.log(this.file);
+      fd.append('file', this.file, this.file.name);
+      fd.append('user', this.user);
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('api/file/store', fd, {
+        headers: {
+          "Authorization": "Bearer ".concat(this.$store.state.token),
+          "Content-type": "multipart/form-data"
+        }
       });
     }
   }
@@ -41716,7 +41670,22 @@ var render = function() {
                 "div",
                 { staticClass: "container-fluid d-flex flex-column p-0" },
                 [
-                  _vm._m(0),
+                  _c(
+                    "a",
+                    {
+                      staticClass:
+                        "navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0",
+                      attrs: { href: "#" }
+                    },
+                    [
+                      _vm._m(0),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "sidebar-brand-text mx-3" }, [
+                        _vm._v(_vm._s(_vm.user.name)),
+                        _c("span")
+                      ])
+                    ]
+                  ),
                   _vm._v(" "),
                   _c(
                     "ul",
@@ -41770,7 +41739,39 @@ var render = function() {
             ]
           ),
           _vm._v(" "),
-          _vm._m(5)
+          _c(
+            "div",
+            {
+              staticClass: "d-flex flex-column",
+              attrs: { id: "content-wrapper" }
+            },
+            [
+              _c("div", { attrs: { id: "content" } }, [
+                _c("div", { staticClass: "container-fluid" }, [
+                  _vm._m(5),
+                  _vm._v(" "),
+                  _vm._m(6),
+                  _vm._v(" "),
+                  _vm._m(7),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "row" }, [
+                    _c("div", { staticClass: "col-lg-6 mb-4" }, [
+                      _c("div", { staticClass: "card shadow mb-4" }, [
+                        _vm._m(8),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          { staticClass: "card-body" },
+                          [_c("formFile", { attrs: { user: _vm.user.id } })],
+                          1
+                        )
+                      ])
+                    ])
+                  ])
+                ])
+              ])
+            ]
+          )
         ])
   ])
 }
@@ -41779,24 +41780,9 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c(
-      "a",
-      {
-        staticClass:
-          "navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0",
-        attrs: { href: "#" }
-      },
-      [
-        _c("div", { staticClass: "sidebar-brand-icon rotate-n-15" }, [
-          _c("i", { staticClass: "fas fa-laugh-wink" })
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "sidebar-brand-text mx-3" }, [
-          _vm._v("Brand"),
-          _c("span")
-        ])
-      ]
-    )
+    return _c("div", { staticClass: "sidebar-brand-icon rotate-n-15" }, [
+      _c("i", { staticClass: "fas fa-laugh-wink" })
+    ])
   },
   function() {
     var _vm = this
@@ -41848,818 +41834,363 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c(
       "div",
-      { staticClass: "d-flex flex-column", attrs: { id: "content-wrapper" } },
+      {
+        staticClass: "d-sm-flex justify-content-between align-items-center mb-4"
+      },
       [
-        _c("div", { attrs: { id: "content" } }, [
-          _c("div", { staticClass: "container-fluid" }, [
-            _c(
-              "div",
-              {
-                staticClass:
-                  "d-sm-flex justify-content-between align-items-center mb-4"
-              },
-              [
-                _c("h3", { staticClass: "text-dark mb-0" }, [
-                  _vm._v("Dashboard")
-                ]),
+        _c("h3", { staticClass: "text-dark mb-0" }, [_vm._v("Dashboard")]),
+        _c(
+          "a",
+          {
+            staticClass: "btn btn-primary btn-sm d-none d-sm-inline-block",
+            attrs: { role: "button", href: "#" }
+          },
+          [
+            _c("i", { staticClass: "fas fa-download fa-sm text-white-50" }),
+            _vm._v(" Generate Report")
+          ]
+        )
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-md-6 col-xl-3 mb-4" }, [
+        _c("div", { staticClass: "card shadow border-left-primary py-2" }, [
+          _c("div", { staticClass: "card-body" }, [
+            _c("div", { staticClass: "row align-items-center no-gutters" }, [
+              _c("div", { staticClass: "col mr-2" }, [
                 _c(
-                  "a",
+                  "div",
                   {
                     staticClass:
-                      "btn btn-primary btn-sm d-none d-sm-inline-block",
-                    attrs: { role: "button", href: "#" }
+                      "text-uppercase text-primary font-weight-bold text-xs mb-1"
                   },
-                  [
-                    _c("i", {
-                      staticClass: "fas fa-download fa-sm text-white-50"
-                    }),
-                    _vm._v(" Generate Report")
-                  ]
-                )
-              ]
-            ),
-            _vm._v(" "),
-            _c("div", { staticClass: "row" }, [
-              _c("div", { staticClass: "col-md-6 col-xl-3 mb-4" }, [
-                _c(
-                  "div",
-                  { staticClass: "card shadow border-left-primary py-2" },
-                  [
-                    _c("div", { staticClass: "card-body" }, [
-                      _c(
-                        "div",
-                        { staticClass: "row align-items-center no-gutters" },
-                        [
-                          _c("div", { staticClass: "col mr-2" }, [
-                            _c(
-                              "div",
-                              {
-                                staticClass:
-                                  "text-uppercase text-primary font-weight-bold text-xs mb-1"
-                              },
-                              [_c("span", [_vm._v("Earnings (monthly)")])]
-                            ),
-                            _vm._v(" "),
-                            _c(
-                              "div",
-                              {
-                                staticClass:
-                                  "text-dark font-weight-bold h5 mb-0"
-                              },
-                              [_c("span", [_vm._v("$40,000")])]
-                            )
-                          ]),
-                          _vm._v(" "),
-                          _c("div", { staticClass: "col-auto" }, [
-                            _c("i", {
-                              staticClass: "fas fa-calendar fa-2x text-gray-300"
-                            })
-                          ])
-                        ]
-                      )
-                    ])
-                  ]
-                )
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "col-md-6 col-xl-3 mb-4" }, [
-                _c(
-                  "div",
-                  { staticClass: "card shadow border-left-success py-2" },
-                  [
-                    _c("div", { staticClass: "card-body" }, [
-                      _c(
-                        "div",
-                        { staticClass: "row align-items-center no-gutters" },
-                        [
-                          _c("div", { staticClass: "col mr-2" }, [
-                            _c(
-                              "div",
-                              {
-                                staticClass:
-                                  "text-uppercase text-success font-weight-bold text-xs mb-1"
-                              },
-                              [_c("span", [_vm._v("Earnings (annual)")])]
-                            ),
-                            _vm._v(" "),
-                            _c(
-                              "div",
-                              {
-                                staticClass:
-                                  "text-dark font-weight-bold h5 mb-0"
-                              },
-                              [_c("span", [_vm._v("$215,000")])]
-                            )
-                          ]),
-                          _vm._v(" "),
-                          _c("div", { staticClass: "col-auto" }, [
-                            _c("i", {
-                              staticClass:
-                                "fas fa-dollar-sign fa-2x text-gray-300"
-                            })
-                          ])
-                        ]
-                      )
-                    ])
-                  ]
-                )
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "col-md-6 col-xl-3 mb-4" }, [
-                _c(
-                  "div",
-                  { staticClass: "card shadow border-left-info py-2" },
-                  [
-                    _c("div", { staticClass: "card-body" }, [
-                      _c(
-                        "div",
-                        { staticClass: "row align-items-center no-gutters" },
-                        [
-                          _c("div", { staticClass: "col mr-2" }, [
-                            _c(
-                              "div",
-                              {
-                                staticClass:
-                                  "text-uppercase text-info font-weight-bold text-xs mb-1"
-                              },
-                              [_c("span", [_vm._v("Tasks")])]
-                            ),
-                            _vm._v(" "),
-                            _c(
-                              "div",
-                              {
-                                staticClass: "row no-gutters align-items-center"
-                              },
-                              [
-                                _c("div", { staticClass: "col-auto" }, [
-                                  _c(
-                                    "div",
-                                    {
-                                      staticClass:
-                                        "text-dark font-weight-bold h5 mb-0 mr-3"
-                                    },
-                                    [_c("span", [_vm._v("50%")])]
-                                  )
-                                ]),
-                                _vm._v(" "),
-                                _c("div", { staticClass: "col" }, [
-                                  _c(
-                                    "div",
-                                    { staticClass: "progress progress-sm" },
-                                    [
-                                      _c(
-                                        "div",
-                                        {
-                                          staticClass: "progress-bar bg-info",
-                                          staticStyle: { width: "50%" },
-                                          attrs: {
-                                            "aria-valuenow": "50",
-                                            "aria-valuemin": "0",
-                                            "aria-valuemax": "100"
-                                          }
-                                        },
-                                        [
-                                          _c(
-                                            "span",
-                                            { staticClass: "sr-only" },
-                                            [_vm._v("50%")]
-                                          )
-                                        ]
-                                      )
-                                    ]
-                                  )
-                                ])
-                              ]
-                            )
-                          ]),
-                          _vm._v(" "),
-                          _c("div", { staticClass: "col-auto" }, [
-                            _c("i", {
-                              staticClass:
-                                "fas fa-clipboard-list fa-2x text-gray-300"
-                            })
-                          ])
-                        ]
-                      )
-                    ])
-                  ]
-                )
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "col-md-6 col-xl-3 mb-4" }, [
-                _c(
-                  "div",
-                  { staticClass: "card shadow border-left-warning py-2" },
-                  [
-                    _c("div", { staticClass: "card-body" }, [
-                      _c(
-                        "div",
-                        { staticClass: "row align-items-center no-gutters" },
-                        [
-                          _c("div", { staticClass: "col mr-2" }, [
-                            _c(
-                              "div",
-                              {
-                                staticClass:
-                                  "text-uppercase text-warning font-weight-bold text-xs mb-1"
-                              },
-                              [_c("span", [_vm._v("Pending Requests")])]
-                            ),
-                            _vm._v(" "),
-                            _c(
-                              "div",
-                              {
-                                staticClass:
-                                  "text-dark font-weight-bold h5 mb-0"
-                              },
-                              [_c("span", [_vm._v("18")])]
-                            )
-                          ]),
-                          _vm._v(" "),
-                          _c("div", { staticClass: "col-auto" }, [
-                            _c("i", {
-                              staticClass: "fas fa-comments fa-2x text-gray-300"
-                            })
-                          ])
-                        ]
-                      )
-                    ])
-                  ]
-                )
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "row" }, [
-              _c("div", { staticClass: "col-lg-7 col-xl-8" }, [
-                _c("div", { staticClass: "card shadow mb-4" }, [
-                  _c(
-                    "div",
-                    {
-                      staticClass:
-                        "card-header d-flex justify-content-between align-items-center"
-                    },
-                    [
-                      _c(
-                        "h6",
-                        { staticClass: "text-primary font-weight-bold m-0" },
-                        [_vm._v("Earnings Overview")]
-                      ),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "dropdown no-arrow" }, [
-                        _c(
-                          "button",
-                          {
-                            staticClass: "btn btn-link btn-sm dropdown-toggle",
-                            attrs: {
-                              "aria-expanded": "false",
-                              "data-toggle": "dropdown",
-                              type: "button"
-                            }
-                          },
-                          [
-                            _c("i", {
-                              staticClass: "fas fa-ellipsis-v text-gray-400"
-                            })
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "div",
-                          {
-                            staticClass:
-                              "dropdown-menu shadow dropdown-menu-right animated--fade-in"
-                          },
-                          [
-                            _c(
-                              "p",
-                              { staticClass: "text-center dropdown-header" },
-                              [_vm._v("dropdown header:")]
-                            ),
-                            _c(
-                              "a",
-                              {
-                                staticClass: "dropdown-item",
-                                attrs: { href: "#" }
-                              },
-                              [_vm._v(" Action")]
-                            ),
-                            _c(
-                              "a",
-                              {
-                                staticClass: "dropdown-item",
-                                attrs: { href: "#" }
-                              },
-                              [_vm._v(" Another action")]
-                            ),
-                            _vm._v(" "),
-                            _c("div", { staticClass: "dropdown-divider" }),
-                            _c(
-                              "a",
-                              {
-                                staticClass: "dropdown-item",
-                                attrs: { href: "#" }
-                              },
-                              [_vm._v(" Something else here")]
-                            )
-                          ]
-                        )
-                      ])
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "card-body" }, [
-                    _c("div", { staticClass: "chart-area" }, [
-                      _c("canvas", {
-                        staticStyle: {
-                          display: "block",
-                          width: "564px",
-                          height: "320px"
-                        },
-                        attrs: { height: "320", width: "564" }
-                      })
-                    ])
-                  ])
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "col-lg-5 col-xl-4" }, [
-                _c("div", { staticClass: "card shadow mb-4" }, [
-                  _c(
-                    "div",
-                    {
-                      staticClass:
-                        "card-header d-flex justify-content-between align-items-center"
-                    },
-                    [
-                      _c(
-                        "h6",
-                        { staticClass: "text-primary font-weight-bold m-0" },
-                        [_vm._v("Revenue Sources")]
-                      ),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "dropdown no-arrow" }, [
-                        _c(
-                          "button",
-                          {
-                            staticClass: "btn btn-link btn-sm dropdown-toggle",
-                            attrs: {
-                              "aria-expanded": "false",
-                              "data-toggle": "dropdown",
-                              type: "button"
-                            }
-                          },
-                          [
-                            _c("i", {
-                              staticClass: "fas fa-ellipsis-v text-gray-400"
-                            })
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "div",
-                          {
-                            staticClass:
-                              "dropdown-menu shadow dropdown-menu-right animated--fade-in"
-                          },
-                          [
-                            _c(
-                              "p",
-                              { staticClass: "text-center dropdown-header" },
-                              [_vm._v("dropdown header:")]
-                            ),
-                            _c(
-                              "a",
-                              {
-                                staticClass: "dropdown-item",
-                                attrs: { href: "#" }
-                              },
-                              [_vm._v(" Action")]
-                            ),
-                            _c(
-                              "a",
-                              {
-                                staticClass: "dropdown-item",
-                                attrs: { href: "#" }
-                              },
-                              [_vm._v(" Another action")]
-                            ),
-                            _vm._v(" "),
-                            _c("div", { staticClass: "dropdown-divider" }),
-                            _c(
-                              "a",
-                              {
-                                staticClass: "dropdown-item",
-                                attrs: { href: "#" }
-                              },
-                              [_vm._v(" Something else here")]
-                            )
-                          ]
-                        )
-                      ])
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "card-body" }, [
-                    _c("div", { staticClass: "chart-area" }, [
-                      _c("canvas", {
-                        staticStyle: {
-                          display: "block",
-                          width: "249px",
-                          height: "320px"
-                        },
-                        attrs: { height: "320", width: "249" }
-                      })
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "text-center small mt-4" }, [
-                      _c("span", { staticClass: "mr-2" }, [
-                        _c("i", { staticClass: "fas fa-circle text-primary" }),
-                        _vm._v(" Direct")
-                      ]),
-                      _c("span", { staticClass: "mr-2" }, [
-                        _c("i", { staticClass: "fas fa-circle text-success" }),
-                        _vm._v(" Social")
-                      ]),
-                      _c("span", { staticClass: "mr-2" }, [
-                        _c("i", { staticClass: "fas fa-circle text-info" }),
-                        _vm._v(" Refferal")
-                      ])
-                    ])
-                  ])
-                ])
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "row" }, [
-              _c("div", { staticClass: "col-lg-6 mb-4" }, [
-                _c("div", { staticClass: "card shadow mb-4" }, [
-                  _c("div", { staticClass: "card-header py-3" }, [
-                    _c(
-                      "h6",
-                      { staticClass: "text-primary font-weight-bold m-0" },
-                      [_vm._v("Projects")]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "card-body" }, [
-                    _c("h4", { staticClass: "small font-weight-bold" }, [
-                      _vm._v("Server migration"),
-                      _c("span", { staticClass: "float-right" }, [
-                        _vm._v("20%")
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "progress mb-4" }, [
-                      _c(
-                        "div",
-                        {
-                          staticClass: "progress-bar bg-danger",
-                          staticStyle: { width: "20%" },
-                          attrs: {
-                            "aria-valuenow": "20",
-                            "aria-valuemin": "0",
-                            "aria-valuemax": "100"
-                          }
-                        },
-                        [
-                          _c("span", { staticClass: "sr-only" }, [
-                            _vm._v("20%")
-                          ])
-                        ]
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("h4", { staticClass: "small font-weight-bold" }, [
-                      _vm._v("Sales tracking"),
-                      _c("span", { staticClass: "float-right" }, [
-                        _vm._v("40%")
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "progress mb-4" }, [
-                      _c(
-                        "div",
-                        {
-                          staticClass: "progress-bar bg-warning",
-                          staticStyle: { width: "40%" },
-                          attrs: {
-                            "aria-valuenow": "40",
-                            "aria-valuemin": "0",
-                            "aria-valuemax": "100"
-                          }
-                        },
-                        [
-                          _c("span", { staticClass: "sr-only" }, [
-                            _vm._v("40%")
-                          ])
-                        ]
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("h4", { staticClass: "small font-weight-bold" }, [
-                      _vm._v("Customer Database"),
-                      _c("span", { staticClass: "float-right" }, [
-                        _vm._v("60%")
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "progress mb-4" }, [
-                      _c(
-                        "div",
-                        {
-                          staticClass: "progress-bar bg-primary",
-                          staticStyle: { width: "60%" },
-                          attrs: {
-                            "aria-valuenow": "60",
-                            "aria-valuemin": "0",
-                            "aria-valuemax": "100"
-                          }
-                        },
-                        [
-                          _c("span", { staticClass: "sr-only" }, [
-                            _vm._v("60%")
-                          ])
-                        ]
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("h4", { staticClass: "small font-weight-bold" }, [
-                      _vm._v("Payout Details"),
-                      _c("span", { staticClass: "float-right" }, [
-                        _vm._v("80%")
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "progress mb-4" }, [
-                      _c(
-                        "div",
-                        {
-                          staticClass: "progress-bar bg-info",
-                          staticStyle: { width: "80%" },
-                          attrs: {
-                            "aria-valuenow": "80",
-                            "aria-valuemin": "0",
-                            "aria-valuemax": "100"
-                          }
-                        },
-                        [
-                          _c("span", { staticClass: "sr-only" }, [
-                            _vm._v("80%")
-                          ])
-                        ]
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("h4", { staticClass: "small font-weight-bold" }, [
-                      _vm._v("Account setup"),
-                      _c("span", { staticClass: "float-right" }, [
-                        _vm._v("Complete!")
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "progress mb-4" }, [
-                      _c(
-                        "div",
-                        {
-                          staticClass: "progress-bar bg-success",
-                          staticStyle: { width: "100%" },
-                          attrs: {
-                            "aria-valuenow": "100",
-                            "aria-valuemin": "0",
-                            "aria-valuemax": "100"
-                          }
-                        },
-                        [
-                          _c("span", { staticClass: "sr-only" }, [
-                            _vm._v("100%")
-                          ])
-                        ]
-                      )
-                    ])
-                  ])
-                ]),
+                  [_c("span", [_vm._v("Earnings (monthly)")])]
+                ),
                 _vm._v(" "),
-                _c("div", { staticClass: "card shadow mb-4" }, [
-                  _c("div", { staticClass: "card-header py-3" }, [
-                    _c(
-                      "h6",
-                      { staticClass: "text-primary font-weight-bold m-0" },
-                      [_vm._v("Todo List")]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("ul", { staticClass: "list-group list-group-flush" }, [
-                    _c("li", { staticClass: "list-group-item" }, [
-                      _c(
-                        "div",
-                        { staticClass: "row align-items-center no-gutters" },
-                        [
-                          _c("div", { staticClass: "col mr-2" }, [
-                            _c("h6", { staticClass: "mb-0" }, [
-                              _c("strong", [_vm._v("Lunch meeting")])
-                            ]),
-                            _c("span", { staticClass: "text-xs" }, [
-                              _vm._v("10:30 AM")
-                            ])
-                          ]),
-                          _vm._v(" "),
-                          _c("div", { staticClass: "col-auto" }, [
-                            _c(
-                              "div",
-                              { staticClass: "custom-control custom-checkbox" },
-                              [
-                                _c("input", {
-                                  staticClass: "custom-control-input",
-                                  attrs: { type: "checkbox", id: "formCheck-1" }
-                                }),
-                                _c("label", {
-                                  staticClass: "custom-control-label",
-                                  attrs: { for: "formCheck-1" }
-                                })
-                              ]
-                            )
-                          ])
-                        ]
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("li", { staticClass: "list-group-item" }, [
-                      _c(
-                        "div",
-                        { staticClass: "row align-items-center no-gutters" },
-                        [
-                          _c("div", { staticClass: "col mr-2" }, [
-                            _c("h6", { staticClass: "mb-0" }, [
-                              _c("strong", [_vm._v("Lunch meeting")])
-                            ]),
-                            _c("span", { staticClass: "text-xs" }, [
-                              _vm._v("11:30 AM")
-                            ])
-                          ]),
-                          _vm._v(" "),
-                          _c("div", { staticClass: "col-auto" }, [
-                            _c(
-                              "div",
-                              { staticClass: "custom-control custom-checkbox" },
-                              [
-                                _c("input", {
-                                  staticClass: "custom-control-input",
-                                  attrs: { type: "checkbox", id: "formCheck-2" }
-                                }),
-                                _c("label", {
-                                  staticClass: "custom-control-label",
-                                  attrs: { for: "formCheck-2" }
-                                })
-                              ]
-                            )
-                          ])
-                        ]
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("li", { staticClass: "list-group-item" }, [
-                      _c(
-                        "div",
-                        { staticClass: "row align-items-center no-gutters" },
-                        [
-                          _c("div", { staticClass: "col mr-2" }, [
-                            _c("h6", { staticClass: "mb-0" }, [
-                              _c("strong", [_vm._v("Lunch meeting")])
-                            ]),
-                            _c("span", { staticClass: "text-xs" }, [
-                              _vm._v("12:30 AM")
-                            ])
-                          ]),
-                          _vm._v(" "),
-                          _c("div", { staticClass: "col-auto" }, [
-                            _c(
-                              "div",
-                              { staticClass: "custom-control custom-checkbox" },
-                              [
-                                _c("input", {
-                                  staticClass: "custom-control-input",
-                                  attrs: { type: "checkbox", id: "formCheck-3" }
-                                }),
-                                _c("label", {
-                                  staticClass: "custom-control-label",
-                                  attrs: { for: "formCheck-3" }
-                                })
-                              ]
-                            )
-                          ])
-                        ]
-                      )
-                    ])
-                  ])
-                ])
+                _c(
+                  "div",
+                  { staticClass: "text-dark font-weight-bold h5 mb-0" },
+                  [_c("span", [_vm._v("$40,000")])]
+                )
               ]),
               _vm._v(" "),
-              _c("div", { staticClass: "col" }, [
-                _c("div", { staticClass: "row" }, [
-                  _c("div", { staticClass: "col-lg-6 mb-4" }, [
-                    _c(
-                      "div",
-                      { staticClass: "card text-white bg-primary shadow" },
-                      [
-                        _c("div", { staticClass: "card-body" }, [
-                          _c("p", { staticClass: "m-0" }, [_vm._v("Primary")]),
-                          _vm._v(" "),
-                          _c("p", { staticClass: "text-white-50 small m-0" }, [
-                            _vm._v("#4e73df")
-                          ])
-                        ])
-                      ]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "col-lg-6 mb-4" }, [
-                    _c(
-                      "div",
-                      { staticClass: "card text-white bg-success shadow" },
-                      [
-                        _c("div", { staticClass: "card-body" }, [
-                          _c("p", { staticClass: "m-0" }, [_vm._v("Success")]),
-                          _vm._v(" "),
-                          _c("p", { staticClass: "text-white-50 small m-0" }, [
-                            _vm._v("#1cc88a")
-                          ])
-                        ])
-                      ]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "col-lg-6 mb-4" }, [
-                    _c(
-                      "div",
-                      { staticClass: "card text-white bg-info shadow" },
-                      [
-                        _c("div", { staticClass: "card-body" }, [
-                          _c("p", { staticClass: "m-0" }, [_vm._v("Info")]),
-                          _vm._v(" "),
-                          _c("p", { staticClass: "text-white-50 small m-0" }, [
-                            _vm._v("#36b9cc")
-                          ])
-                        ])
-                      ]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "col-lg-6 mb-4" }, [
-                    _c(
-                      "div",
-                      { staticClass: "card text-white bg-warning shadow" },
-                      [
-                        _c("div", { staticClass: "card-body" }, [
-                          _c("p", { staticClass: "m-0" }, [_vm._v("Warning")]),
-                          _vm._v(" "),
-                          _c("p", { staticClass: "text-white-50 small m-0" }, [
-                            _vm._v("#f6c23e")
-                          ])
-                        ])
-                      ]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "col-lg-6 mb-4" }, [
-                    _c(
-                      "div",
-                      { staticClass: "card text-white bg-danger shadow" },
-                      [
-                        _c("div", { staticClass: "card-body" }, [
-                          _c("p", { staticClass: "m-0" }, [_vm._v("Danger")]),
-                          _vm._v(" "),
-                          _c("p", { staticClass: "text-white-50 small m-0" }, [
-                            _vm._v("#e74a3b")
-                          ])
-                        ])
-                      ]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "col-lg-6 mb-4" }, [
-                    _c(
-                      "div",
-                      { staticClass: "card text-white bg-secondary shadow" },
-                      [
-                        _c("div", { staticClass: "card-body" }, [
-                          _c("p", { staticClass: "m-0" }, [
-                            _vm._v("Secondary")
-                          ]),
-                          _vm._v(" "),
-                          _c("p", { staticClass: "text-white-50 small m-0" }, [
-                            _vm._v("#858796")
-                          ])
-                        ])
-                      ]
-                    )
-                  ])
-                ])
+              _c("div", { staticClass: "col-auto" }, [
+                _c("i", { staticClass: "fas fa-calendar fa-2x text-gray-300" })
               ])
             ])
           ])
         ])
-      ]
-    )
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-md-6 col-xl-3 mb-4" }, [
+        _c("div", { staticClass: "card shadow border-left-success py-2" }, [
+          _c("div", { staticClass: "card-body" }, [
+            _c("div", { staticClass: "row align-items-center no-gutters" }, [
+              _c("div", { staticClass: "col mr-2" }, [
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "text-uppercase text-success font-weight-bold text-xs mb-1"
+                  },
+                  [_c("span", [_vm._v("Earnings (annual)")])]
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "text-dark font-weight-bold h5 mb-0" },
+                  [_c("span", [_vm._v("$215,000")])]
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-auto" }, [
+                _c("i", {
+                  staticClass: "fas fa-dollar-sign fa-2x text-gray-300"
+                })
+              ])
+            ])
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-md-6 col-xl-3 mb-4" }, [
+        _c("div", { staticClass: "card shadow border-left-info py-2" }, [
+          _c("div", { staticClass: "card-body" }, [
+            _c("div", { staticClass: "row align-items-center no-gutters" }, [
+              _c("div", { staticClass: "col mr-2" }, [
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "text-uppercase text-info font-weight-bold text-xs mb-1"
+                  },
+                  [_c("span", [_vm._v("Tasks")])]
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "row no-gutters align-items-center" },
+                  [
+                    _c("div", { staticClass: "col-auto" }, [
+                      _c(
+                        "div",
+                        {
+                          staticClass: "text-dark font-weight-bold h5 mb-0 mr-3"
+                        },
+                        [_c("span", [_vm._v("50%")])]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col" }, [
+                      _c("div", { staticClass: "progress progress-sm" }, [
+                        _c(
+                          "div",
+                          {
+                            staticClass: "progress-bar bg-info",
+                            staticStyle: { width: "50%" },
+                            attrs: {
+                              "aria-valuenow": "50",
+                              "aria-valuemin": "0",
+                              "aria-valuemax": "100"
+                            }
+                          },
+                          [
+                            _c("span", { staticClass: "sr-only" }, [
+                              _vm._v("50%")
+                            ])
+                          ]
+                        )
+                      ])
+                    ])
+                  ]
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-auto" }, [
+                _c("i", {
+                  staticClass: "fas fa-clipboard-list fa-2x text-gray-300"
+                })
+              ])
+            ])
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-md-6 col-xl-3 mb-4" }, [
+        _c("div", { staticClass: "card shadow border-left-warning py-2" }, [
+          _c("div", { staticClass: "card-body" }, [
+            _c("div", { staticClass: "row align-items-center no-gutters" }, [
+              _c("div", { staticClass: "col mr-2" }, [
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "text-uppercase text-warning font-weight-bold text-xs mb-1"
+                  },
+                  [_c("span", [_vm._v("Pending Requests")])]
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "text-dark font-weight-bold h5 mb-0" },
+                  [_c("span", [_vm._v("18")])]
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-auto" }, [
+                _c("i", { staticClass: "fas fa-comments fa-2x text-gray-300" })
+              ])
+            ])
+          ])
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-lg-7 col-xl-8" }, [
+        _c("div", { staticClass: "card shadow mb-4" }, [
+          _c(
+            "div",
+            {
+              staticClass:
+                "card-header d-flex justify-content-between align-items-center"
+            },
+            [
+              _c("h6", { staticClass: "text-primary font-weight-bold m-0" }, [
+                _vm._v("Earnings Overview")
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "dropdown no-arrow" }, [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-link btn-sm dropdown-toggle",
+                    attrs: {
+                      "aria-expanded": "false",
+                      "data-toggle": "dropdown",
+                      type: "button"
+                    }
+                  },
+                  [_c("i", { staticClass: "fas fa-ellipsis-v text-gray-400" })]
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "dropdown-menu shadow dropdown-menu-right animated--fade-in"
+                  },
+                  [
+                    _c("p", { staticClass: "text-center dropdown-header" }, [
+                      _vm._v("dropdown header:")
+                    ]),
+                    _c(
+                      "a",
+                      { staticClass: "dropdown-item", attrs: { href: "#" } },
+                      [_vm._v(" Action")]
+                    ),
+                    _c(
+                      "a",
+                      { staticClass: "dropdown-item", attrs: { href: "#" } },
+                      [_vm._v(" Another action")]
+                    ),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "dropdown-divider" }),
+                    _c(
+                      "a",
+                      { staticClass: "dropdown-item", attrs: { href: "#" } },
+                      [_vm._v(" Something else here")]
+                    )
+                  ]
+                )
+              ])
+            ]
+          ),
+          _vm._v(" "),
+          _c("div", { staticClass: "card-body" }, [
+            _c("div", { staticClass: "chart-area" }, [
+              _c("canvas", {
+                staticStyle: {
+                  display: "block",
+                  width: "564px",
+                  height: "320px"
+                },
+                attrs: { height: "320", width: "564" }
+              })
+            ])
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-lg-5 col-xl-4" }, [
+        _c("div", { staticClass: "card shadow mb-4" }, [
+          _c(
+            "div",
+            {
+              staticClass:
+                "card-header d-flex justify-content-between align-items-center"
+            },
+            [
+              _c("h6", { staticClass: "text-primary font-weight-bold m-0" }, [
+                _vm._v("Revenue Sources")
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "dropdown no-arrow" }, [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-link btn-sm dropdown-toggle",
+                    attrs: {
+                      "aria-expanded": "false",
+                      "data-toggle": "dropdown",
+                      type: "button"
+                    }
+                  },
+                  [_c("i", { staticClass: "fas fa-ellipsis-v text-gray-400" })]
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "dropdown-menu shadow dropdown-menu-right animated--fade-in"
+                  },
+                  [
+                    _c("p", { staticClass: "text-center dropdown-header" }, [
+                      _vm._v("dropdown header:")
+                    ]),
+                    _c(
+                      "a",
+                      { staticClass: "dropdown-item", attrs: { href: "#" } },
+                      [_vm._v(" Action")]
+                    ),
+                    _c(
+                      "a",
+                      { staticClass: "dropdown-item", attrs: { href: "#" } },
+                      [_vm._v(" Another action")]
+                    ),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "dropdown-divider" }),
+                    _c(
+                      "a",
+                      { staticClass: "dropdown-item", attrs: { href: "#" } },
+                      [_vm._v(" Something else here")]
+                    )
+                  ]
+                )
+              ])
+            ]
+          ),
+          _vm._v(" "),
+          _c("div", { staticClass: "card-body" }, [
+            _c("div", { staticClass: "chart-area" }, [
+              _c("canvas", {
+                staticStyle: {
+                  display: "block",
+                  width: "249px",
+                  height: "320px"
+                },
+                attrs: { height: "320", width: "249" }
+              })
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "text-center small mt-4" }, [
+              _c("span", { staticClass: "mr-2" }, [
+                _c("i", { staticClass: "fas fa-circle text-primary" }),
+                _vm._v(" Direct")
+              ]),
+              _c("span", { staticClass: "mr-2" }, [
+                _c("i", { staticClass: "fas fa-circle text-success" }),
+                _vm._v(" Social")
+              ]),
+              _c("span", { staticClass: "mr-2" }, [
+                _c("i", { staticClass: "fas fa-circle text-info" }),
+                _vm._v(" Refferal")
+              ])
+            ])
+          ])
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "card-header py-3" }, [
+      _c("h6", { staticClass: "text-primary font-weight-bold m-0" }, [
+        _vm._v("Dodaj swoje faktury")
+      ])
+    ])
   }
 ]
 render._withStripped = true
@@ -42848,6 +42379,45 @@ var staticRenderFns = [
     ])
   }
 ]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/app/components/formFile.vue?vue&type=template&id=6be4eabd&":
+/*!***************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/app/components/formFile.vue?vue&type=template&id=6be4eabd& ***!
+  \***************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c("input", {
+      attrs: { type: "file", name: "file" },
+      on: { change: _vm.onFileSelected }
+    }),
+    _vm._v(" "),
+    _c(
+      "button",
+      {
+        staticClass: "btn btn-primary",
+        attrs: { type: "button" },
+        on: { click: _vm.onUpload }
+      },
+      [_vm._v("Wyślij")]
+    )
+  ])
+}
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -59721,6 +59291,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Login_vue_vue_type_template_id_3d6ea3cd_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Login_vue_vue_type_template_id_3d6ea3cd_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/app/components/formFile.vue":
+/*!**************************************************!*\
+  !*** ./resources/js/app/components/formFile.vue ***!
+  \**************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _formFile_vue_vue_type_template_id_6be4eabd___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./formFile.vue?vue&type=template&id=6be4eabd& */ "./resources/js/app/components/formFile.vue?vue&type=template&id=6be4eabd&");
+/* harmony import */ var _formFile_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./formFile.vue?vue&type=script&lang=js& */ "./resources/js/app/components/formFile.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _formFile_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _formFile_vue_vue_type_template_id_6be4eabd___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _formFile_vue_vue_type_template_id_6be4eabd___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/app/components/formFile.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/app/components/formFile.vue?vue&type=script&lang=js&":
+/*!***************************************************************************!*\
+  !*** ./resources/js/app/components/formFile.vue?vue&type=script&lang=js& ***!
+  \***************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_formFile_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./formFile.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/app/components/formFile.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_formFile_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/app/components/formFile.vue?vue&type=template&id=6be4eabd&":
+/*!*********************************************************************************!*\
+  !*** ./resources/js/app/components/formFile.vue?vue&type=template&id=6be4eabd& ***!
+  \*********************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_formFile_vue_vue_type_template_id_6be4eabd___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./formFile.vue?vue&type=template&id=6be4eabd& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/app/components/formFile.vue?vue&type=template&id=6be4eabd&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_formFile_vue_vue_type_template_id_6be4eabd___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_formFile_vue_vue_type_template_id_6be4eabd___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

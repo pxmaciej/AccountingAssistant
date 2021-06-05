@@ -154,7 +154,7 @@ class UploadFileController extends Controller
         $file = $request->file('file');
         $filename = $file->getClientOriginalName();
         $filename = time().'.'. $filename;
-        $fileuser = $request->user_id;
+        $fileuser = $request->user;
         $file->storeAs('public', $filename);
         UploadFile::create([
             'user_id' => $fileuser,

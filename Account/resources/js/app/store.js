@@ -17,6 +17,5 @@ export const store = new Vuex.Store( {
             localStorage.removeItem('auth');
             state.token = '';
         },
-
     }
 })
