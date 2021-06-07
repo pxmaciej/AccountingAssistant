@@ -5416,17 +5416,23 @@ __webpack_require__.r(__webpack_exports__);
   props: ['user'],
   data: function data() {
     return {
-      file: file
+      files: []
     };
   },
   methods: {
     onFileSelected: function onFileSelected(event) {
-      this.file = event.target.files[0];
+      for (var i = 0; i < event.target.files.length; i++) {
+        this.files.push(event.target.files[i]);
+      }
     },
     onUpload: function onUpload() {
       var fd = new FormData();
-      console.log(this.file);
-      fd.append('file', this.file, this.file.name);
+
+      for (var i = 0; i < this.files.length; i++) {
+        var file = this.files[i];
+        fd.append('files[' + i + ']', file);
+      }
+
       fd.append('user', this.user);
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('api/file/store', fd, {
         headers: {
@@ -42402,7 +42408,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", [
     _c("input", {
-      attrs: { type: "file", name: "file" },
+      attrs: { type: "file", name: "file", multiple: "" },
       on: { change: _vm.onFileSelected }
     }),
     _vm._v(" "),

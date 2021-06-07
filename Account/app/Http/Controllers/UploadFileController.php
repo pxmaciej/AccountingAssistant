@@ -151,20 +151,21 @@ class UploadFileController extends Controller
      */
     public function store(Request $request)
     {
-        $file = $request->file('file');
-        $filename = $file->getClientOriginalName();
-        $filename = time().'.'. $filename;
-        $fileuser = $request->user;
-        $file->storeAs('public', $filename);
-        UploadFile::create([
-            'user_id' => $fileuser,
-            'file' => $filename,
-        ]);
-        return response()->json([
-            'status' => '200',
-            'user_id' => $fileuser,
-            'file' => $filename
-            ]);
+            foreach ($request->file('files') as $file){
+                 $filename = $file->getClientOriginalName();
+                 $filename = time().'.'. $filename;
+                 $fileuser = $request->user;
+                 $file->storeAs('public', $filename);
+                 UploadFile::create([
+                    'user_id' => $fileuser,
+                    'file' => $filename,
+                ]);
+
+            }
+             return response()->json([
+                 'status' => '200',
+                 'user_id' => $fileuser,
+                 ]);
     }
 
     /**
