@@ -20,27 +20,13 @@
             </div>
         </nav>
 
-        <div class="d-flex flex-column" id="content-wrapper">
-            <div id="content">
-
+        <div class="d-flex flex-column " id="content-wrapper">
+            <div id="content" class="mt-3">
                 <div class="container-fluid">
-                    <div class="d-sm-flex justify-content-between align-items-center mb-4">
-                        <h3 class="text-dark mb-0">Dashboard</h3><a class="btn btn-primary btn-sm d-none d-sm-inline-block" role="button" href="#"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
-                    </div>
                     <div class="row">
-                        <div class="col-md-6 col-xl-3 mb-4">
-                            <div class="card shadow border-left-primary py-2">
-                                <div class="card-body">
-                                    <div class="row align-items-center no-gutters">
-                                        <div class="col mr-2">
-                                            <div class="text-uppercase text-primary font-weight-bold text-xs mb-1"><span>Earnings (monthly)</span></div>
-                                            <div class="text-dark font-weight-bold h5 mb-0"><span>$40,000</span></div>
-                                        </div>
-                                        <div class="col-auto"><i class="fas fa-calendar fa-2x text-gray-300"></i></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        <erningsMonthly v-bind:user="user.id">
+
+                        </erningsMonthly>
                         <div class="col-md-6 col-xl-3 mb-4">
                             <div class="card shadow border-left-success py-2">
                                 <div class="card-body">
@@ -90,70 +76,60 @@
                             </div>
                         </div>
                     </div>
+
                     <div class="row">
-                        <div class="col-lg-7 col-xl-8">
-                            <div class="card shadow mb-4">
-                                <div class="card-header d-flex justify-content-between align-items-center">
-                                    <h6 class="text-primary font-weight-bold m-0">Earnings Overview</h6>
-                                    <div class="dropdown no-arrow"><button class="btn btn-link btn-sm dropdown-toggle" aria-expanded="false" data-toggle="dropdown" type="button"><i class="fas fa-ellipsis-v text-gray-400"></i></button>
-                                        <div class="dropdown-menu shadow dropdown-menu-right animated--fade-in">
-                                            <p class="text-center dropdown-header">dropdown header:</p><a class="dropdown-item" href="#"> Action</a><a class="dropdown-item" href="#"> Another action</a>
-                                            <div class="dropdown-divider"></div><a class="dropdown-item" href="#"> Something else here</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card-body">
-                                    <div class="chart-area"><canvas height="320" style="display: block; width: 564px; height: 320px;" width="564"></canvas></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-5 col-xl-4">
-                            <div class="card shadow mb-4">
-                                <div class="card-header d-flex justify-content-between align-items-center">
-                                    <h6 class="text-primary font-weight-bold m-0">Revenue Sources</h6>
-                                    <div class="dropdown no-arrow"><button class="btn btn-link btn-sm dropdown-toggle" aria-expanded="false" data-toggle="dropdown" type="button"><i class="fas fa-ellipsis-v text-gray-400"></i></button>
-                                        <div class="dropdown-menu shadow dropdown-menu-right animated--fade-in">
-                                            <p class="text-center dropdown-header">dropdown header:</p><a class="dropdown-item" href="#"> Action</a><a class="dropdown-item" href="#"> Another action</a>
-                                            <div class="dropdown-divider"></div><a class="dropdown-item" href="#"> Something else here</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card-body">
-                                    <div class="chart-area"><canvas height="320" style="display: block; width: 249px; height: 320px;" width="249"></canvas></div>
-                                    <div class="text-center small mt-4"><span class="mr-2"><i class="fas fa-circle text-primary"></i> Direct</span><span class="mr-2"><i class="fas fa-circle text-success"></i> Social</span><span class="mr-2"><i class="fas fa-circle text-info"></i> Refferal</span></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-6 mb-4">
+                        <div class="col-lg-3 mb-4">
                             <div class="card shadow mb-4">
                                 <div class="card-header py-3">
-                                    <h6 class="text-primary font-weight-bold m-0">Dodaj swoje faktury</h6>
+                                    <h6 class="text-primary font-weight-bold m-0">Prześlij Dokumenty</h6>
                                 </div>
                                 <div class="card-body">
                                     <formFile v-bind:user="user.id"></formFile>
                                 </div>
                             </div>
-
                         </div>
-
+                        <div class="col-lg-6 mb-4">
+                            <div class="card shadow mb-4">
+                                <div class="card-header py-3">
+                                    <h6 class="text-primary font-weight-bold m-0">Lista Przesłanych Dokumentów</h6>
+                                </div>
+                                <div class="card-body">
+                                    <listFile v-bind:user="user.id"></listFile>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 mb-4">
+                            <div class="card shadow mb-4">
+                                <div class="card-header py-3">
+                                    <h6 class="text-primary font-weight-bold m-0">Płatności</h6>
+                                </div>
+                                <div class="card-body">
+                                    <listPayment v-bind:user="user.id"></listPayment>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+
                 </div>
             </div>
+        </div>
     </div>
 
-
-    </div>
 </div>
 </template>
 <script>
     import axios from 'axios';
     import formFile from './components/formFile.vue';
+    import listFile from './components/listFile.vue';
+    import listPayment from './components/listPayment.vue';
+    import erningsMonthly from './components/erningsMonthly.vue';
 export default {
     name: "Dashboard",
     components: {
-        formFile
+        formFile,
+        listFile,
+        listPayment,
+        erningsMonthly
     },
     data(){
         return{

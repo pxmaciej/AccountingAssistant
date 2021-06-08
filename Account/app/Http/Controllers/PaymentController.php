@@ -194,7 +194,7 @@ class PaymentController extends Controller
     public function show($user_id)
     {
         $show = Payment::where('user_id', 'like', '%'.$user_id.'%')->get();
-        return response()->json([$show]);;
+        return $show;
     }
 
     /**

@@ -178,9 +178,8 @@ class UploadFileController extends Controller
     {
         $savedfile = UploadFile::where('user_id', 'like', '%'.$user_id.'%')->get();
 
-        return response()->json([
-            $savedfile
-            ]);
+        return $savedfile;
+
     }
 
     /**
