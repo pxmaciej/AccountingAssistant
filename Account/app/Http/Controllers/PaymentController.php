@@ -164,6 +164,8 @@ class PaymentController extends Controller
             'name' => 'required|string',
             'category' => 'required|string',
             'value' => 'required',
+            'deadline' => 'required',
+
         ]);
         if ($validator->fails()) {
             return response()->json(['error' => $validator->messages()],401);
@@ -173,12 +175,16 @@ class PaymentController extends Controller
         $name = $request->name;
         $category = $request->category;
         $value = $request->value;
+        $deadline = $request->deadline;
+        $paid = $request->paid;
 
         Payment::create([
             'user_id' => $user,
             'name' => $name,
             'category' => $category,
             'value' => $value,
+            'deadline' => $deadline,
+            'paid' => $paid
         ]);
 
         return response()->json(['200' => 'success']);
@@ -221,6 +227,8 @@ class PaymentController extends Controller
         $edited->name = $request->name;
         $edited->category = $request->category;
         $edited->value = $request->value;
+        $edited->deadline = $request->deadline;
+        $edited->paid = $request->paid;
         $edited->save();
         return response()->json(['200' => 'success']);
     }
@@ -233,7 +241,7 @@ class PaymentController extends Controller
      */
     public function destroy(Payment $payment)
     {
-        $destroy = Payment::find($payment_id);
+        $destroy = Payment::find($payment);
         $destroy->delete();
         return response()->json(['200' => 'success']);
     }

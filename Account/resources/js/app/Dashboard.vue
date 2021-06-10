@@ -11,8 +11,8 @@
                 </a>
                 <ul class="navbar-nav text-light" id="accordionSidebar">
                     <router-link to="/dashboard"><li class="nav-item"><a class="nav-link active" href="/dashboard"><i class="fas fa-tachometer-alt"></i><span>Główna</span></a></li></router-link>
-                    <li class="nav-item"><a class="nav-link" href="profile.html"><i class="fas fa-user"></i><span>Profile</span></a></li>
-                    <li class="nav-item"><a class="nav-link" href="table.html"><i class="fas fa-table"></i><span>Table</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="profile.html"><i class="fas fa-user"></i><span>Profil</span></a></li>
+                    <li class="nav-item"><router-link to =""><i class="fas fa-table"></i><span>Pliki</span></router-link></li>
                     <li class="nav-item"><a class="nav-link" @click="logout"><i class="far fa-user-circle"></i><span>Wyloguj</span></a></li>
                     <li class="nav-item"><a class="nav-link" href="register.html"><i class="fas fa-user-circle"></i><span>Register</span></a></li>
                 </ul>
@@ -76,7 +76,30 @@
                             </div>
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="col-lg-3 mb-4">
+                            <div class="card shadow mb-4">
+                                <div class="card-header py-3">
+                                    <h6 class="text-primary font-weight-bold m-0">Dodaj Przychody</h6>
+                                </div>
+                                <div class="card-body">
+                                    <formErning></formErning>
+                                </div>
+                            </div>
+                        </div>
 
+                        <div class="col-lg-3 mb-4">
+                            <div class="card shadow mb-4">
+                                <div class="card-header py-3">
+                                    <h6 class="text-primary font-weight-bold m-0">Dodaj Płatności</h6>
+                                </div>
+                                <div class="card-body">
+                                    <formPayment></formPayment>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
                     <div class="row">
                         <div class="col-lg-3 mb-4">
                             <div class="card shadow mb-4">
@@ -123,13 +146,17 @@
     import listFile from './components/listFile.vue';
     import listPayment from './components/listPayment.vue';
     import erningsMonthly from './components/erningsMonthly.vue';
+    import formErning from './components/formErning.vue';
+    import formPayment from './components/formPayment.vue';
 export default {
     name: "Dashboard",
     components: {
         formFile,
         listFile,
         listPayment,
-        erningsMonthly
+        erningsMonthly,
+        formErning,
+        formPayment
     },
     data(){
         return{

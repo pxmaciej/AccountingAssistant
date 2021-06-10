@@ -19,6 +19,8 @@ class CreatePaymentsTable extends Migration
             $table->text('name');
             $table->string('category');
             $table->double('value');
+            $table->date('deadline');
+            $table->boolean('paid');
             $table->timestamps();
         });
     }

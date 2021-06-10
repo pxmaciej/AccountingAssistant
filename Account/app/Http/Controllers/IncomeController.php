@@ -175,46 +175,30 @@ class IncomeController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'user_id' => 'required|integer',
-            'number' => 'required|string',
-            'date_issue' => 'required|date',
-            'buyer' => 'required|string',
-            'nip' => 'required|integer',
             'name' => 'required|string|min:3',
-            'netto' => 'required',
-            'vat' => 'required|integer',
-            'brutto' => 'required',
-            'category' => 'required|string|min:3|max:255',
-            'paid' => 'required|boolean',
+            'value' => 'required|double',
+            'date' => 'required|date'
+
+
         ]);
         if ($validator->fails()) {
             return response()->json(['error' => $validator->messages()],401);
 
         }
         $user = $request->user_id;
-        $number = $request->number;
-        $date = $request->date_issue;
-        $buyer = $request->buyer;
-        $nip = $request->nip;
         $name = $request->name;
-        $netto = $request->netto;
-        $vat = $request->vat;
-        $brutto = $request->brutto;
-        $category = $request->category;
-        $paid= $request->paid;
+        $value = $request->value;
+        $date = $request->date;
+
 
         Income::create([
             'user_id' => $user,
-            'number' => $number,
-            'date_issue' => $date,
-            'buyer' => $buyer,
-            'nip' => $nip,
             'name' => $name,
-            'netto' => $netto,
-            'vat' => $vat,
-            'brutto' => $brutto,
-            'category' => $category,
-            'paid' => $paid,
+            'value' => $value,
+            'date' => $date,
+
         ]);
+
         return response()->json(['200' => 'success']);
     }
 
@@ -227,7 +211,7 @@ class IncomeController extends Controller
     public function show($user_id)
     {
         $show = Income::where('user_id', 'like', '%'.$user_id.'%')->get();
-        return response()->json([$show]);;
+        return $show;
     }
 
     /**
@@ -239,27 +223,17 @@ class IncomeController extends Controller
     public function edit(Request $request)
     {
         $edited = Income::find($request->income_id);
-        $number = $request->number;
-        $date = $request->date_issue;
-        $buyer = $request->buyer;
-        $nip = $request->nip;
-        $name = $request->name;
-        $netto = $request->netto;
-        $vat = $request->vat;
-        $brutto = $request->brutto;
-        $category = $request->category;
-        $paid = $request->paid;
 
-        $edited->number = $number;
-        $edited->date_issue = $date;
-        $edited->buyer= $buyer;
-        $edited->nip = $nip;
+        $user = $request->user_id;
+        $name = $request->name;
+        $value = $request->value;
+        $date = $request->date;
+        $year = $request->year;
+
+        $edited->user_id = $user;
         $edited->name = $name;
-        $edited->netto = $netto;
-        $edited->vat = $vat;
-        $edited->brutto = $brutto;
-        $edited->category = $category;
-        $edited->paid = $paid;
+        $edited->value = $value;
+        $edited->date = $date;
         $edited->save();
 
         return response()->json(['200' => 'success']);

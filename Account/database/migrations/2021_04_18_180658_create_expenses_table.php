@@ -16,16 +16,10 @@ class CreateExpensesTable extends Migration
         Schema::create('expenses', function (Blueprint $table) {
             $table->id();
             $table->integer('user_id');
-            $table->string('number');
-            $table->date('date_issue');
-            $table->string('seller');
-            $table->bigInteger('nip');
-            $table->string('name');
-            $table->double('netto');
-            $table->integer('vat');
-            $table->double('brutto');
+            $table->date('date');
+            $table->text('name');
+            $table->double('value');
             $table->string('category');
-            $table->boolean('paid');
             $table->timestamps();
         });
     }
