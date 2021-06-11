@@ -176,7 +176,6 @@ class IncomeController extends Controller
         $validator = Validator::make($request->all(), [
             'user_id' => 'required|integer',
             'name' => 'required|string|min:3',
-            'value' => 'required|double',
             'date' => 'required|date'
 
 

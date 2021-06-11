@@ -11,6 +11,7 @@
          <tr v-for="file of files" :key="file.id">
               <td><a :href="'../storage/'+file.file" download>{{file.file}}</a></td>
               <td>{{file.created_at | dateParse('YYYY.MM.DD') | dateFormat('DD.MM.YYYY')}}</td>
+              <td><button type="button" class="btn btn-primary" @click="deleteFile"></button></td>
          </tr>
 
 
@@ -43,7 +44,10 @@ export default {
     })
     },
     methods: {
-
+        deleteFile(){
+            let file_id;
+            axios.delete('api/file/destroy/'+file_id,{ headers: {"Authorization" : `Bearer ${this.$store.state.token}`} })
+        }
     }
 };
 </script>

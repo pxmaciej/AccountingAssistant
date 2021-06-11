@@ -10,7 +10,7 @@
      <tbody>
          <tr v-for="payment of payments" :key="payment.id">
               <td>{{payment.name}}</td>
-              <td>{{payment.created_at | dateParse('YYYY.MM.DD') | dateFormat('DD.MM.YYYY')}}</td>
+              <td>{{payment.deadline | dateParse('YYYY.MM.DD') | dateFormat('DD.MM.YYYY')}}</td>
          </tr>
 
 

@@ -33,7 +33,7 @@ export default {
             }
              fd.append('user', this.user)
             axios.post('api/file/store',fd,{ headers: {"Authorization" : `Bearer ${this.$store.state.token}`,"Content-type": "multipart/form-data"} })
-        }
+        },
     }
 
 };

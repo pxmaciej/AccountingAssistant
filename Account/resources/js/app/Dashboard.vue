@@ -99,6 +99,17 @@
                             </div>
                         </div>
 
+                        <div class="col-lg-3 mb-4">
+                            <div class="card shadow mb-4">
+                                <div class="card-header py-3">
+                                    <h6 class="text-primary font-weight-bold m-0">Dodaj Wydatek</h6>
+                                </div>
+                                <div class="card-body">
+                                    <formExpense></formExpense>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                     <div class="row">
                         <div class="col-lg-3 mb-4">
@@ -148,6 +159,7 @@
     import erningsMonthly from './components/erningsMonthly.vue';
     import formErning from './components/formErning.vue';
     import formPayment from './components/formPayment.vue';
+    import formExpense from './components/formExpense.vue';
 export default {
     name: "Dashboard",
     components: {
@@ -156,7 +168,8 @@ export default {
         listPayment,
         erningsMonthly,
         formErning,
-        formPayment
+        formPayment,
+        formExpense,
     },
     data(){
         return{

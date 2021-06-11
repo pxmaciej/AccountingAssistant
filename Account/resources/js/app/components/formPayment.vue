@@ -21,12 +21,17 @@
     <label for="exampleInputEmail1" class="form-label">Termin Płatności</label>
     <input type="date" class="form-control" v-model="payment.deadline">
     </div>
-     <div class="form-check form-switch">
-    <input type="checkbox" class="form-check-input" v-model="payment.paid"  :checked="aPropFrom"
-  @input="$emit('update:aPropFrom', $event.target.checked)">
-    <label class="form-check-label"> Status Płatnosci</label>
-    </div>
-    <button class="btn btn-primary" type="button" @click.prevent="store" >Wyślij</button>
+
+   <input type="checkbox"
+      id="checkbox-1"
+      v-model="payment.paid"
+      name="paid"
+      value=true
+      unchecked-value=false
+    >
+     Status Płatnosci
+    </input>
+    <button class="btn btn-primary mt-1" type="button" @click="store" >Wyślij</button>
 </form>
 </div>
 
