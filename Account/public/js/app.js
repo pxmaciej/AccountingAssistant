@@ -43526,8 +43526,7 @@ var render = function() {
           }
         }
       }),
-      _vm._v("\n     Status Płatnosci\n    "),
-      _vm._v(" "),
+      _vm._v("\n     Status Płatnosci\n\n    "),
       _c(
         "button",
         {

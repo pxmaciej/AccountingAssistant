@@ -30,7 +30,7 @@
       unchecked-value=false
     >
      Status Płatnosci
-    </input>
+
     <button class="btn btn-primary mt-1" type="button" @click="store" >Wyślij</button>
 </form>
 </div>
