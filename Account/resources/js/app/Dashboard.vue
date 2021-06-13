@@ -24,9 +24,7 @@
             <div id="content" class="mt-3">
                 <div class="container-fluid">
                     <div class="row">
-                        <erningsMonthly v-bind:user="user.id">
 
-                        </erningsMonthly>
                         <div class="col-md-6 col-xl-3 mb-4">
                             <div class="card shadow border-left-success py-2">
                                 <div class="card-body">
@@ -74,6 +72,11 @@
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-3 mb-4">
+                            <!--       <chartErning :chartData="ernings" :options="options"></chartErning> -->
                         </div>
                     </div>
                     <div class="row">
@@ -153,6 +156,7 @@
 </template>
 <script>
     import axios from 'axios';
+    import moment from 'moment';
     import formFile from './components/formFile.vue';
     import listFile from './components/listFile.vue';
     import listPayment from './components/listPayment.vue';
@@ -160,6 +164,7 @@
     import formErning from './components/formErning.vue';
     import formPayment from './components/formPayment.vue';
     import formExpense from './components/formExpense.vue';
+    import chartErning from './components/chartErning.vue';
 export default {
     name: "Dashboard",
     components: {
@@ -170,14 +175,20 @@ export default {
         formErning,
         formPayment,
         formExpense,
+        chartErning
     },
     data(){
         return{
             loading :true,
             user: [],
+            ernings:[],
+            options:{
+                responsive: true,
+                mainteinAspectRactio: false
+            }
         }
     },
-     mounted(){
+      created(){
         if(this.$store.state.token !== ''){
             axios.post('api/auth/checkToken', { token : this.$store.state.token} )
             .then( res => {
@@ -193,7 +204,13 @@ export default {
             axios.post('api/auth/profile', { token : this.$store.state.token} )
             .then( res => {
                 this.user = res.data;
+                axios.get('api/income/show/'+this.user.id, { token : this.$store.state.token})
+            .then(res =>{
+                this.ernings = res.data;
             })
+            })
+
+
         }else{
             this.loading = false;
             this.$router.push('/login');

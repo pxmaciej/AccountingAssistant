@@ -1,5 +1,4 @@
 require('./bootstrap');
-
 import Vue from 'vue';
 import App from './app/App';
 import { routes } from './app/routes';
