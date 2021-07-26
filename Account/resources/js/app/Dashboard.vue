@@ -75,8 +75,8 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-lg-3 mb-4">
-                            <!--       <chartErning :chartData="ernings" :options="options"></chartErning> -->
+                        <div v-if="loadedChart" class="col-lg-3 mb-4">
+                             <chartErning  :chartdata="incomeChart" :chartoptions="options" label="Income" :chartColors="incomeColors"/>
                         </div>
                     </div>
                     <div class="row">
@@ -121,7 +121,7 @@
                                     <h6 class="text-primary font-weight-bold m-0">Prześlij Dokumenty</h6>
                                 </div>
                                 <div class="card-body">
-                                    <formFile v-bind:user="user.id"></formFile>
+                                    <formFile v-if="user.id" v-bind:user="user.id"></formFile>
                                 </div>
                             </div>
                         </div>
@@ -131,7 +131,7 @@
                                     <h6 class="text-primary font-weight-bold m-0">Lista Przesłanych Dokumentów</h6>
                                 </div>
                                 <div class="card-body">
-                                    <listFile v-bind:user="user.id"></listFile>
+                                    <listFile v-if="user.id" v-bind:user="user.id"></listFile>
                                 </div>
                             </div>
                         </div>
@@ -141,7 +141,7 @@
                                     <h6 class="text-primary font-weight-bold m-0">Płatności</h6>
                                 </div>
                                 <div class="card-body">
-                                    <listPayment v-bind:user="user.id"></listPayment>
+                                    <listPayment v-if="user.id" v-bind:user="user.id"></listPayment>
                                 </div>
                             </div>
                         </div>
@@ -156,7 +156,6 @@
 </template>
 <script>
     import axios from 'axios';
-    import moment from 'moment';
     import formFile from './components/formFile.vue';
     import listFile from './components/listFile.vue';
     import listPayment from './components/listPayment.vue';
@@ -179,18 +178,25 @@ export default {
     },
     data(){
         return{
-            loading :true,
+            loading :false,
+            loadedChart: false,
             user: [],
-            ernings:[],
+            incomeChart: [],
             options:{
                 responsive: true,
                 mainteinAspectRactio: false
+            },
+            incomeColors:{
+                borderColor: "#f2ddc0",
+                pointBorderColor: "#90dad9",
+                pointBackgroundColor: "#f2ddc0",
+                backgroundColor: "#adeac3"
             }
         }
     },
-      created(){
+    async mounted(){
         if(this.$store.state.token !== ''){
-            axios.post('api/auth/checkToken', { token : this.$store.state.token} )
+           await axios.post('api/auth/checkToken', { token : this.$store.state.token} )
             .then( res => {
                 if(res.data.success){
                     this.loading = false;
@@ -201,20 +207,26 @@ export default {
                 this.$store.commit('clearToken');
                 this.$router.push('/login');
             })
-            axios.post('api/auth/profile', { token : this.$store.state.token} )
+           await axios.post('api/auth/profile', { token : this.$store.state.token} )
             .then( res => {
                 this.user = res.data;
-                axios.get('api/income/show/'+this.user.id, { token : this.$store.state.token})
-            .then(res =>{
-                this.ernings = res.data;
-            })
-            })
 
-
+            })
         }else{
             this.loading = false;
             this.$router.push('/login');
         }
+        const {data} = await axios.get('api/income/show/'+this.user.id, { token : this.$store.state.token})
+                console.log(data);
+                data.forEach(d => {
+                 const date = d.date
+                 console.log(d.date)
+                 const value = d.value
+                 console.log(d.value)
+                 this.incomeChart.push({date, total:value})
+                 console.log(this.incomeChart)
+                 this.loadedChart = true
+                })
     },
     methods: {
         logout(){
@@ -224,7 +236,6 @@ export default {
              this.$router.push('/');
          })
         }
-
     }
 }
 </script>
