@@ -150,9 +150,6 @@ class ExpenseController extends Controller
      *
      * @return void
      */
-    public function __construct() {
-        $this->middleware('auth');
-     }
 
     /**
      * Display a listing of the resource.
@@ -186,8 +183,6 @@ class ExpenseController extends Controller
         $validator = Validator::make($request->all(), [
             'user_id' => 'required|integer',
             'date' => 'required|date',
-            'name' => 'required|string|min:3',
-            'value' => 'required|double',
             'category' => 'required|string',
         ]);
         if ($validator->fails()) {
@@ -219,7 +214,7 @@ class ExpenseController extends Controller
     public function show($user_id)
     {
         $show = Expense::where('user_id', 'like', '%'.$user_id.'%')->get();
-        return response()->json([$show]);;
+        return $show;
     }
 
     /**

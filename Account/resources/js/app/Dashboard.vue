@@ -30,7 +30,7 @@
                                 <div class="card-body">
                                     <div class="row align-items-center no-gutters">
                                         <div class="col mr-2">
-                                            <div class="text-uppercase text-success font-weight-bold text-xs mb-1"><span>Earnings (annual)</span></div>
+                                            <div class="text-uppercase text-success font-weight-bold text-xs mb-1"><span>Przychód miesięcznie:</span></div>
                                             <div class="text-dark font-weight-bold h5 mb-0"><span>$215,000</span></div>
                                         </div>
                                         <div class="col-auto"><i class="fas fa-dollar-sign fa-2x text-gray-300"></i></div>
@@ -76,7 +76,10 @@
                     </div>
                     <div class="row">
                         <div v-if="loadedChart" class="col-lg-3 mb-4">
-                             <chartErning  :chartdata="incomeChart" :chartoptions="options" label="Income" :chartColors="incomeColors"/>
+                             <chartErning :key="reload" :chartdata="incomeChart" :chartoptions="options" label="Przychody" :chartColors="incomeColors"/>
+                        </div>
+                        <div v-if="loadedChart2" class="col-lg-3 mb-4">
+                             <chartErning  :chartdata="expenseChart" :chartoptions="options" label="Wydatki" :chartColors="expenseColors"/>
                         </div>
                     </div>
                     <div class="row">
@@ -86,7 +89,7 @@
                                     <h6 class="text-primary font-weight-bold m-0">Dodaj Przychody</h6>
                                 </div>
                                 <div class="card-body">
-                                    <formErning></formErning>
+                                    <formErning v-if="user.id" v-bind:user="user.id" @finished="finished"></formErning>
                                 </div>
                             </div>
                         </div>
@@ -97,7 +100,7 @@
                                     <h6 class="text-primary font-weight-bold m-0">Dodaj Płatności</h6>
                                 </div>
                                 <div class="card-body">
-                                    <formPayment></formPayment>
+                                    <formPayment v-if="user.id" v-bind:user="user.id"></formPayment>
                                 </div>
                             </div>
                         </div>
@@ -108,7 +111,7 @@
                                     <h6 class="text-primary font-weight-bold m-0">Dodaj Wydatek</h6>
                                 </div>
                                 <div class="card-body">
-                                    <formExpense></formExpense>
+                                    <formExpense v-if="user.id" v-bind:user="user.id"></formExpense>
                                 </div>
                             </div>
                         </div>
@@ -164,6 +167,7 @@
     import formPayment from './components/formPayment.vue';
     import formExpense from './components/formExpense.vue';
     import chartErning from './components/chartErning.vue';
+
 export default {
     name: "Dashboard",
     components: {
@@ -180,17 +184,28 @@ export default {
         return{
             loading :false,
             loadedChart: false,
+            loadedChart2: false,
+            reload: 0,
             user: [],
             incomeChart: [],
+            expenseChart: [],
+            data: [],
+            data2: [],
             options:{
                 responsive: true,
                 mainteinAspectRactio: false
             },
             incomeColors:{
-                borderColor: "#f2ddc0",
-                pointBorderColor: "#90dad9",
-                pointBackgroundColor: "#f2ddc0",
-                backgroundColor: "#adeac3"
+                borderColor: "#20dbd8",
+                pointBorderColor: "#146d80",
+                pointBackgroundColor: "#20dbd8",
+                backgroundColor: "#1aa1b3"
+            },
+            expenseColors:{
+                borderColor: "#9a2b49",
+                pointBorderColor: "#d7444c",
+                pointBackgroundColor: "#ff8059",
+                backgroundColor: "#d7444c"
             }
         }
     },
@@ -216,25 +231,45 @@ export default {
             this.loading = false;
             this.$router.push('/login');
         }
-        const {data} = await axios.get('api/income/show/'+this.user.id, { token : this.$store.state.token})
-                console.log(data);
-                data.forEach(d => {
-                 const date = d.date
-                 console.log(d.date)
-                 const value = d.value
-                 console.log(d.value)
-                 this.incomeChart.push({date, total:value})
-                 console.log(this.incomeChart)
-                 this.loadedChart = true
-                })
+    this.expData();
+    this.incomData();
+
     },
     methods: {
+         async finished() {
+                this.expData();
+                this.incomData();
+                this.reload += 1;
+
+            },
         logout(){
          axios.post('api/auth/logout', { token : this.$store.state.token })
          .then( res => {
              this.$store.commit('clearToken');
              this.$router.push('/');
          })
+        },
+        async expData(){
+        await axios.get('api/expense/show/'+this.user.id, { token : this.$store.state.token}).then(res => {
+            this.data2 = res.data;
+        })
+                this.data2.forEach(b => {
+                 const EXDATE = b.date;
+                 const EXVALUE = b.value;
+                 this.expenseChart.push({date:EXDATE, total:EXVALUE});
+                 this.loadedChart2 = true;
+                });
+        },
+         async incomData(){
+             await axios.get('api/income/show/'+this.user.id, { token : this.$store.state.token}).then(res => {
+                 this.data = res.data;
+             })
+                this.data.forEach(d => {
+                 const date = d.date
+                 const value = d.value
+                 this.incomeChart.push({date, total:value})
+                 this.loadedChart = true;
+                });
         }
     }
 }

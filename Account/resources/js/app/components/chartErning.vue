@@ -18,6 +18,7 @@ export default {
     }
   },
   mounted () {
+
       const dates = this.chartdata.map(d => d.date);
       const totals = this.chartdata.map(d => d.total);
 
@@ -36,7 +37,10 @@ export default {
 
     }, this.options);
   }
+
+
 }
+
 
 </script>
 

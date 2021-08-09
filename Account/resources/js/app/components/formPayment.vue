@@ -42,10 +42,11 @@
 import axios from 'axios';
 export default {
     name: "formPayment",
+    props: ['user'],
     data(){
         return{
             payment :{
-                user_id : '',
+                user_id : this.user,
                 name : '',
                 category: '',
                 value: '',
@@ -55,10 +56,14 @@ export default {
         }
     },
     methods:{
+        reload() {
+            this.$forceUpdate();
+         },
         store(){
             axios.post('api/payment/store', this.payment,{ headers: {"Authorization" : `Bearer ${this.$store.state.token}`} })
             .then( res=>{
                 console.log(res)
+                this.reload()
             })
         }
     }

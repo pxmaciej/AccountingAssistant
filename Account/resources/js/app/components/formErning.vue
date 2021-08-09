@@ -26,10 +26,11 @@
 import axios from 'axios';
 export default {
     name: "formErning",
+     props: ['user','reload'],
     data(){
         return{
             income:{
-                user_id: '',
+                user_id: this.user,
                 name:'',
                 value:'',
                 date:'',
@@ -41,8 +42,13 @@ export default {
             axios.post('api/income/store' ,this.income,{ headers: {"Authorization" : `Bearer ${this.$store.state.token}`} })
             .then(res=>{
                 this.success = res.data;
+                this.ok();
             })
-        }
+
+        },
+        ok() {
+                this.$emit('finished')
+            }
     }
 };
 </script>

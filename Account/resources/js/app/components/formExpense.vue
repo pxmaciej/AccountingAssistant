@@ -30,10 +30,11 @@
 import axios from 'axios';
 export default {
     name: "formExpense",
+     props: ['user'],
     data(){
         return{
             expense:{
-                user_id: '',
+                user_id: this.user,
                 data:'',
                 name:'',
                 value:'',

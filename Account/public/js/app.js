@@ -5223,6 +5223,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
 
 
 
@@ -5248,17 +5251,28 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     return {
       loading: false,
       loadedChart: false,
+      loadedChart2: false,
+      reload: 0,
       user: [],
       incomeChart: [],
+      expenseChart: [],
+      data: [],
+      data2: [],
       options: {
         responsive: true,
         mainteinAspectRactio: false
       },
       incomeColors: {
-        borderColor: "#f2ddc0",
-        pointBorderColor: "#90dad9",
-        pointBackgroundColor: "#f2ddc0",
-        backgroundColor: "#adeac3"
+        borderColor: "#20dbd8",
+        pointBorderColor: "#146d80",
+        pointBackgroundColor: "#20dbd8",
+        backgroundColor: "#1aa1b3"
+      },
+      expenseColors: {
+        borderColor: "#9a2b49",
+        pointBorderColor: "#d7444c",
+        pointBackgroundColor: "#ff8059",
+        backgroundColor: "#d7444c"
       }
     };
   },
@@ -5266,8 +5280,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     var _this = this;
 
     return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
-      var _yield$axios$get, data;
-
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
@@ -5310,31 +5322,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               _this.$router.push('/login');
 
             case 9:
-              _context.next = 11;
-              return axios__WEBPACK_IMPORTED_MODULE_1___default().get('api/income/show/' + _this.user.id, {
-                token: _this.$store.state.token
-              });
+              _this.expData();
+
+              _this.incomData();
 
             case 11:
-              _yield$axios$get = _context.sent;
-              data = _yield$axios$get.data;
-              console.log(data);
-              data.forEach(function (d) {
-                var date = d.date;
-                console.log(d.date);
-                var value = d.value;
-                console.log(d.value);
-
-                _this.incomeChart.push({
-                  date: date,
-                  total: value
-                });
-
-                console.log(_this.incomeChart);
-                _this.loadedChart = true;
-              });
-
-            case 15:
             case "end":
               return _context.stop();
           }
@@ -5343,16 +5335,110 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     }))();
   },
   methods: {
-    logout: function logout() {
+    finished: function finished() {
       var _this2 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _this2.expData();
+
+                _this2.incomData();
+
+                _this2.reload += 1;
+
+              case 3:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2);
+      }))();
+    },
+    logout: function logout() {
+      var _this3 = this;
 
       axios__WEBPACK_IMPORTED_MODULE_1___default().post('api/auth/logout', {
         token: this.$store.state.token
       }).then(function (res) {
-        _this2.$store.commit('clearToken');
+        _this3.$store.commit('clearToken');
 
-        _this2.$router.push('/');
+        _this3.$router.push('/');
       });
+    },
+    expData: function expData() {
+      var _this4 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                _context3.next = 2;
+                return axios__WEBPACK_IMPORTED_MODULE_1___default().get('api/expense/show/' + _this4.user.id, {
+                  token: _this4.$store.state.token
+                }).then(function (res) {
+                  _this4.data2 = res.data;
+                });
+
+              case 2:
+                _this4.data2.forEach(function (b) {
+                  var EXDATE = b.date;
+                  var EXVALUE = b.value;
+
+                  _this4.expenseChart.push({
+                    date: EXDATE,
+                    total: EXVALUE
+                  });
+
+                  _this4.loadedChart2 = true;
+                });
+
+              case 3:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee3);
+      }))();
+    },
+    incomData: function incomData() {
+      var _this5 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee4() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee4$(_context4) {
+          while (1) {
+            switch (_context4.prev = _context4.next) {
+              case 0:
+                _context4.next = 2;
+                return axios__WEBPACK_IMPORTED_MODULE_1___default().get('api/income/show/' + _this5.user.id, {
+                  token: _this5.$store.state.token
+                }).then(function (res) {
+                  _this5.data = res.data;
+                });
+
+              case 2:
+                _this5.data.forEach(function (d) {
+                  var date = d.date;
+                  var value = d.value;
+
+                  _this5.incomeChart.push({
+                    date: date,
+                    total: value
+                  });
+
+                  _this5.loadedChart = true;
+                });
+
+              case 3:
+              case "end":
+                return _context4.stop();
+            }
+          }
+        }, _callee4);
+      }))();
     }
   }
 });
@@ -5619,10 +5705,11 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "formErning",
+  props: ['user', 'reload'],
   data: function data() {
     return {
       income: {
-        user_id: '',
+        user_id: this.user,
         name: '',
         value: '',
         date: ''
@@ -5639,7 +5726,12 @@ __webpack_require__.r(__webpack_exports__);
         }
       }).then(function (res) {
         _this.success = res.data;
+
+        _this.ok();
       });
+    },
+    ok: function ok() {
+      this.$emit('finished');
     }
   }
 });
@@ -5690,10 +5782,11 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "formExpense",
+  props: ['user'],
   data: function data() {
     return {
       expense: {
-        user_id: '',
+        user_id: this.user,
         data: '',
         name: '',
         value: '',
@@ -5832,10 +5925,11 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "formPayment",
+  props: ['user'],
   data: function data() {
     return {
       payment: {
-        user_id: '',
+        user_id: this.user,
         name: '',
         category: '',
         value: '',
@@ -5845,13 +5939,20 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
+    reload: function reload() {
+      this.$forceUpdate();
+    },
     store: function store() {
+      var _this = this;
+
       axios__WEBPACK_IMPORTED_MODULE_0___default().post('api/payment/store', this.payment, {
         headers: {
           "Authorization": "Bearer ".concat(this.$store.state.token)
         }
       }).then(function (res) {
         console.log(res);
+
+        _this.reload();
       });
     }
   }
@@ -81783,11 +81884,30 @@ var render = function() {
                           { staticClass: "col-lg-3 mb-4" },
                           [
                             _c("chartErning", {
+                              key: _vm.reload,
                               attrs: {
                                 chartdata: _vm.incomeChart,
                                 chartoptions: _vm.options,
-                                label: "Income",
+                                label: "Przychody",
                                 chartColors: _vm.incomeColors
+                              }
+                            })
+                          ],
+                          1
+                        )
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _vm.loadedChart2
+                      ? _c(
+                          "div",
+                          { staticClass: "col-lg-3 mb-4" },
+                          [
+                            _c("chartErning", {
+                              attrs: {
+                                chartdata: _vm.expenseChart,
+                                chartoptions: _vm.options,
+                                label: "Wydatki",
+                                chartColors: _vm.expenseColors
                               }
                             })
                           ],
@@ -81804,7 +81924,14 @@ var render = function() {
                         _c(
                           "div",
                           { staticClass: "card-body" },
-                          [_c("formErning")],
+                          [
+                            _vm.user.id
+                              ? _c("formErning", {
+                                  attrs: { user: _vm.user.id },
+                                  on: { finished: _vm.finished }
+                                })
+                              : _vm._e()
+                          ],
                           1
                         )
                       ])
@@ -81817,7 +81944,13 @@ var render = function() {
                         _c(
                           "div",
                           { staticClass: "card-body" },
-                          [_c("formPayment")],
+                          [
+                            _vm.user.id
+                              ? _c("formPayment", {
+                                  attrs: { user: _vm.user.id }
+                                })
+                              : _vm._e()
+                          ],
                           1
                         )
                       ])
@@ -81830,7 +81963,13 @@ var render = function() {
                         _c(
                           "div",
                           { staticClass: "card-body" },
-                          [_c("formExpense")],
+                          [
+                            _vm.user.id
+                              ? _c("formExpense", {
+                                  attrs: { user: _vm.user.id }
+                                })
+                              : _vm._e()
+                          ],
                           1
                         )
                       ])
@@ -81956,7 +82095,7 @@ var staticRenderFns = [
                     staticClass:
                       "text-uppercase text-success font-weight-bold text-xs mb-1"
                   },
-                  [_c("span", [_vm._v("Earnings (annual)")])]
+                  [_c("span", [_vm._v("Przychód miesięcznie:")])]
                 ),
                 _vm._v(" "),
                 _c(
