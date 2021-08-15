@@ -12,7 +12,7 @@
                 <ul class="navbar-nav text-light" id="accordionSidebar">
                     <router-link to="/dashboard"><li class="nav-item"><a class="nav-link active" href="/dashboard"><i class="fas fa-tachometer-alt"></i><span>Główna</span></a></li></router-link>
                     <li class="nav-item"><a class="nav-link" href="profile.html"><i class="fas fa-user"></i><span>Profil</span></a></li>
-                    <li class="nav-item"><router-link to =""><i class="fas fa-table"></i><span>Pliki</span></router-link></li>
+                    <li class="nav-item"><a class="nav-link" href="/F-upload"><i class="fas fa-table"></i><span>Wyślij Pliki</span></a></li>
                     <li class="nav-item"><a class="nav-link" @click="logout"><i class="far fa-user-circle"></i><span>Wyloguj</span></a></li>
                     <li class="nav-item"><a class="nav-link" href="register.html"><i class="fas fa-user-circle"></i><span>Register</span></a></li>
                 </ul>
@@ -118,16 +118,6 @@
 
                     </div>
                     <div class="row">
-                        <div class="col-lg-3 mb-4">
-                            <div class="card shadow mb-4">
-                                <div class="card-header py-3">
-                                    <h6 class="text-primary font-weight-bold m-0">Prześlij Dokumenty</h6>
-                                </div>
-                                <div class="card-body">
-                                    <formFile v-if="user.id" v-bind:user="user.id"></formFile>
-                                </div>
-                            </div>
-                        </div>
                         <div class="col-lg-6 mb-4">
                             <div class="card shadow mb-4">
                                 <div class="card-header py-3">
@@ -138,7 +128,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-3 mb-4">
+                        <div class="col-lg-4 mb-4">
                             <div class="card shadow mb-4">
                                 <div class="card-header py-3">
                                     <h6 class="text-primary font-weight-bold m-0">Płatności</h6>
@@ -225,6 +215,8 @@ export default {
            await axios.post('api/auth/profile', { token : this.$store.state.token} )
             .then( res => {
                 this.user = res.data;
+                this.$store.commit('setUserId', res.data.id);
+
 
             })
         }else{
@@ -246,7 +238,7 @@ export default {
          axios.post('api/auth/logout', { token : this.$store.state.token })
          .then( res => {
              this.$store.commit('clearToken');
-             this.$router.push('/');
+             this.$router.push('/login');
          })
         },
         async expData(){

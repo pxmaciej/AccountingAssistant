@@ -2,6 +2,7 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 import Dashboard from './Dashboard';
 import Login from './Login';
+import Fupload from './Fupload';
 
 
 
@@ -17,5 +18,9 @@ export const routes = [
     {
         path : '/dashboard',
         component: Dashboard,
+    },
+    {
+        path : '/f-upload',
+        component: Fupload,
     },
 ];

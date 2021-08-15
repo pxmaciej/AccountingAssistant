@@ -6,7 +6,7 @@ use App\Models\UploadFile;
 use GuzzleHttp\Middleware;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Support\Facades\Validator;
 /**
  * @OA\Get(
  * path="/api/file/index",
@@ -151,21 +151,23 @@ class UploadFileController extends Controller
      */
     public function store(Request $request)
     {
-            foreach ($request->file('files') as $file){
-                 $filename = $file->getClientOriginalName();
-                 $filename = time().'.'. $filename;
-                 $fileuser = $request->user;
-                 $file->storeAs('public', $filename);
-                 UploadFile::create([
-                    'user_id' => $fileuser,
-                    'file' => $filename,
-                ]);
+        $rules = ['file' => 'required|mimes:jpeg,png,jpg,gif,svg'];
+        $validator = Validator::make($request->all(), $rules);
 
-            }
-             return response()->json([
-                 'status' => '200',
-                 'user_id' => $fileuser,
-                 ]);
+                foreach ($request->file('files') as $file){
+
+                    $filename = $file->getClientOriginalName();
+                    $filename = time().'.'. $filename;
+                    $fileuser = $request->user;
+                    $file->storeAs('public', $filename);
+                    UploadFile::create([
+                       'user_id' => $fileuser,
+                       'file' => $filename,
+                   ]);
+
+                }
+                $status = true;
+                return $status;
     }
 
     /**
