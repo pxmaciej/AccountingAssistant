@@ -28,4 +28,4 @@ Route::get('/polityka-prywatnosci',function(){
     return view('pages.polityka');
 });
 
-Route::view('/{app?}', 'home')->where('app', '.*')->middleware('api');
+Route::view('/{app?}', 'pages.home')->where('app', '.*')->middleware('api');

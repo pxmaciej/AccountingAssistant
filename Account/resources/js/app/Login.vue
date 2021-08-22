@@ -5,7 +5,7 @@
   <span class="visually-hidden">Loading...</span>
 </div>
 </div>
- <div class="container" v-else>
+    <div class="container" v-else>
         <div class="row justify-content-center">
             <div class="col-md-9 col-lg-12 col-xl-10">
                 <div class="card shadow-lg o-hidden border-0 my-5">
@@ -63,6 +63,7 @@ export default {
             .catch(err => {
                 this.loading = false;
                 this.$store.commit('clearToken');
+
             })
         }else{
             this.loading = false;
@@ -83,4 +84,5 @@ export default {
 }
 </script>
 <style scoped>
+
 </style>

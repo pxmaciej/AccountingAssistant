@@ -209,7 +209,7 @@ class IncomeController extends Controller
      */
     public function show($user_id)
     {
-        $show = Income::where('user_id', 'like', '%'.$user_id.'%')->get();
+        $show = Income::where('user_id', 'like', '%'.$user_id.'%')->orderBy('date', 'desc')->get();
         return $show;
     }
 

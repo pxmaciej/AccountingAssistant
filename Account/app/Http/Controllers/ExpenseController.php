@@ -213,7 +213,7 @@ class ExpenseController extends Controller
      */
     public function show($user_id)
     {
-        $show = Expense::where('user_id', 'like', '%'.$user_id.'%')->get();
+        $show = Expense::where('user_id', 'like', '%'.$user_id.'%')->orderBy('date', 'desc')->get();
         return $show;
     }
 

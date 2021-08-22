@@ -1,13 +1,12 @@
 <template>
-<div>
- <router-view></router-view>
+<div class="app">
+    <router-view @updateStatus="updateStatus" ></router-view>
 </div>
-
-
-
 </template>
+
 <script>
+
 export default {
-    name: "App"
+    name: "App",
 };
 </script>
