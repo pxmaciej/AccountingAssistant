@@ -239,7 +239,7 @@ class AuthController extends Controller
      */
     public function login(Request $request){
         $validator = Validator::make($request->all(), [
-            'email' => 'required|email',
+            'login' => 'required',
             'password' => 'required|string|min:6',
         ]);
 
@@ -262,8 +262,14 @@ class AuthController extends Controller
     public function register(Request $request) {
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|between:2,100',
+            'surname' => 'string',
+            'country' => 'string',
+            'adress' => 'string',
+            'city' => 'string',
+            'company' => 'string',
+            'nip' => 'integer',
             'role' => 'string',
-            'email' => 'required|string|email|max:100|unique:users',
+            'login' => 'required|string|max:100|unique:users',
             'password' => 'required|string|confirmed|min:6',
         ]);
 
@@ -332,10 +338,7 @@ class AuthController extends Controller
         $edited = User::find($request->user_id);
 
         $validator = Validator::make($request->all(), [
-            'name' => 'string|between:2,100',
-            'role' => 'string',
-            'email' => 'string|email|max:100',
-            'password' => 'string|confirmed|min:6',
+
         ]);
         if ($validator->fails()) {
             return response()->json(['error' => $validator->messages()],401);
@@ -343,8 +346,14 @@ class AuthController extends Controller
         }
 
             $edited->name = $request->name;
+            $edited->surname = $request->surname;
+            $edited->country = $request->country;
+            $edited->adress = $request->adress;
+            $edited->city = $request->city;
+            $edited->nip = $request->nip;
+            $edited->company = $request->company;
             $edited->role = $request->role;
-            $edited->email = $request->email;
+            $edited->login = $request->login;
             $edited->password = bcrypt($request->password);
             $edited->save();
 

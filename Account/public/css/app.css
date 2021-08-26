@@ -4,10 +4,6 @@
  * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap-sb-admin-2/blob/master/LICENSE)
  */
  @import url("https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i");
-
- .app{
-    margin-top: 4rem !important;
- }
  /*!
   * Bootstrap v4.6.0 (https://getbootstrap.com/)
   * Copyright 2011-2021 The Bootstrap Authors
@@ -9721,15 +9717,13 @@
      padding-right: 1.725rem;
      line-height: 51px;
      font-weight: 900;
-     content: "\f107";
-     font-family: Font Awesome\5 Free;
      color: #d1d3e2;
  }
  .card .card-header[data-toggle="collapse"].collapsed {
      border-radius: 0.35rem;
  }
  .card .card-header[data-toggle="collapse"].collapsed:after {
-     content: "\f105";
+
  }
  .chart-area {
      position: relative;
@@ -10150,4 +10144,3 @@
  body.sidebar-toggled footer.sticky-footer {
      width: 100%;
  }
-

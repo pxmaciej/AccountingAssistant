@@ -2,11 +2,11 @@
     <div v-if="loading">
     </div>
 <div v-else>
-    <div id="wrapper">
+    <div id="wrapper" class="mt-5 pt-3">
         <navbar></navbar>
         <div class="d-flex flex-column " id="content-wrapper">
-            <div id="content" class="mt-3">
-        <div class="container-fluid">
+            <div id="content" class="mt-5">
+                <div class="container-fluid">
             <div class="row">
                 <div class="col-md-6 col-xl-3 mb-4">
                     <div class="card shadow border-left-success py-2">
@@ -61,15 +61,22 @@
                 <div v-if="loadedChart" class="col-lg-6 col-xl-4">
                     <div class="card shadow mb-4">
                           <div class="card-header d-flex justify-content-between align-items-center">
-                                    <h6 class="text-primary font-weight-bold m-0">Earnings Overview</h6>
+                                    <h6 class="text-primary font-weight-bold m-0">Przychody</h6>
                           </div>
                         <div class="card-body">
-                                <chartErning class="chart-area" :key="reload" :chartdata="incomeChart" :chartoptions="options" label="Przychody" :chartColors="incomeColors"/>
+                                <chartErning :key="reload" :chartdata="incomeChart" :chartoptions="options" label="Przychody" :chartColors="incomeColors"/>
                         </div>
                     </div>
                 </div>
                 <div v-if="loadedChart2" class="col-md-6 col-xl-4 mb-4">
-                    <chartErning  :chartdata="expenseChart" :chartoptions="options" label="Wydatki" :chartColors="expenseColors"/>
+                     <div class="card shadow mb-4">
+                          <div class="card-header d-flex justify-content-between align-items-center">
+                                    <h6 class="text-primary font-weight-bold m-0">Wydatki</h6>
+                          </div>
+                          <div class="card-body">
+                                 <chartErning  :chartdata="expenseChart" :chartoptions="options" label="Wydatki" :chartColors="expenseColors"/>
+                          </div>
+                     </div>
                 </div>
             </div>
             <div class="row">
@@ -126,7 +133,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+                </div>
             </div>
         </div>
     </div>
@@ -204,6 +211,7 @@ export default {
             .then( res => {
                 this.user = res.data;
                 this.$store.commit('setUserId', res.data.id);
+                this.$store.commit('setUserRole', res.data.role);
                 this.expData();
                 this.incomData();
 

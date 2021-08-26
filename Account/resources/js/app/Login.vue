@@ -20,7 +20,7 @@
                                         <h4 class="text-dark mb-4">Welcome Back!</h4>
                                     </div>
                                     <form class="user">
-                                            <div class="form-group"> <input class="form-control form-control-user" type="email"  aria-describedby="emailHelp" placeholder="Enter Email Address..." name="email" v-model="credentials.email"></div>
+                                            <div class="form-group"> <input class="form-control form-control-user" type="text"  aria-describedby="login" placeholder="Enter Login Address..." name="login" v-model="credentials.login"></div>
                                             <div class="form-group"> <input class="form-control form-control-user" type="password"  placeholder="Password" name="password" v-model="credentials.password"></div>
 
 
@@ -45,7 +45,7 @@ export default {
     data(){
         return {
             credentials : {
-                email : '',
+                login : '',
                 password : '',
             },
             loading : true,

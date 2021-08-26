@@ -8,6 +8,7 @@ export const store = new Vuex.Store( {
     state:{
         token: localStorage.getItem('auth')||'',
         user: localStorage.getItem('id')||'',
+        role: localStorage.getItem('role')||'',
     },
     mutations : {
         setToken (state,token){
@@ -22,6 +23,9 @@ export const store = new Vuex.Store( {
             localStorage.setItem('id',user );
             state.user = user;
         },
-
+        setUserRole (state,role){
+            localStorage.setItem('role',role );
+            state.role = role;
+        },
     }
 })
