@@ -344,7 +344,6 @@ class AuthController extends Controller
             return response()->json(['error' => $validator->messages()],401);
 
         }
-
             $edited->name = $request->name;
             $edited->surname = $request->surname;
             $edited->country = $request->country;

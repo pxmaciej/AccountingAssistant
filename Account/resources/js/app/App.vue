@@ -1,6 +1,6 @@
 <template>
 <div class="app">
-    <router-view @updateStatus="updateStatus" ></router-view>
+    <router-view></router-view>
 </div>
 </template>
 

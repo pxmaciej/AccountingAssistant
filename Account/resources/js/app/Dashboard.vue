@@ -80,38 +80,6 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-lg-3 mb-4">
-                    <div class="card shadow mb-4">
-                        <div class="card-header py-3">
-                            <h6 class="text-primary font-weight-bold m-0">Dodaj Przychody</h6>
-                        </div>
-                        <div class="card-body">
-                            <formErning v-if="user.id" v-bind:user="user.id" @finished="finished"></formErning>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 mb-4">
-                    <div class="card shadow mb-4">
-                        <div class="card-header py-3">
-                            <h6 class="text-primary font-weight-bold m-0">Dodaj Płatności</h6>
-                        </div>
-                        <div class="card-body">
-                            <formPayment v-if="user.id" v-bind:user="user.id"></formPayment>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 mb-4">
-                    <div class="card shadow mb-4">
-                        <div class="card-header py-3">
-                            <h6 class="text-primary font-weight-bold m-0">Dodaj Wydatek</h6>
-                        </div>
-                        <div class="card-body">
-                            <formExpense v-if="user.id" v-bind:user="user.id"></formExpense>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
                 <div class="col-lg-6 mb-4">
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
@@ -146,9 +114,6 @@
     import listFile from './components/listFile.vue';
     import listPayment from './components/listPayment.vue';
     import erningsMonthly from './components/erningsMonthly.vue';
-    import formErning from './components/formErning.vue';
-    import formPayment from './components/formPayment.vue';
-    import formExpense from './components/formExpense.vue';
     import chartErning from './components/chartErning.vue';
     import navbar from './components/navbar.vue';
 
@@ -159,9 +124,6 @@ export default {
         listFile,
         listPayment,
         erningsMonthly,
-        formErning,
-        formPayment,
-        formExpense,
         chartErning,
         navbar
     },
@@ -212,6 +174,7 @@ export default {
                 this.user = res.data;
                 this.$store.commit('setUserId', res.data.id);
                 this.$store.commit('setUserRole', res.data.role);
+                this.$store.commit('setUserData', res.data);
                 this.expData();
                 this.incomData();
 

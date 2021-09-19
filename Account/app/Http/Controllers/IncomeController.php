@@ -209,7 +209,7 @@ class IncomeController extends Controller
      */
     public function show($user_id)
     {
-        $show = Income::where('user_id', 'like', '%'.$user_id.'%')->orderBy('date', 'desc')->get();
+        $show = Income::where('user_id', 'like', '%'.$user_id.'%')->orderBy('date', 'asc')->get();
         return $show;
     }
 
@@ -227,7 +227,6 @@ class IncomeController extends Controller
         $name = $request->name;
         $value = $request->value;
         $date = $request->date;
-        $year = $request->year;
 
         $edited->user_id = $user;
         $edited->name = $name;

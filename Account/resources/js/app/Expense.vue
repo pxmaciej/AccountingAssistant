@@ -4,19 +4,18 @@
     <div class="d-flex flex-column " id="content-wrapper">
             <div id="content" class="mt-5">
                 <div class="container-fluid">
-                    <h3 class="text-dark mb-4">Płatności</h3>
+                    <h3 class="text-dark mb-4">Wydatek</h3>
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="text-primary font-weight-bold m-0">Dodaj Płatności</h6>
+                            <h6 class="text-primary font-weight-bold m-0">Dodaj Wydatek</h6>
                         </div>
                         <div class="card-body">
-                            <formPayment v-if="user.id" v-bind:user="user.id"></formPayment>
+                            <formExpense v-if="user.id" v-bind:user="user.id"></formExpense>
                         </div>
                     </div>
                 </div>
             </div>
     </div>
-
 </div>
 
 
@@ -24,12 +23,12 @@
 </template>
 <script>
    import navbar from './components/navbar.vue';
-   import formPayment from './components/formPayment.vue';
+   import formExpense from './components/formExpense.vue';
 export default {
-    name: "Payment",
+    name: "Expense",
      components: {
           navbar,
-          formPayment,
+          formExpense,
       },
       data(){
           return{

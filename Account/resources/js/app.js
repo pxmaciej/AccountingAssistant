@@ -6,10 +6,12 @@ import VueRouter from 'vue-router';
 import { store } from './app/store';
 import VueFilterDateParse from '@vuejs-community/vue-filter-date-parse';
 import VueFilterDateFormat from 'vue-filter-date-format';
+import Vuelidate from 'vuelidate'
 
 Vue.use(VueRouter);
 Vue.use(VueFilterDateParse);
 Vue.use(VueFilterDateFormat);
+Vue.use(Vuelidate);
 
 
 const router = new VueRouter({

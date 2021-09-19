@@ -4,7 +4,7 @@
     <div class="d-flex flex-column " id="content-wrapper">
             <div id="content" class="mt-5">
                 <div class="container-fluid">
-                    <h3 class="text-dark mb-4">Profile</h3>
+                    <h3 class="text-dark mb-4">Profil</h3>
                     <div class="row mb-3">
                                 <div class="col-8">
                                     <div class="card shadow mb-3">
@@ -34,7 +34,8 @@
                                     </div>
                                     <div class="card shadow mb-3">
                                         <div class="card-header py-3">
-                                            <p class="text-primary m-0 font-weight-bold">User Settings</p>
+                                            <p class="text-primary m-0 font-weight-bold">Ustawienia</p>
+                                            <p v-if="response" class="text-success">Success</p>
                                         </div>
                                         <div class="card-body">
                                             <form>
@@ -42,19 +43,19 @@
                                                     <div class="col">
                                                         <div class="form-group">
                                                             <label for="username"><strong>Imie</strong></label>
-                                                            <input class="form-control" type="text" placeholder="Jan" name="name" v-model="editeduser.name">
+                                                            <input class="form-control" type="text" :placeholder='[[ user. name ]]'  name="name" v-model="editeduser.name">
                                                         </div>
                                                     </div>
                                                     <div class="col">
                                                         <div class="form-group">
                                                             <label for="email"><strong>Nazwisko</strong></label>
-                                                            <input class="form-control" type="text"  placeholder="Kowalski" name="surname" v-model="editeduser.surname">
+                                                            <input class="form-control" type="text"  :placeholder='[[ user.surname]]' name="surname" v-model="editeduser.surname">
                                                         </div>
                                                     </div>
                                                     <div class="col">
                                                         <div class="form-group">
                                                             <label for="email"><strong>Nazwa Firmy</strong></label>
-                                                            <input class="form-control" type="text" placeholder="Jan Kowalski Company" name="company" v-model="editeduser.company">
+                                                            <input class="form-control" type="text" :placeholder='[[user.company]]'  name="company" v-model="editeduser.company">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -62,41 +63,43 @@
                                                     <div class="col">
                                                         <div class="form-group">
                                                             <label for="last_name"><strong>NIP</strong></label>
-                                                            <input class="form-control" type="integer" id="last_name" placeholder="99999999999" name="nip" v-model="editeduser.nip">
+                                                            <input class="form-control" type="integer" id="last_name" :placeholder='[[user.nip]]' name="nip" v-model="editeduser.nip">
                                                         </div>
                                                     </div>
                                                     <div class="col">
                                                         <div class="form-group">
                                                             <label for="last_name"><strong>Login</strong></label>
-                                                            <input class="form-control" type="text" id="last_name" placeholder="user" name="login" v-model="editeduser.login">
+                                                            <input class="form-control" type="text" id="last_name" :placeholder='[[user.login]]'  name="login" v-model="editeduser.login">
                                                         </div>
+                                                    </div>
+                                                    <div class="col">
+                                                        <div class="form-group">
+                                                            <label for="last_name"><strong>Hasło</strong></label>
+                                                            <input class="form-control" type="text" id="last_name"   name="login" v-model="editeduser.password">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col">
+                                                        <div class="form-group">
+                                                            <label for="last_name"><strong>Role</strong></label>
+                                                            <input class="form-control" type="text" id="last_name" :placeholder='[[user.role]]'  name="login" v-model="editeduser.role">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group"><label for="address"><strong>Adres</strong></label><input class="form-control" type="text" id="address" :placeholder='[[user.adress]]' name="adress" v-model="editeduser.adress"></div>
+                                                <div class="form-row">
+                                                    <div class="col">
+                                                        <div class="form-group"><label for="city"><strong>Miasto</strong></label><input class="form-control" type="text" id="city" :placeholder='[[user.city]]'  name="city" v-model="editeduser.city"></div>
+                                                    </div>
+                                                    <div class="col">
+                                                        <div class="form-group"><label for="country"><strong>Kraj</strong></label><input class="form-control" type="text" id="country" :placeholder="[[user.country]]" name="country" v-model="editeduser.country"></div>
                                                     </div>
                                                 </div>
                                                 <div class="form-group"><button class="btn btn-primary btn-sm" type="submit" @click.prevent="edit">Zapisz Ustawienia</button></div>
                                             </form>
                                         </div>
                                     </div>
-                                    <div class="card shadow">
-                                        <div class="card-header py-3">
-                                            <p class="text-primary m-0 font-weight-bold">Contact Settings</p>
-                                        </div>
-                                        <div class="card-body">
-                                            <form>
-                                                <div class="form-group"><label for="address"><strong>Address</strong></label><input class="form-control" type="text" id="address" placeholder="Sunset Blvd, 38" name="address"></div>
-                                                <div class="form-row">
-                                                    <div class="col">
-                                                        <div class="form-group"><label for="city"><strong>City</strong></label><input class="form-control" type="text" id="city" placeholder="Los Angeles" name="city"></div>
-                                                    </div>
-                                                    <div class="col">
-                                                        <div class="form-group"><label for="country"><strong>Country</strong></label><input class="form-control" type="text" id="country" placeholder="USA" name="country"></div>
-                                                    </div>
-                                                </div>
-                                                <div class="form-group"><button class="btn btn-primary btn-sm" type="submit">Save&nbsp;Settings</button></div>
-                                            </form>
-                                        </div>
-                                    </div>
                                 </div>
-                            </div>
+                    </div>
                 </div>
             </div>
     </div>
@@ -106,6 +109,7 @@
 </template>
 <script>
     import navbar from './components/navbar.vue';
+
        import axios from 'axios';
 export default {
     name: "Profile",
@@ -114,19 +118,22 @@ export default {
       },
       data(){
           return{
-                user: [],
+                user:[],
                 editeduser:{
-                    name:'',
-                    surname:'',
-                    country:'',
-                    adress:'',
+                    user_id: localStorage.getItem('id')||'',
+                    name: '',
+                    surname: '',
+                    country: '',
+                    adress: '',
                     city:'',
-                    nip:'',
-                    company:'',
+                    nip: '',
+                    company: '',
                     login:'',
                     password:'',
+                    role:'user',
 
-                }
+                },
+                response: false
           }
 
       },
@@ -155,7 +162,8 @@ export default {
     methods:{
         edit(){
             axios.patch('api/auth/update',this.editeduser,{ headers: {"Authorization" : `Bearer ${this.$store.state.token}`} }).then(res => {
-                console.log(res.data);
+                this.response = true;
+
             })
         }
     }
