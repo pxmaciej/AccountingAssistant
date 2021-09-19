@@ -199,7 +199,7 @@ class PaymentController extends Controller
      */
     public function show($user_id)
     {
-        $show = Payment::where('user_id', 'like', '%'.$user_id.'%')->get();
+        $show = Payment::where('user_id', 'like', '%'.$user_id.'%')->orderBy('deadline', 'asc')->get();
         return $show;
     }
 

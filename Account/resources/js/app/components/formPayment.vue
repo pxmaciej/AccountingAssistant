@@ -51,7 +51,7 @@ export default {
                 category: '',
                 value: '',
                 deadline: '',
-                paid: ''
+                paid: 0,
             }
         }
     },

@@ -1,16 +1,22 @@
 <template>
-<div>
-<table class="table table-warning">
+<div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
+<table class="table" id="dataTable">
      <thead>
          <tr>
              <th scope="col">Nazwa Płatności</th>
              <th scope="col">Termin Płatności</th>
+             <th scope="col">Kategoria</th>
+             <th scope="col">Wartość</th>
+             <th scope="col">Zapłacono</th>
          </tr>
      </thead>
      <tbody>
-         <tr v-for="payment of payments" :key="payment.id">
+         <tr v-for="payment in filterItems(payments)"  :key="payment.id">
               <td>{{payment.name}}</td>
-              <td>{{payment.deadline | dateParse('YYYY.MM.DD') | dateFormat('DD.MM.YYYY')}}</td>
+              <td class="border border-warning">{{payment.deadline | dateParse('YYYY.MM.DD') | dateFormat('DD.MM.YYYY')}}</td>
+              <td>{{payment.category}}</td>
+              <td>{{payment.value}}</td>
+              <td>{{payment.paid}}</td>
          </tr>
 
 
@@ -43,7 +49,16 @@ export default {
     })
     },
     methods: {
-
-    }
+        filterItems: function(payments) {
+            return payments.filter(function(payment) {
+                return payment.paid == false;
+            })
+        }
+    },
 };
 </script>
+<style scoped>
+.tablebody{
+ margin-top: 10em;
+}
+</style>
