@@ -5873,6 +5873,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -5882,6 +5888,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   data: function data() {
     return {
+      errors: [],
       user: [],
       editeduser: {
         user_id: localStorage.getItem('id') || '',
@@ -5894,7 +5901,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         company: '',
         login: '',
         password: '',
-        role: 'user'
+        role: localStorage.getItem('role') || ''
       },
       response: false
     };
@@ -5956,13 +5963,59 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     edit: function edit() {
       var _this2 = this;
 
-      axios__WEBPACK_IMPORTED_MODULE_2___default().patch('api/auth/update', this.editeduser, {
-        headers: {
-          "Authorization": "Bearer ".concat(this.$store.state.token)
-        }
-      }).then(function (res) {
-        _this2.response = true;
-      });
+      this.errors.splice(0);
+
+      if (this.editeduser.name && this.editeduser.surname && this.editeduser.country && this.editeduser.adress && this.editeduser.city && this.editeduser.nip && this.editeduser.company && this.editeduser.login && this.editeduser.password && this.editeduser.role) {
+        axios__WEBPACK_IMPORTED_MODULE_2___default().patch('api/auth/update', this.editeduser, {
+          headers: {
+            "Authorization": "Bearer ".concat(this.$store.state.token)
+          }
+        }).then(function (res) {
+          _this2.response = true;
+
+          _this2.errors.splice(0);
+        });
+      }
+
+      if (!this.editeduser.name) {
+        this.errors.push('Imie wymagane');
+      }
+
+      if (!this.editeduser.surname) {
+        this.errors.push('Nazwisko wymagane');
+      }
+
+      if (!this.editeduser.company) {
+        this.errors.push('Nazwa Firmy wymagane');
+      }
+
+      if (!this.editeduser.adress) {
+        this.errors.push('Nazwa Firmy wymagane');
+      }
+
+      if (!this.editeduser.city) {
+        this.errors.push('Miasto wymagane');
+      }
+
+      if (!this.editeduser.nip) {
+        this.errors.push('NIP wymagane');
+      }
+
+      if (!this.editeduser.country) {
+        this.errors.push('Kraj wymagane');
+      }
+
+      if (!this.editeduser.login) {
+        this.errors.push('Login wymagane');
+      }
+
+      if (!this.editeduser.password) {
+        this.errors.push('Hasło wymagane');
+      }
+
+      if (!this.editeduser.role) {
+        this.errors.push('Role wymagane');
+      }
     }
   }
 });
@@ -6118,17 +6171,26 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "formErning",
-  props: ['user', 'reload'],
   data: function data() {
     return {
+      errors: [],
       income: {
-        user_id: this.user,
+        user_id: localStorage.getItem('id') || '',
         name: '',
         value: '',
-        date: ''
+        date: date
       }
     };
   },
@@ -6136,18 +6198,31 @@ __webpack_require__.r(__webpack_exports__);
     store: function store() {
       var _this = this;
 
-      axios__WEBPACK_IMPORTED_MODULE_0___default().post('api/income/store', this.income, {
-        headers: {
-          "Authorization": "Bearer ".concat(this.$store.state.token)
-        }
-      }).then(function (res) {
-        _this.success = res.data;
+      this.errors.splice(0);
 
-        _this.ok();
-      });
-    },
-    ok: function ok() {
-      this.$emit('finished');
+      if (this.income.name && this.income.value && this.income.date) {
+        axios__WEBPACK_IMPORTED_MODULE_0___default().post('api/income/store', this.income, {
+          headers: {
+            "Authorization": "Bearer ".concat(this.$store.state.token)
+          }
+        }).then(function (res) {
+          _this.success = res.data;
+
+          _this.errors.splice(0);
+        });
+      }
+
+      if (!this.income.name) {
+        this.errors.push('Nazwa wymagane');
+      }
+
+      if (!this.income.value) {
+        this.errors.push('Wartość wymagane');
+      }
+
+      if (!this.income.date) {
+        this.errors.push('Data wymagane');
+      }
     }
   }
 });
@@ -6195,18 +6270,21 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "formExpense",
   props: ['user'],
   data: function data() {
     return {
+      errors: [],
       expense: {
-        user_id: this.user,
-        data: '',
+        user_id: localStorage.getItem('id') || '',
         name: '',
         value: '',
-        category: ''
+        category: '',
+        date: ''
       }
     };
   },
@@ -6214,13 +6292,35 @@ __webpack_require__.r(__webpack_exports__);
     store: function store() {
       var _this = this;
 
-      axios__WEBPACK_IMPORTED_MODULE_0___default().post('api/expense/store', this.expense, {
-        headers: {
-          "Authorization": "Bearer ".concat(this.$store.state.token)
-        }
-      }).then(function (res) {
-        _this.success = res.data;
-      });
+      this.errors.splice(0);
+
+      if (this.expense.date && this.expense.name && this.expense.value && this.expense.category) {
+        axios__WEBPACK_IMPORTED_MODULE_0___default().post('api/expense/store', this.expense, {
+          headers: {
+            "Authorization": "Bearer ".concat(this.$store.state.token)
+          }
+        }).then(function (res) {
+          _this.success = res.data;
+
+          _this.errors.splice(0);
+        });
+      }
+
+      if (!this.expense.date) {
+        this.errors.push('Data wymagane');
+      }
+
+      if (!this.expense.name) {
+        this.errors.push('Nazwa wymagane');
+      }
+
+      if (!this.expense.value) {
+        this.errors.push('Wartość wymagane');
+      }
+
+      if (!this.expense.category) {
+        this.errors.push('Kategoria wymagane');
+      }
     }
   }
 });
@@ -6345,14 +6445,17 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "formPayment",
   props: ['user'],
   data: function data() {
     return {
+      errors: [],
       payment: {
-        user_id: this.user,
+        user_id: localStorage.getItem('id') || '',
         name: '',
         category: '',
         value: '',
@@ -6368,15 +6471,35 @@ __webpack_require__.r(__webpack_exports__);
     store: function store() {
       var _this = this;
 
-      axios__WEBPACK_IMPORTED_MODULE_0___default().post('api/payment/store', this.payment, {
-        headers: {
-          "Authorization": "Bearer ".concat(this.$store.state.token)
-        }
-      }).then(function (res) {
-        console.log(res);
+      this.errors.splice(0);
 
-        _this.reload();
-      });
+      if (this.payment.name && this.payment.category && this.payment.value && this.payment.deadline) {
+        axios__WEBPACK_IMPORTED_MODULE_0___default().post('api/payment/store', this.payment, {
+          headers: {
+            "Authorization": "Bearer ".concat(this.$store.state.token)
+          }
+        }).then(function (res) {
+          console.log(res);
+
+          _this.errors.splice(0);
+        });
+      }
+
+      if (!this.payment.name) {
+        this.errors.push('Nazwa wymagane');
+      }
+
+      if (!this.payment.category) {
+        this.errors.push('Kategoria wymagane');
+      }
+
+      if (!this.payment.value) {
+        this.errors.push('Wartość wymagane');
+      }
+
+      if (!this.payment.deadline) {
+        this.errors.push('Termin Płatności wymagane');
+      }
     }
   }
 });
@@ -84163,6 +84286,26 @@ var render = function() {
                         ? _c("p", { staticClass: "text-success" }, [
                             _vm._v("Success")
                           ])
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _vm.errors.length
+                        ? _c("p", [
+                            _c("b", [
+                              _vm._v("Please correct the following error(s):")
+                            ]),
+                            _vm._v(" "),
+                            _c(
+                              "ul",
+                              _vm._l(_vm.errors, function(error) {
+                                return _c(
+                                  "li",
+                                  { staticClass: "text-danger" },
+                                  [_vm._v(_vm._s(error))]
+                                )
+                              }),
+                              0
+                            )
+                          ])
                         : _vm._e()
                     ]),
                     _vm._v(" "),
@@ -84740,125 +84883,121 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("form", [
-    _c("div", [
-      _c("label", { staticClass: "form-label" }, [_vm._v("User_id")]),
+  return _c("div", { staticClass: "card shadow mb-3" }, [
+    _c("div", { staticClass: "card-header py-3" }, [
+      _c("p", { staticClass: "text-primary m-0 font-weight-bold" }, [
+        _vm._v("Ustawienia")
+      ]),
       _vm._v(" "),
-      _c("input", {
-        directives: [
-          {
-            name: "model",
-            rawName: "v-model",
-            value: _vm.income.user_id,
-            expression: "income.user_id"
-          }
-        ],
-        staticClass: "form-control",
-        attrs: { type: "number" },
-        domProps: { value: _vm.income.user_id },
-        on: {
-          input: function($event) {
-            if ($event.target.composing) {
-              return
-            }
-            _vm.$set(_vm.income, "user_id", $event.target.value)
-          }
-        }
-      })
+      _vm.errors.length
+        ? _c("p", [
+            _c("b", [_vm._v("Please correct the following error(s):")]),
+            _vm._v(" "),
+            _c(
+              "ul",
+              _vm._l(_vm.errors, function(error) {
+                return _c("li", { staticClass: "text-danger" }, [
+                  _vm._v(_vm._s(error))
+                ])
+              }),
+              0
+            )
+          ])
+        : _vm._e()
     ]),
     _vm._v(" "),
-    _c("div", [
-      _c("label", { staticClass: "form-label" }, [_vm._v("Nazwa")]),
-      _vm._v(" "),
-      _c("input", {
-        directives: [
-          {
-            name: "model",
-            rawName: "v-model",
-            value: _vm.income.name,
-            expression: "income.name"
-          }
-        ],
-        staticClass: "form-control",
-        attrs: { type: "text" },
-        domProps: { value: _vm.income.name },
-        on: {
-          input: function($event) {
-            if ($event.target.composing) {
-              return
+    _c("div", { staticClass: "card-body" }, [
+      _c("form", [
+        _c("div", { staticClass: "form-group" }, [
+          _c("label", { staticClass: "form-label" }, [_vm._v("Nazwa")]),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.income.name,
+                expression: "income.name"
+              }
+            ],
+            staticClass: "form-control",
+            attrs: { type: "text" },
+            domProps: { value: _vm.income.name },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.$set(_vm.income, "name", $event.target.value)
+              }
             }
-            _vm.$set(_vm.income, "name", $event.target.value)
-          }
-        }
-      })
-    ]),
-    _vm._v(" "),
-    _c("div", [
-      _c("label", { staticClass: "form-label" }, [_vm._v("Wartość")]),
-      _vm._v(" "),
-      _c("input", {
-        directives: [
-          {
-            name: "model",
-            rawName: "v-model",
-            value: _vm.income.value,
-            expression: "income.value"
-          }
-        ],
-        staticClass: "form-control",
-        attrs: { type: "number" },
-        domProps: { value: _vm.income.value },
-        on: {
-          input: function($event) {
-            if ($event.target.composing) {
-              return
+          })
+        ]),
+        _vm._v(" "),
+        _c("label", { staticClass: "form-label" }, [_vm._v("Wartość")]),
+        _vm._v(" "),
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.income.value,
+              expression: "income.value"
             }
-            _vm.$set(_vm.income, "value", $event.target.value)
-          }
-        }
-      })
-    ]),
-    _vm._v(" "),
-    _c("div", [
-      _c("label", { staticClass: "form-label" }, [_vm._v("Data")]),
-      _vm._v(" "),
-      _c("input", {
-        directives: [
-          {
-            name: "model",
-            rawName: "v-model",
-            value: _vm.income.date,
-            expression: "income.date"
-          }
-        ],
-        staticClass: "form-control",
-        attrs: { type: "date" },
-        domProps: { value: _vm.income.date },
-        on: {
-          input: function($event) {
-            if ($event.target.composing) {
-              return
+          ],
+          staticClass: "form-control",
+          attrs: { type: "number" },
+          domProps: { value: _vm.income.value },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.$set(_vm.income, "value", $event.target.value)
             }
-            _vm.$set(_vm.income, "date", $event.target.value)
           }
-        }
-      })
-    ]),
-    _vm._v(" "),
-    _c(
-      "button",
-      {
-        staticClass: "btn btn-primary mt-3",
-        attrs: { type: "button" },
-        on: {
-          click: function($event) {
-            $event.preventDefault()
-            return _vm.store.apply(null, arguments)
+        }),
+        _vm._v(" "),
+        _c("label", { staticClass: "form-label" }, [_vm._v("Data")]),
+        _vm._v(" "),
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.income.date,
+              expression: "income.date"
+            }
+          ],
+          staticClass: "form-control",
+          attrs: { type: "date" },
+          domProps: { value: _vm.income.date },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.$set(_vm.income, "date", $event.target.value)
+            }
           }
-        }
-      },
-      [_vm._v("Wyślij")]
-    )
+        }),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-primary mt-3",
+            attrs: { type: "button" },
+            on: {
+              click: function($event) {
+                $event.preventDefault()
+                return _vm.store.apply(null, arguments)
+              }
+            }
+          },
+          [_vm._v("Wyślij")]
+        )
+      ])
+    ])
   ])
 }
 var staticRenderFns = []
@@ -84885,31 +85024,21 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("form", [
-    _c("div", [
-      _c("label", { staticClass: "form-label" }, [_vm._v("User_id")]),
-      _vm._v(" "),
-      _c("input", {
-        directives: [
-          {
-            name: "model",
-            rawName: "v-model",
-            value: _vm.expense.user_id,
-            expression: "expense.user_id"
-          }
-        ],
-        staticClass: "form-control",
-        attrs: { type: "number" },
-        domProps: { value: _vm.expense.user_id },
-        on: {
-          input: function($event) {
-            if ($event.target.composing) {
-              return
-            }
-            _vm.$set(_vm.expense, "user_id", $event.target.value)
-          }
-        }
-      })
-    ]),
+    _vm.errors.length
+      ? _c("p", [
+          _c("b", [_vm._v("Please correct the following error(s):")]),
+          _vm._v(" "),
+          _c(
+            "ul",
+            _vm._l(_vm.errors, function(error) {
+              return _c("li", { staticClass: "text-danger" }, [
+                _vm._v(_vm._s(error))
+              ])
+            }),
+            0
+          )
+        ])
+      : _vm._e(),
     _vm._v(" "),
     _c("div", [
       _c("label", { staticClass: "form-label" }, [_vm._v("Nazwa")]),
@@ -85111,37 +85240,23 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
+    _vm.errors.length
+      ? _c("p", [
+          _c("b", [_vm._v("Please correct the following error(s):")]),
+          _vm._v(" "),
+          _c(
+            "ul",
+            _vm._l(_vm.errors, function(error) {
+              return _c("li", { staticClass: "text-danger" }, [
+                _vm._v(_vm._s(error))
+              ])
+            }),
+            0
+          )
+        ])
+      : _vm._e(),
+    _vm._v(" "),
     _c("form", [
-      _c("div", [
-        _c(
-          "label",
-          { staticClass: "form-label", attrs: { for: "exampleInputEmail1" } },
-          [_vm._v("User_id")]
-        ),
-        _vm._v(" "),
-        _c("input", {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.payment.user_id,
-              expression: "payment.user_id"
-            }
-          ],
-          staticClass: "form-control",
-          attrs: { type: "number" },
-          domProps: { value: _vm.payment.user_id },
-          on: {
-            input: function($event) {
-              if ($event.target.composing) {
-                return
-              }
-              _vm.$set(_vm.payment, "user_id", $event.target.value)
-            }
-          }
-        })
-      ]),
-      _vm._v(" "),
       _c("div", [
         _c(
           "label",

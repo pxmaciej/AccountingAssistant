@@ -1,11 +1,13 @@
 <template>
 
 <form>
+    <p v-if="errors.length">
+        <b>Please correct the following error(s):</b>
+        <ul>
+            <li class="text-danger" v-for="error in errors">{{ error }}</li>
+        </ul>
+    </p>
     <div>
-    <label class="form-label">User_id</label>
-    <input type="number" class="form-control"  v-model="expense.user_id">
-    </div>
-     <div>
     <label class="form-label">Nazwa</label>
     <input type="text" class="form-control" v-model="expense.name">
     </div>
@@ -33,21 +35,39 @@ export default {
      props: ['user'],
     data(){
         return{
+            errors:[],
             expense:{
-                user_id: this.user,
-                data:'',
+                user_id: localStorage.getItem('id')||'',
                 name:'',
                 value:'',
-                category:''
+                category:'',
+                date:'',
             }
         }
     },
     methods:{
         store(){
-            axios.post('api/expense/store' ,this.expense,{ headers: {"Authorization" : `Bearer ${this.$store.state.token}`} })
-            .then(res=>{
-                this.success = res.data;
-            })
+            this.errors.splice(0);
+            if(this.expense.date&&this.expense.name&&this.expense.value&&this.expense.category){
+                axios.post('api/expense/store' ,this.expense,{ headers: {"Authorization" : `Bearer ${this.$store.state.token}`} })
+                    .then(res=>{
+                        this.success = res.data;
+                        this.errors.splice(0);
+                    })
+            }
+            if(!this.expense.date){
+                 this.errors.push('Data wymagane');
+            }
+            if(!this.expense.name){
+                 this.errors.push('Nazwa wymagane');
+            }
+            if(!this.expense.value){
+                 this.errors.push('Wartość wymagane');
+            }
+            if(!this.expense.category){
+                 this.errors.push('Kategoria wymagane');
+            }
+
         }
     }
 };

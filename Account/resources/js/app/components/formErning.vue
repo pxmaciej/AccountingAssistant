@@ -1,54 +1,72 @@
 <template>
+ <div class="card shadow mb-3">
+    <div class="card-header py-3">
+        <p class="text-primary m-0 font-weight-bold">Ustawienia</p>
+            <p v-if="errors.length">
+            <b>Please correct the following error(s):</b>
+            <ul>
+                <li class="text-danger" v-for="error in errors">{{ error }}</li>
+            </ul>
+        </p>
+    </div>
+    <div class="card-body">
+        <form>
+            <div class="form-group">
+            <label class="form-label">Nazwa</label>
+            <input type="text" class="form-control" v-model="income.name">
+            </div>
 
-<form>
-    <div>
-    <label class="form-label">User_id</label>
-    <input type="number" class="form-control"  v-model="income.user_id">
-    </div>
-     <div>
-    <label class="form-label">Nazwa</label>
-    <input type="text" class="form-control" v-model="income.name">
-    </div>
-     <div>
-    <label class="form-label">Wartość</label>
-    <input type="number" class="form-control" v-model="income.value">
-    </div>
-     <div>
-    <label class="form-label">Data</label>
-    <input type="date" class="form-control" v-model="income.date">
-    </div>
-    <button class="btn btn-primary mt-3" type="button" @click.prevent="store" >Wyślij</button>
-</form>
 
+        <label class="form-label">Wartość</label>
+        <input type="number" class="form-control" v-model="income.value">
+
+
+        <label class="form-label">Data</label>
+        <input type="date" class="form-control" v-model="income.date">
+
+        <button class="btn btn-primary mt-3" type="button" @click.prevent="store" >Wyślij</button>
+
+        </form>
+    </div>
+</div>
 </template>
 
 <script>
 import axios from 'axios';
 export default {
     name: "formErning",
-     props: ['user','reload'],
     data(){
         return{
+               errors:[],
             income:{
-                user_id: this.user,
+                user_id: localStorage.getItem('id')||'',
                 name:'',
                 value:'',
-                date:'',
+                date,
             }
         }
     },
     methods:{
         store(){
-            axios.post('api/income/store' ,this.income,{ headers: {"Authorization" : `Bearer ${this.$store.state.token}`} })
-            .then(res=>{
-                this.success = res.data;
-                this.ok();
-            })
+            this.errors.splice(0);
+            if(this.income.name&&this.income.value&&this.income.date){
+                axios.post('api/income/store' ,this.income,{ headers: {"Authorization" : `Bearer ${this.$store.state.token}`} })
+                 .then(res=>{
+                    this.success = res.data;
+                    this.errors.splice(0);
+                })
+            }
+            if(!this.income.name){
+                this.errors.push('Nazwa wymagane');
+            }
+            if(!this.income.value){
+                this.errors.push('Wartość wymagane');
+            }
+            if(!this.income.date){
+                this.errors.push('Data wymagane');
+            }
 
         },
-        ok() {
-                this.$emit('finished')
-            }
     }
 };
 </script>
