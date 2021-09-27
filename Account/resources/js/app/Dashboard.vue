@@ -221,7 +221,7 @@ export default {
                  this.incomeChart.push({date, total:value})
                  this.loadedChart = true;
                 });
-        }
+            }
     }
 }
 </script>

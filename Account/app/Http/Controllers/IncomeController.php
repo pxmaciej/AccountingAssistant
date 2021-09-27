@@ -209,7 +209,7 @@ class IncomeController extends Controller
      */
     public function show($user_id)
     {
-        $show = Income::where('user_id', 'like', '%'.$user_id.'%')->orderBy('date', 'asc')->get();
+        $show = Income::where('user_id', 'like', '%'.$user_id.'%')->orderBy('date', 'desc')->get();
         return $show;
     }
 
@@ -257,8 +257,7 @@ class IncomeController extends Controller
      */
     public function destroy($income_id)
     {
-        $destroy = Income::find($income_id);
-        $destroy->delete();
+        Income::where('id' , $income_id)->delete();
         return response()->json(['200' => 'success']);
     }
 }

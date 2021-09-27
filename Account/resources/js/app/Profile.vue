@@ -45,6 +45,9 @@
                                         </div>
                                         <div class="card-body">
                                             <form>
+                                                <div v-if="success" class="alert alert-success" role="alert">
+                                                    Dodałeś Przychód!
+                                                </div>
                                                 <div class="form-row">
                                                     <div class="col">
                                                         <div class="form-group">
@@ -123,6 +126,7 @@ export default {
       },
       data(){
           return{
+                success: false,
                 errors: [],
                 user:[],
                 editeduser:{
@@ -139,39 +143,39 @@ export default {
                     role:localStorage.getItem('role')||'',
 
                 },
-                response: false
+
           }
 
       },
     async mounted(){
             if(this.$store.state.token !== ''){
-           await axios.post('api/auth/checkToken', { token : this.$store.state.token} )
-            .then( res => {
-                if(res.data.success){
-                    this.loading = false;
-                }
-            })
-            .catch(err => {
-                this.loading = false;
-                this.$store.commit('clearToken');
-                this.$router.push('/login');
-            })
-           await axios.post('api/auth/profile', { token : this.$store.state.token} )
-            .then( res => {
-                this.user = res.data;
-            })
+                await axios.post('api/auth/checkToken', { token : this.$store.state.token} )
+                    .then( res => {
+                        if(res.data.success){
+                            this.loading = false;
+                        }
+                    })
+                    .catch(err => {
+                        this.loading = false;
+                        this.$store.commit('clearToken');
+                        this.$router.push('/login');
+                    })
+                this.getProfile();
             }else{
-            this.loading = false;
-            this.$router.push('/login');
+                this.loading = false;
+                this.$router.push('/login');
             }
     },
     methods:{
         edit(){
+            this.success = false;
             this.errors.splice(0);
             if(this.editeduser.name&&this.editeduser.surname&&this.editeduser.country&&this.editeduser.adress&&this.editeduser.city&&this.editeduser.nip&&this.editeduser.company&&this.editeduser.login&&this.editeduser.password&&this.editeduser.role){
                  axios.patch('api/auth/update',this.editeduser,{ headers: {"Authorization" : `Bearer ${this.$store.state.token}`} }).then(res => {
-                    this.response = true;
                     this.errors.splice(0);
+                    this.getProfile();
+                    this.reset();
+                    this.success = true;
                  })
             }
             if(!this.editeduser.name){
@@ -205,6 +209,24 @@ export default {
                 this.errors.push('Role wymagane');
             }
 
+        },
+        async getProfile(){
+            await axios.post('api/auth/profile', { token : this.$store.state.token} )
+            .then( res => {
+                this.user = res.data;
+            })
+        },
+        reset(){
+            this.editeduser.name = '';
+            this.editeduser.surname = '';
+            this.editeduser.company = '';
+            this.editeduser.adress = '';
+            this.editeduser.city = '';
+            this.editeduser.nip = '';
+            this.editeduser.country = '';
+            this.editeduser.login = '';
+            this.editeduser.password = '';
+            this.editeduser.role = localStorage.getItem('role')||'';
         }
 
 
