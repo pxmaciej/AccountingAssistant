@@ -3,7 +3,7 @@
         <p v-if="errors.length">
             <b>Please correct the following error(s):</b>
             <ul>
-                <li class="text-danger" v-for="error in errors">{{ error }}</li>
+                <li class="text-white" v-for="error in errors">{{ error }}</li>
             </ul>
         </p>
         <div v-if="success" class="alert alert-success" role="alert">
@@ -18,7 +18,7 @@
             <label class="form-label">Data</label>
             <input type="date" class="form-control" v-model="income.date">
 
-            <button class="btn btn-primary mt-3" type="button" @click.prevent="store" >Wyślij</button>
+            <button class="btn btn-success mt-3" type="button" @click.prevent="store" >Wyślij</button>
     </form>
 </template>
 
@@ -35,7 +35,7 @@ export default {
                 name:'',
                 value:'',
                 date:'',
-            }
+            },
         }
     },
     methods:{

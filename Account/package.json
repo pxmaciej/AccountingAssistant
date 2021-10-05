@@ -37,6 +37,7 @@
         "vue-router": "^3.5.1",
         "vue-server-renderer": "^2.6.13",
         "vue-sidebar-menu": "^5.0.1",
+        "vuejs-smart-table": "0.0.8",
         "vuelidate": "^0.7.6",
         "vuex": "^3.6.2"
     }

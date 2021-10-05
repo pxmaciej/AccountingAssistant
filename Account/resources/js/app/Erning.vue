@@ -7,7 +7,7 @@
                 <h3 class="text-dark font-weight-bold mb-4">Przychód</h3>
                 <div class="row">
                     <div class="col-md-3 col-xl-4 mb-4">
-                        <div class="card shadow mb-4">
+                        <div class="card text-white bg-primary shadow mb-4">
                             <div class="card-header py-3">
                                 <h6 class="text-primary font-weight-bold m-0">Dodaj Przychód</h6>
                             </div>

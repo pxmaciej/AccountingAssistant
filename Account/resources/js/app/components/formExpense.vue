@@ -4,7 +4,7 @@
     <p v-if="errors.length">
         <b>Please correct the following error(s):</b>
         <ul>
-            <li class="text-danger" v-for="error in errors">{{ error }}</li>
+            <li class="text-white" v-for="error in errors">{{ error }}</li>
         </ul>
     </p>
     <div>
@@ -51,8 +51,10 @@ export default {
             if(this.expense.date&&this.expense.name&&this.expense.value&&this.expense.category){
                 axios.post('api/expense/store' ,this.expense,{ headers: {"Authorization" : `Bearer ${this.$store.state.token}`} })
                     .then(res=>{
+                        this.$emit('reload', 'true');
                         this.success = res.data;
                         this.errors.splice(0);
+                        this.reset();
                     })
             }
             if(!this.expense.date){
@@ -68,6 +70,12 @@ export default {
                  this.errors.push('Kategoria wymagane');
             }
 
+        },
+        reset(){
+            this.expense.name = '';
+            this.expense.value = '';
+            this.expense.category = '';
+            this.expense.date = '';
         }
     }
 };

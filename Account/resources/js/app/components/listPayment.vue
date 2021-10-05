@@ -33,10 +33,11 @@ import axios from 'axios';
 
 export default {
     name: "listPayment",
-    props: ['user'],
+    props: ['reload'],
     data(){
         return{
-            payments: []
+            payments: [],
+            user: localStorage.getItem('id')||''
         }
     },
     mounted(){

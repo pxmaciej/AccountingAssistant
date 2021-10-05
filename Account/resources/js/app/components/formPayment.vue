@@ -23,16 +23,6 @@
     <label for="exampleInputEmail1" class="form-label">Termin Płatności</label>
     <input type="date" class="form-control" v-model="payment.deadline">
     </div>
-
-   <input type="checkbox"
-      id="checkbox-1"
-      v-model="payment.paid"
-      name="paid"
-      value=true
-      unchecked-value=false
-    >
-     Status Płatnosci
-
     <button class="btn btn-primary mt-1" type="button" @click="store" >Wyślij</button>
 </form>
 </div>
@@ -69,6 +59,7 @@ export default {
                 .then( res=>{
                      console.log(res)
                      this.errors.splice(0);
+                     this.$emit('reload', 'true');
                  })
             }
             if(!this.payment.name){
