@@ -159,7 +159,7 @@ class ExpenseController extends Controller
     public function index()
     {
         $show = Expense::get();
-        return response()->json([$show]);;
+        return response()->json([$show]);
     }
 
     /**
