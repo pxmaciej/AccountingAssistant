@@ -8,14 +8,15 @@
 </head>
 <body>
 
-        <main>
+
                 @include('includes.header')
                 @include('includes.cookie')
                 @yield('content')
                 @include('includes.footer')
-        </main>
 
+<script src="{{ mix('js/app.js') }}"></script>
+<script src="https://cdn.jsdelivr.net/gh/Wruczek/Bootstrap-Cookie-Alert@gh-pages/cookiealert.js"></script>
 </body>
 </html>
-<script src="https://cdn.jsdelivr.net/gh/Wruczek/Bootstrap-Cookie-Alert@gh-pages/cookiealert.js"></script>
+
 

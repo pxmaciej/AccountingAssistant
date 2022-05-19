@@ -71,8 +71,8 @@ use Illuminate\Support\Facades\Validator;
  *       @OA\Property(property="seller", type="string",  example="Mechanik Zbyszek"),
  *       @OA\Property(property="nip", type="integer", format="int64", example="9999999999"),
  *       @OA\Property(property="name", type="string", example="Silnik"),
- *       @OA\Property(property="netto", type="double", format="double", example="40000.00"),
- *       @OA\Property(property="vat", type="integer", format="int64", example="23"),
+ *       @OA\Property(property="value", type="double", format="double", example="40000.00"),
+ *       @OA\Property(property="category", type="integer", format="int64", example="23"),
  *       @OA\Property(property="brutto", type="double", format="double", example="49200.00"),
  *       @OA\Property(property="category", type="string",  example="Naprawy"),
  *       @OA\Property(property="paid", type="boolean",  example="true"),
@@ -102,8 +102,8 @@ use Illuminate\Support\Facades\Validator;
  *       @OA\Property(property="seller", type="string",  example="Mechanik Zbysio"),
  *       @OA\Property(property="nip", type="integer", format="int64", example="9999999999"),
  *       @OA\Property(property="name", type="string", example="Silnik v2"),
- *       @OA\Property(property="netto", type="double", format="double", example="400.00"),
- *       @OA\Property(property="vat", type="integer", format="int64", example="23"),
+ *       @OA\Property(property="value", type="double", format="double", example="400.00"),
+ *       @OA\Property(property="category", type="integer", format="int64", example="23"),
  *       @OA\Property(property="brutto", type="double", format="double", example="492.00"),
  *       @OA\Property(property="category", type="string",  example="Serwis"),
  *       @OA\Property(property="paid", type="boolean",  example="false"),
@@ -150,9 +150,6 @@ class ExpenseController extends Controller
      *
      * @return void
      */
-    public function __construct() {
-        $this->middleware('auth');
-     }
 
     /**
      * Display a listing of the resource.
@@ -185,45 +182,25 @@ class ExpenseController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'user_id' => 'required|integer',
-            'number' => 'required|string',
-            'date_issue' => 'required|date',
-            'seller' => 'required|string',
-            'nip' => 'required|integer',
-            'name' => 'required|string|min:3',
-            'netto' => 'required',
-            'vat' => 'required|integer',
-            'brutto' => 'required',
-            'category' => 'required|string|min:3|max:255',
-            'paid' => 'required|boolean',
+            'date' => 'required|date',
+            'category' => 'required|string',
         ]);
         if ($validator->fails()) {
             return response()->json(['error' => $validator->messages()],401);
 
         }
         $user = $request->user_id;
-        $number = $request->number;
-        $date = $request->date_issue;
-        $seller = $request->seller;
-        $nip = $request->nip;
+        $date = $request->date;
         $name = $request->name;
-        $netto = $request->netto;
-        $vat = $request->vat;
-        $brutto = $request->brutto;
+        $value = $request->value;
         $category = $request->category;
-        $paid= $request->paid;
 
         Expense::create([
             'user_id' => $user,
-            'number' => $number,
-            'date_issue' => $date,
-            'seller' => $seller,
-            'nip' => $nip,
+            'date' => $date,
             'name' => $name,
-            'netto' => $netto,
-            'vat' => $vat,
-            'brutto' => $brutto,
+            'value' => $value,
             'category' => $category,
-            'paid' => $paid,
         ]);
         return response()->json(['200' => 'success']);
     }
@@ -236,8 +213,8 @@ class ExpenseController extends Controller
      */
     public function show($user_id)
     {
-        $show = Expense::where('user_id', 'like', '%'.$user_id.'%')->get();
-        return response()->json([$show]);;
+        $show = Expense::where('user_id', 'like', '%'.$user_id.'%')->orderBy('date', 'desc')->get();
+        return $show;
     }
 
     /**
@@ -261,27 +238,18 @@ class ExpenseController extends Controller
     public function update(Request $request)
     {
         $edited = Expense::find($request->expense_id);
-        $number = $request->number;
-        $date = $request->date_issue;
-        $seller = $request->seller;
-        $nip = $request->nip;
+        $user = $request->user_id;
+        $date = $request->date;
         $name = $request->name;
-        $netto = $request->netto;
-        $vat = $request->vat;
-        $brutto = $request->brutto;
+        $value = $request->value;
         $category = $request->category;
-        $paid = $request->paid;
 
-        $edited->number = $number;
-        $edited->date_issue = $date;
-        $edited->seller= $seller;
-        $edited->nip = $nip;
+
+        $edited->user_id = $user;
+        $edited->date = $date;
         $edited->name = $name;
-        $edited->netto = $netto;
-        $edited->vat = $vat;
-        $edited->brutto = $brutto;
+        $edited->value = $value;
         $edited->category = $category;
-        $edited->paid = $paid;
         $edited->save();
 
         return response()->json(['200' => 'success']);

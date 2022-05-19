@@ -2,17 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Income;
-use Illuminate\Support\Facades\Validator;
+use App\Models\Payment;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 /**
  * @OA\Get(
- * path="/api/income/index",
+ * path="/api/payment/index",
  *
- * description="Get all user income, admin only",
+ * description="Get all user payment, admin only",
  * operationId="index",
- * tags={"income"},
+ * tags={"payment"},
  * security={{ "apiAuth": {} }},
  * @OA\Response(
  *    response=200,
@@ -30,11 +30,11 @@ use Illuminate\Http\Request;
 
 /**
  * @OA\Get(
- * path="/api/income/show/{user_id}",
+ * path="/api/payment/show/{user_id}",
  *
- * description="Show income",
+ * description="Show payment",
  * operationId="show",
- * tags={"income"},
+ * tags={"payment"},
  * security={{ "apiAuth": {} }},
  *  @OA\Parameter(
  *    description="ID user",
@@ -56,25 +56,18 @@ use Illuminate\Http\Request;
 
 /**
  * @OA\Post(
- * path="/api/income/store",
+ * path="/api/payment/store",
  *
- * description="Store income",
+ * description="Store payment admin only",
  * operationId="store",
- * tags={"income"},
+ * tags={"payment"},
  * security={{ "apiAuth": {} }},
  * @OA\RequestBody(
 *  @OA\JsonContent(
  *       @OA\Property(property="user_id", type="integer", format="int64", example="1"),
- *       @OA\Property(property="number", type="string",  example="125/B/45HK"),
- *       @OA\Property(property="date_issue", type="date", format="date",  example="1998-09-24 10:02:20"),
- *       @OA\Property(property="buyer", type="string",  example="Mechanik Zbyszek"),
- *       @OA\Property(property="nip", type="integer", format="int64", example="9999999999"),
- *       @OA\Property(property="name", type="string", example="Silnik"),
- *       @OA\Property(property="netto", type="double", format="double", example="40000.00"),
- *       @OA\Property(property="vat", type="integer", format="int64", example="23"),
- *       @OA\Property(property="brutto", type="double", format="double", example="49200.00"),
- *       @OA\Property(property="category", type="string",  example="Naprawy"),
- *       @OA\Property(property="paid", type="boolean",  example="true"),
+ *       @OA\Property(property="name", type="string", example="Płatność zus"),
+ *       @OA\Property(property="category", type="string",  example="ZUS"),
+ *       @OA\Property(property="value", type="double", format="double", example="400.00"),
  *    )
 *
 * ),
@@ -87,25 +80,18 @@ use Illuminate\Http\Request;
 
  /**
  * @OA\Patch(
- * path="/api/income/update",
+ * path="/api/payment/update",
  *
- * description="Update income",
+ * description="Update payment admin only",
  * operationId="update",
- * tags={"income"},
+ * tags={"payment"},
  * security={{ "apiAuth": {} }},
  * @OA\RequestBody(
 *  @OA\JsonContent(
- *       @OA\Property(property="income_id", type="integer", format="int64", example="1"),
- *       @OA\Property(property="number", type="string",  example="126/CN/655"),
- *       @OA\Property(property="date_issue", type="date", format="date",  example="2021-04-18 10:02:20"),
- *       @OA\Property(property="buyer", type="string",  example="Mechanik Zbysio"),
- *       @OA\Property(property="nip", type="integer", format="int64", example="9999999999"),
+ *       @OA\Property(property="payment_id", type="integer", format="int64", example="1"),
  *       @OA\Property(property="name", type="string", example="Silnik v2"),
- *       @OA\Property(property="netto", type="double", format="double", example="400.00"),
- *       @OA\Property(property="vat", type="integer", format="int64", example="23"),
- *       @OA\Property(property="brutto", type="double", format="double", example="492.00"),
- *       @OA\Property(property="category", type="string",  example="Serwis"),
- *       @OA\Property(property="paid", type="boolean",  example="false"),
+ *       @OA\Property(property="category", type="string",  example="ZUS"),
+ *       @OA\Property(property="value", type="double", format="double", example="400.00"),
  *    )
 *
 * ),
@@ -118,16 +104,16 @@ use Illuminate\Http\Request;
 
  /**
  * @OA\Delete(
- * path="/api/income/destroy/{income_id}",
+ * path="/api/payment/destroy/{payment_id}",
  *
- * description="Destroy income",
+ * description="Destroy payment admin only",
  * operationId="destroy",
- * tags={"income"},
+ * tags={"payment"},
  * security={{ "apiAuth": {} }},
  *  @OA\Parameter(
- *    description="ID income",
+ *    description="ID payment",
  *    in="path",
- *    name="income_id",
+ *    name="payment_id",
  *    required=true,
  *    example="1",
  *    @OA\Schema(
@@ -142,7 +128,7 @@ use Illuminate\Http\Request;
  * )
 */
 
-class IncomeController extends Controller
+class PaymentController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -151,7 +137,7 @@ class IncomeController extends Controller
      */
     public function index()
     {
-        $show = Income::get();
+        $show = Payment::get();
         return response()->json([$show]);;
     }
 
@@ -175,9 +161,10 @@ class IncomeController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'user_id' => 'required|integer',
-            'name' => 'required|string|min:3',
-            'date' => 'required|date'
-
+            'name' => 'required|string',
+            'category' => 'required|string',
+            'value' => 'required',
+            'deadline' => 'required',
 
         ]);
         if ($validator->fails()) {
@@ -186,78 +173,76 @@ class IncomeController extends Controller
         }
         $user = $request->user_id;
         $name = $request->name;
+        $category = $request->category;
         $value = $request->value;
-        $date = $request->date;
+        $deadline = $request->deadline;
+        $paid = $request->paid;
 
-
-        Income::create([
+        Payment::create([
             'user_id' => $user,
             'name' => $name,
+            'category' => $category,
             'value' => $value,
-            'date' => $date,
-
+            'deadline' => $deadline,
+            'paid' => $paid
         ]);
 
         return response()->json(['200' => 'success']);
+
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Income  $income
+     * @param  \App\Models\Payment  $payment
      * @return \Illuminate\Http\Response
      */
     public function show($user_id)
     {
-        $show = Income::where('user_id', 'like', '%'.$user_id.'%')->orderBy('date', 'desc')->get();
+        $show = Payment::where('user_id', 'like', '%'.$user_id.'%')->orderBy('deadline', 'asc')->get();
         return $show;
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\Payment  $payment
      * @return \Illuminate\Http\Response
      */
-    public function edit(Request $request)
+    public function edit(Payment $payment)
     {
-        $edited = Income::find($request->income_id);
-
-        $user = $request->user_id;
-        $name = $request->name;
-        $value = $request->value;
-        $date = $request->date;
-
-        $edited->user_id = $user;
-        $edited->name = $name;
-        $edited->value = $value;
-        $edited->date = $date;
-        $edited->save();
-
-        return response()->json(['200' => 'success']);
+        //
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Income  $income
+     * @param  \App\Models\Payment  $payment
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Income $income)
+    public function update(Request $request, Payment $payment)
     {
-        //
+        $edited = Payment::find($request->user_id);
+        $edited->name = $request->name;
+        $edited->category = $request->category;
+        $edited->value = $request->value;
+        $edited->deadline = $request->deadline;
+        $edited->paid = $request->paid;
+        $edited->save();
+        return response()->json(['200' => 'success']);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Income  $income
+     * @param  \App\Models\Payment  $payment
      * @return \Illuminate\Http\Response
      */
-    public function destroy($income_id)
+    public function destroy(Payment $payment)
     {
-        Income::where('id' , $income_id)->delete();
+        $destroy = Payment::find($payment);
+        $destroy->delete();
         return response()->json(['200' => 'success']);
     }
 }

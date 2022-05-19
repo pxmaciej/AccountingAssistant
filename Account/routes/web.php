@@ -28,12 +28,4 @@ Route::get('/polityka-prywatnosci',function(){
     return view('pages.polityka');
 });
 
-Auth::routes();
-
-Route::get('expenses', function(){
-    return view('expenses');
-});
-
-Route::resource('/uploadExpenses', UploadFileController::class);
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->middleware('auth');
+Route::view('/{app?}', 'pages.home')->where('app', '.*')->middleware('api');

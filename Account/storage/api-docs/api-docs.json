@@ -258,6 +258,64 @@
                 ]
             }
         },
+        "/api/auth/update": {
+            "patch": {
+                "tags": [
+                    "auth"
+                ],
+                "description": "Update user",
+                "operationId": "update",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "user_id": {
+                                        "type": "integer",
+                                        "format": "int64",
+                                        "example": "1"
+                                    },
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Maciej"
+                                    },
+                                    "role": {
+                                        "type": "string",
+                                        "example": "user"
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "format": "email",
+                                        "example": "user@user"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "format": "password",
+                                        "example": "zaq1@WSX"
+                                    },
+                                    "password_confirmation": {
+                                        "type": "string",
+                                        "format": "password",
+                                        "example": "zaq1@WSX"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            }
+        },
         "/api/auth/logout": {
             "post": {
                 "tags": [
@@ -284,6 +342,38 @@
                                 }
                             }
                         }
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/auth/destroy/{user_id}": {
+            "delete": {
+                "tags": [
+                    "auth"
+                ],
+                "description": "Destroy user",
+                "operationId": "destroy",
+                "parameters": [
+                    {
+                        "name": "user_id",
+                        "in": "path",
+                        "description": "ID user",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        },
+                        "example": "1"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
                     }
                 },
                 "security": [
@@ -811,6 +901,201 @@
                 ]
             }
         },
+        "/api/payment/index": {
+            "get": {
+                "tags": [
+                    "payment"
+                ],
+                "description": "Get all user payment, admin only",
+                "operationId": "index",
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "401": {
+                        "description": "Returns when user is not authenticated",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Not authorized"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/payment/show/{user_id}": {
+            "get": {
+                "tags": [
+                    "payment"
+                ],
+                "description": "Show payment",
+                "operationId": "show",
+                "parameters": [
+                    {
+                        "name": "user_id",
+                        "in": "path",
+                        "description": "ID user",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        },
+                        "example": "1"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/payment/store": {
+            "post": {
+                "tags": [
+                    "payment"
+                ],
+                "description": "Store payment admin only",
+                "operationId": "store",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "user_id": {
+                                        "type": "integer",
+                                        "format": "int64",
+                                        "example": "1"
+                                    },
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Płatność zus"
+                                    },
+                                    "category": {
+                                        "type": "string",
+                                        "example": "ZUS"
+                                    },
+                                    "value": {
+                                        "type": "double",
+                                        "format": "double",
+                                        "example": "400.00"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/payment/update": {
+            "patch": {
+                "tags": [
+                    "payment"
+                ],
+                "description": "Update payment admin only",
+                "operationId": "update",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "payment_id": {
+                                        "type": "integer",
+                                        "format": "int64",
+                                        "example": "1"
+                                    },
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Silnik v2"
+                                    },
+                                    "category": {
+                                        "type": "string",
+                                        "example": "ZUS"
+                                    },
+                                    "value": {
+                                        "type": "double",
+                                        "format": "double",
+                                        "example": "400.00"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/payment/destroy/{payment_id}": {
+            "delete": {
+                "tags": [
+                    "payment"
+                ],
+                "description": "Destroy payment admin only",
+                "operationId": "destroy",
+                "parameters": [
+                    {
+                        "name": "payment_id",
+                        "in": "path",
+                        "description": "ID payment",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        },
+                        "example": "1"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            }
+        },
         "/api/file/index": {
             "get": {
                 "tags": [
@@ -962,10 +1247,46 @@
                 "in": "header",
                 "bearerFormat": "JWT",
                 "scheme": "bearer"
+            },
+            "api_key_security_example": {
+                "type": "apiKey",
+                "description": "A short description for security scheme",
+                "name": "api_key",
+                "in": "header"
+            },
+            "oauth2_security_example": {
+                "type": "oauth2",
+                "description": "A short description for oauth2 security scheme.",
+                "flow": "implicit",
+                "authorizationUrl": "http://example.com/auth",
+                "scopes": {
+                    "read:projects": "read your projects",
+                    "write:projects": "modify projects in your account"
+                }
+            },
+            "passport": {
+                "type": "oauth2",
+                "description": "Laravel passport oauth2 security.",
+                "in": "header",
+                "scheme": "https",
+                "flows": {
+                    "password": {
+                        "authorizationUrl": "http://localhost/oauth/authorize",
+                        "tokenUrl": "http://localhost/oauth/token",
+                        "refreshUrl": "http://localhost/token/refresh",
+                        "scopes": []
+                    }
+                }
             }
         }
     },
     "security": [
-        []
+        {
+            "oauth2_security_example": [
+                "read",
+                "write"
+            ],
+            "passport": []
+        }
     ]
 }
