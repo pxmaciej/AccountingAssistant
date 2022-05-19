@@ -11,7 +11,7 @@
          <tr v-for="file of files" :key="file.id">
               <td><a :href="'../storage/'+file.file" download>{{file.file}}</a></td>
               <td>{{file.created_at | dateParse('YYYY.MM.DD') | dateFormat('DD.MM.YYYY')}}</td>
-              <td><button type="button" class="btn btn-primary" @click="deleteFile"></button></td>
+              <td><button type="button" class="btn btn-primary" @click="deleteFile(file.id)">Usuń</button></td>
          </tr>
 
 
@@ -44,9 +44,18 @@ export default {
     })
     },
     methods: {
-        deleteFile(){
-            let file_id;
+        getdata(){
+        axios.get('api/file/show/'+this.user,{ headers: {"Authorization" : `Bearer ${this.$store.state.token}`} })
+        .then( res => {
+        this.files = res.data;
+    })
+    .catch(err => {
+        console.log(err)
+    })
+        },
+        deleteFile(file_id){
             axios.delete('api/file/destroy/'+file_id,{ headers: {"Authorization" : `Bearer ${this.$store.state.token}`} })
+             this.getdata();
         }
     }
 };

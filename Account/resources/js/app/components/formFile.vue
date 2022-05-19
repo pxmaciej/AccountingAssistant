@@ -1,7 +1,7 @@
 <template>
 <div>
     <div class="alert alert-success" role="alert" v-if="success">Succes</div>
-    <div class="alert alert-danger" role="alert" v-if=" succes = false">A simple danger alert—check it out!</div>
+    <div class="alert alert-danger" role="alert" v-if=" success = false">A simple danger alert—check it out!</div>
 <input type="file" @change="onFileSelected" name="file" multiple>
 <button type="button" class="btn btn-outline-primary" @click="onUpload">Wyślij</button>
 </div>
