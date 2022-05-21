@@ -5440,56 +5440,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 
@@ -7258,6 +7208,29 @@ __webpack_require__.r(__webpack_exports__);
       return payments.filter(function (payment) {
         return payment.paid == false;
       });
+    },
+    reloadPayment: function reloadPayment() {
+      var _this2 = this;
+
+      axios__WEBPACK_IMPORTED_MODULE_0___default().get('api/payment/show/' + this.user, {
+        headers: {
+          "Authorization": "Bearer ".concat(this.$store.state.token)
+        }
+      }).then(function (res) {
+        _this2.payments = res.data;
+      })["catch"](function (err) {
+        console.log(err);
+      });
+    },
+    statusPayment: function statusPayment(id) {
+      axios__WEBPACK_IMPORTED_MODULE_0___default()["delete"]('api/payment/destroy/' + id, {
+        headers: {
+          "Authorization": "Bearer ".concat(this.$store.state.token)
+        }
+      }).then(function (res) {
+        console.log(res);
+      });
+      this.reloadPayment();
     }
   }
 });
@@ -85943,13 +85916,11 @@ var render = function () {
               [
                 _c("div", { staticClass: "mt-5", attrs: { id: "content" } }, [
                   _c("div", { staticClass: "container-fluid" }, [
-                    _vm._m(0),
-                    _vm._v(" "),
                     _c("div", { staticClass: "row" }, [
                       _vm.loadedChart
                         ? _c("div", { staticClass: "col-lg-6 col-xl-4" }, [
                             _c("div", { staticClass: "card shadow mb-4" }, [
-                              _vm._m(1),
+                              _vm._m(0),
                               _vm._v(" "),
                               _c(
                                 "div",
@@ -85974,7 +85945,7 @@ var render = function () {
                       _vm.loadedChart2
                         ? _c("div", { staticClass: "col-md-6 col-xl-4 mb-4" }, [
                             _c("div", { staticClass: "card shadow mb-4" }, [
-                              _vm._m(2),
+                              _vm._m(1),
                               _vm._v(" "),
                               _c(
                                 "div",
@@ -85999,7 +85970,7 @@ var render = function () {
                     _c("div", { staticClass: "row" }, [
                       _c("div", { staticClass: "col-lg-6 mb-4" }, [
                         _c("div", { staticClass: "card shadow mb-4" }, [
-                          _vm._m(3),
+                          _vm._m(2),
                           _vm._v(" "),
                           _c(
                             "div",
@@ -86018,7 +85989,7 @@ var render = function () {
                       _vm._v(" "),
                       _c("div", { staticClass: "col-lg-6 mb-4" }, [
                         _c("div", { staticClass: "card shadow mb-4" }, [
-                          _vm._m(4),
+                          _vm._m(3),
                           _vm._v(" "),
                           _c(
                             "div",
@@ -86045,136 +86016,6 @@ var render = function () {
       ])
 }
 var staticRenderFns = [
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col-md-6 col-xl-3 mb-4" }, [
-        _c("div", { staticClass: "card shadow border-left-success py-2" }, [
-          _c("div", { staticClass: "card-body" }, [
-            _c("div", { staticClass: "row align-items-center no-gutters" }, [
-              _c("div", { staticClass: "col mr-2" }, [
-                _c(
-                  "div",
-                  {
-                    staticClass:
-                      "text-uppercase text-success font-weight-bold text-xs mb-1",
-                  },
-                  [_c("span", [_vm._v("Przychód miesięcznie:")])]
-                ),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  { staticClass: "text-dark font-weight-bold h5 mb-0" },
-                  [_c("span", [_vm._v("$215,000")])]
-                ),
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "col-auto" }, [
-                _c("i", {
-                  staticClass: "fas fa-dollar-sign fa-2x text-gray-300",
-                }),
-              ]),
-            ]),
-          ]),
-        ]),
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-md-6 col-xl-3 mb-4" }, [
-        _c("div", { staticClass: "card shadow border-left-info py-2" }, [
-          _c("div", { staticClass: "card-body" }, [
-            _c("div", { staticClass: "row align-items-center no-gutters" }, [
-              _c("div", { staticClass: "col mr-2" }, [
-                _c(
-                  "div",
-                  {
-                    staticClass:
-                      "text-uppercase text-info font-weight-bold text-xs mb-1",
-                  },
-                  [_c("span", [_vm._v("Tasks")])]
-                ),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  { staticClass: "row no-gutters align-items-center" },
-                  [
-                    _c("div", { staticClass: "col-auto" }, [
-                      _c(
-                        "div",
-                        {
-                          staticClass:
-                            "text-dark font-weight-bold h5 mb-0 mr-3",
-                        },
-                        [_c("span", [_vm._v("50%")])]
-                      ),
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "col" }, [
-                      _c("div", { staticClass: "progress progress-sm" }, [
-                        _c(
-                          "div",
-                          {
-                            staticClass: "progress-bar bg-info",
-                            staticStyle: { width: "50%" },
-                            attrs: {
-                              "aria-valuenow": "50",
-                              "aria-valuemin": "0",
-                              "aria-valuemax": "100",
-                            },
-                          },
-                          [
-                            _c("span", { staticClass: "sr-only" }, [
-                              _vm._v("50%"),
-                            ]),
-                          ]
-                        ),
-                      ]),
-                    ]),
-                  ]
-                ),
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "col-auto" }, [
-                _c("i", {
-                  staticClass: "fas fa-clipboard-list fa-2x text-gray-300",
-                }),
-              ]),
-            ]),
-          ]),
-        ]),
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-md-6 col-xl-3 mb-4" }, [
-        _c("div", { staticClass: "card shadow border-left-warning py-2" }, [
-          _c("div", { staticClass: "card-body" }, [
-            _c("div", { staticClass: "row align-items-center no-gutters" }, [
-              _c("div", { staticClass: "col mr-2" }, [
-                _c(
-                  "div",
-                  {
-                    staticClass:
-                      "text-uppercase text-warning font-weight-bold text-xs mb-1",
-                  },
-                  [_c("span", [_vm._v("Pending Requests")])]
-                ),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  { staticClass: "text-dark font-weight-bold h5 mb-0" },
-                  [_c("span", [_vm._v("18")])]
-                ),
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "col-auto" }, [
-                _c("i", { staticClass: "fas fa-comments fa-2x text-gray-300" }),
-              ]),
-            ]),
-          ]),
-        ]),
-      ]),
-    ])
-  },
   function () {
     var _vm = this
     var _h = _vm.$createElement
@@ -86410,7 +86251,7 @@ var render = function () {
                   ),
                 ]),
                 _vm._v(" "),
-                _c("div", { staticClass: "col-md-3 col-xl-4 mb-4" }, [
+                _c("div", { staticClass: "col-md-6 col-xl-8 mb-4" }, [
                   _c("div", { staticClass: "card shadow mb-4" }, [
                     _vm._m(1),
                     _vm._v(" "),
@@ -86448,7 +86289,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "card-header py-3" }, [
       _c("h6", { staticClass: "text-primary font-weight-bold m-0" }, [
-        _vm._v("Lista Wydatkwó"),
+        _vm._v("Lista Wydatków"),
       ]),
     ])
   },
@@ -86477,7 +86318,7 @@ var render = function () {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { attrs: { id: "wrapper" } },
+    { staticClass: "mt-5 pt-3", attrs: { id: "wrapper" } },
     [
       _c("navbar"),
       _vm._v(" "),
@@ -88494,7 +88335,21 @@ var render = function () {
               _vm._v(" "),
               _c("td", [_vm._v(_vm._s(payment.value))]),
               _vm._v(" "),
-              _c("td", [_vm._v(_vm._s(payment.paid))]),
+              _c("td", [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-primary mt-1",
+                    attrs: { type: "button" },
+                    on: {
+                      click: function ($event) {
+                        return _vm.statusPayment(payment.id)
+                      },
+                    },
+                  },
+                  [_vm._v("Zapłacone")]
+                ),
+              ]),
             ])
           }),
           0

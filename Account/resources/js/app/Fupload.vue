@@ -1,5 +1,5 @@
 <template>
-<div id="wrapper">
+<div id="wrapper" class="mt-5 pt-3">
     <navbar></navbar>
     <div class="d-flex flex-column " id="content-wrapper">
         <div id="content" class="mt-3">

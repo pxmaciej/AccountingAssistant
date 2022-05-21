@@ -16,7 +16,7 @@
               <td class="border border-warning">{{payment.deadline | dateParse('YYYY.MM.DD') | dateFormat('DD.MM.YYYY')}}</td>
               <td>{{payment.category}}</td>
               <td>{{payment.value}}</td>
-              <td>{{payment.paid}}</td>
+              <td><button class="btn btn-primary mt-1" type="button" @click="statusPayment(payment.id)" >Zapłacone</button></td>
          </tr>
 
 
@@ -54,8 +54,23 @@ export default {
             return payments.filter(function(payment) {
                 return payment.paid == false;
             })
+        },
+        reloadPayment(){
+            axios.get('api/payment/show/'+this.user,{ headers: {"Authorization" : `Bearer ${this.$store.state.token}`} })
+            .then( res => {
+                this.payments = res.data;
+                })
+            .catch(err => {
+                console.log(err)
+            })
+        },
+        statusPayment(id){
+               axios.delete('api/payment/destroy/'+id,{ headers: {"Authorization" : `Bearer ${this.$store.state.token}`} })
+                .then( res=>{
+                     console.log(res)});
+                     this.reloadPayment()
         }
-    },
+    }
 };
 </script>
 <style scoped>

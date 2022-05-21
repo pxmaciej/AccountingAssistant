@@ -16,10 +16,10 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-3 col-xl-4 mb-4">
+                        <div class="col-md-6 col-xl-8 mb-4">
                             <div class="card shadow mb-4">
                                 <div class="card-header py-3">
-                                    <h6 class="text-primary font-weight-bold m-0">Lista Wydatkwó</h6>
+                                    <h6 class="text-primary font-weight-bold m-0">Lista Wydatków</h6>
                                 </div>
                                 <div class="card-body">
                                     <listExpense :key="reload"></listExpense>
