@@ -14,7 +14,6 @@
                     <li class="nav-item"><a class="nav-link" href="/payment"><i class="fa fa-calendar-check-o"></i><span>Dodaj Płatność</span></a></li>
                     <li class="nav-item"><a class="nav-link" href="/F-upload"><i class="fa fa-cloud-upload"></i><span>Wyślij Pliki</span></a></li>
                     <li class="nav-item"><a class="nav-link" @click="logout"><i class="far fa-user-circle"></i><span>Wyloguj</span></a></li>
-                    <li class="nav-item"><a class="nav-link" href="register.html"><i class="fas fa-user-circle"></i><span>Register</span></a></li>
                 </ul>
                 <div class="text-center d-none d-md-inline">
                     <button class="btn rounded-circle border-0" @click="toggle" id="sidebarToggle" type="button"><i class="fa fa-angle-left" style="color:white"></i></button></div>

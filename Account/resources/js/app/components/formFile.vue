@@ -1,7 +1,12 @@
 <template>
 <div>
     <div class="alert alert-success" role="alert" v-if="success">Succes</div>
-    <div class="alert alert-danger" role="alert" v-if=" success = false">A simple danger alert—check it out!</div>
+    <p class="alert alert-danger" v-if="errors.length">
+            <b>Please correct the following error(s):</b>
+            <ul>
+                <li v-for="error in errors">{{ error }}</li>
+            </ul>
+        </p>
 <input type="file" @change="onFileSelected" name="file" multiple>
 <button type="button" class="btn btn-outline-primary" @click="onUpload">Wyślij</button>
 </div>
@@ -17,6 +22,7 @@ export default {
     data() {
         return {
             files : [],
+            errors: [],
             success : false,
         }
     },
@@ -28,16 +34,26 @@ export default {
 
         },
         onUpload(){
-            let fd = new FormData();
-            for(let i = 0; i < this.files.length; i++){
-                let file = this.files[i];
-                 fd.append('files['+ i +']', file);
-            }
-             fd.append('user', this.user)
-            axios.post('api/file/store',fd,{ headers: {"Authorization" : `Bearer ${this.$store.state.token}`,"Content-type": "multipart/form-data"} }).then(res=>{
-                this.success = res.data;
-            })
-        },
+            this.success= false;
+             this.errors.splice(0);
+                let fd = new FormData();
+                for(let i = 0; i < this.files.length; i++){
+                    let file = this.files[i];
+                    fd.append('files['+ i +']', file);
+                }
+                if(this.files.length > 0){
+                fd.append('user', this.user)
+                axios.post('api/file/store',fd,{ headers: {"Authorization" : `Bearer ${this.$store.state.token}`,"Content-type": "multipart/form-data"} })
+                .then(res=>{
+                    console.log(res)
+                    this.errors.splice(0);
+                    this.success = true;
+                })
+                }else{
+               this.errors.push('Nie wybrano plików');
+            }  
+
+        }
     }
 
 };
