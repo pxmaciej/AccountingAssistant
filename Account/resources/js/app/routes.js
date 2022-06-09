@@ -7,6 +7,8 @@ import Profile from './Profile';
 import Payment from './Payment';
 import Erning from './Erning';
 import Expense from './Expense';
+import Users from './Users';
+import SelectedUser from './SelectedUser';
 
 Vue.use(VueRouter);
 
@@ -40,5 +42,13 @@ export const routes = [
     {
         path : '/expense',
         component: Expense,
-    }
+    },
+    {
+        path : '/users',
+        component: Users,
+    },
+    {
+        path : '/selecteduser',
+        component: SelectedUser,
+    },
 ];

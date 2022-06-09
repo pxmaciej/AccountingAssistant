@@ -323,7 +323,7 @@ class AuthController extends Controller
      * @return \Illuminate\Http\JsonResponse
      */
     public function allUserProfile() {
-        $users = User::all()->except(Auth::id());
+        $users = User::all();
         return response()->json($users);
     }
     /**

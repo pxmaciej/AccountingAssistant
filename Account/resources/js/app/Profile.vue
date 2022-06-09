@@ -46,7 +46,7 @@
                                         <div class="card-body">
                                             <form>
                                                 <div v-if="success" class="alert alert-success" role="alert">
-                                                    Dodałeś Przychód!
+                                                    Zmieniłeś Dane!
                                                 </div>
                                                 <div class="form-row">
                                                     <div class="col">
@@ -84,13 +84,7 @@
                                                     <div class="col">
                                                         <div class="form-group">
                                                             <label for="last_name"><strong>Hasło</strong></label>
-                                                            <input class="form-control" type="text" id="last_name"   name="login" v-model="editeduser.password">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col">
-                                                        <div class="form-group">
-                                                            <label for="last_name"><strong>Role</strong></label>
-                                                            <input class="form-control" type="text" id="last_name" :placeholder='[[user.role]]'  name="login" v-model="editeduser.role">
+                                                            <input class="form-control" type="password" id="last_name"   name="login" v-model="editeduser.password">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -170,7 +164,7 @@ export default {
         edit(){
             this.success = false;
             this.errors.splice(0);
-            if(this.editeduser.name&&this.editeduser.surname&&this.editeduser.country&&this.editeduser.adress&&this.editeduser.city&&this.editeduser.nip&&this.editeduser.company&&this.editeduser.login&&this.editeduser.password&&this.editeduser.role){
+            if(this.editeduser.name&&this.editeduser.surname&&this.editeduser.country&&this.editeduser.adress&&this.editeduser.city&&this.editeduser.nip&&this.editeduser.company&&this.editeduser.login&&this.editeduser.password&&this.role){
                  axios.patch('api/auth/update',this.editeduser,{ headers: {"Authorization" : `Bearer ${this.$store.state.token}`} }).then(res => {
                     this.errors.splice(0);
                     this.getProfile();
@@ -204,9 +198,6 @@ export default {
             }
             if(!this.editeduser.password){
                 this.errors.push('Hasło wymagane');
-            }
-            if(!this.editeduser.role){
-                this.errors.push('Role wymagane');
             }
 
         },

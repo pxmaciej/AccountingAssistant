@@ -13,6 +13,7 @@
                     <li class="nav-item"><a class="nav-link" href="/expense"><i class="fa fa-calculator"></i><span>Dodaj Wydatek</span></a></li>
                     <li class="nav-item"><a class="nav-link" href="/payment"><i class="fa fa-calendar-check-o"></i><span>Dodaj Płatność</span></a></li>
                     <li class="nav-item"><a class="nav-link" href="/F-upload"><i class="fa fa-cloud-upload"></i><span>Wyślij Pliki</span></a></li>
+                    <li  v-if="role==admin" class="nav-item"><a class="nav-link" href="/users"><i class="fa fa-cloud-upload"></i><span>Admin Panel</span></a></li>
                     <li class="nav-item"><a class="nav-link" @click="logout"><i class="far fa-user-circle"></i><span>Wyloguj</span></a></li>
                 </ul>
                 <div class="text-center d-none d-md-inline">
@@ -26,14 +27,25 @@ export default {
     name: "Navbar",
     data() {
       return{
-          user:[]
+          user:[],
+          role:localStorage.getItem('role')||'',
+          admin:'admin'
       };
     },
   async  mounted(){
-      await axios.post('api/auth/profile', { token : this.$store.state.token} )
+      if(this.$store.state.token !== ''){
+           await axios.post('api/auth/checkToken', { token : this.$store.state.token} )
             .then( res => {
-                this.user = res.data;
+                if(res.data.success){
+                 
+                }
             })
+            .catch(err => {
+                this.$store.commit('clearToken');
+                this.$router.push('/login');
+            })
+        }
+      
     },
     methods: {
         logout(){

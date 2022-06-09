@@ -12,7 +12,7 @@
                                 <h6 class="text-primary font-weight-bold m-0">Dodaj Przychód</h6>
                             </div>
                             <div class="card-body">
-                                <formErning v-if="user.id" v-bind:user="user.id" v-on:reload="change"></formErning>
+                                <formErning v-if="user.id" v-bind:user="user.id" v-on:reload="reload++"></formErning>
                             </div>
                         </div>
                     </div>
@@ -22,7 +22,7 @@
                                     <h6 class="text-primary font-weight-bold m-0">Lista Twoich Przychodów</h6>
                           </div>
                         <div class="card-body">
-                            <listErning :key="reload"></listErning>
+                            <listErning :key="reload" v-bind:user="user.id"></listErning>
                         </div>
                     </div>
                     </div>

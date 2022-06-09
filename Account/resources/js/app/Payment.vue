@@ -12,7 +12,7 @@
                                 <h6 class="text-primary font-weight-bold m-0">Dodaj Płatności</h6>
                             </div>
                             <div class="card-body">
-                                <formPayment v-if="user.id" v-bind:user="user.id" v-on:reload="change"></formPayment>
+                                <formPayment v-if="user.id" v-bind:user="user.id" v-on:reload="reload++"></formPayment>
                             </div>
                         </div>
                     </div>
@@ -22,7 +22,7 @@
                                 <h6 class="text-primary font-weight-bold m-0">Lista Płatności</h6>
                             </div>
                             <div class="card-body">
-                                <listPayment :key="reload"></listPayment>
+                                <listPayment :key="reload" v-bind:user="user.id"></listPayment>
                             </div>
                         </div>
                     </div>
@@ -52,11 +52,11 @@ export default {
             user:{
              id: localStorage.getItem('id')||'',
             },
-            reload: 0
+            reload: 0,
         }
       },
   async mounted(){
-        if(this.$store.state.token !== ''){
+          if(this.$store.state.token !== ''){
            await axios.post('api/auth/checkToken', { token : this.$store.state.token} )
             .then( res => {
                 if(res.data.success){
@@ -68,12 +68,7 @@ export default {
                 this.$store.commit('clearToken');
                 this.$router.push('/login');
             })
-        }else{
-            this.$router.push('/login');
         }
-
-
     }
-
 };
 </script>

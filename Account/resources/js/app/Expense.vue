@@ -12,7 +12,7 @@
                                     <h6 class="text-primary font-weight-bold m-0">Dodaj Wydatek</h6>
                                 </div>
                                 <div class="card-body">
-                                    <formExpense v-if="user.id" v-bind:user="user.id"  v-on:reload="change"></formExpense>
+                                    <formExpense v-if="user.id" v-bind:user="user.id" v-on:reload="reload++"></formExpense>
                                 </div>
                             </div>
                         </div>
@@ -22,7 +22,7 @@
                                     <h6 class="text-primary font-weight-bold m-0">Lista Wydatków</h6>
                                 </div>
                                 <div class="card-body">
-                                    <listExpense :key="reload"></listExpense>
+                                    <listExpense :key="reload" v-bind:user="user.id"></listExpense>
                                 </div>
                             </div>
                         </div>

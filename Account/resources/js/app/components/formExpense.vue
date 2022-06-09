@@ -37,7 +37,7 @@ export default {
         return{
             errors:[],
             expense:{
-                user_id: localStorage.getItem('id')||'',
+                user_id: this.user,
                 name:'',
                 value:'',
                 category:'',

@@ -38,11 +38,13 @@ import axios from 'axios';
 
 export default {
     name: "listPayment",
-    props: ['reload'],
+    props: {
+        user: Number,
+        reload: Boolean
+        },
     data(){
         return{
             payments: [],
-            user: localStorage.getItem('id')||'',
             currentPage: 1,
             totalPages: 0
         }

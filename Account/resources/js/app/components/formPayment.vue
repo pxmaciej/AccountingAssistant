@@ -39,7 +39,7 @@ export default {
         return{
             errors: [],
             payment :{
-                user_id : localStorage.getItem('id')||'',
+                user_id : this.user,
                 name : '',
                 category: '',
                 value: '',
@@ -59,7 +59,7 @@ export default {
                 .then( res=>{
                      console.log(res)
                      this.errors.splice(0);
-                     this.$emit('reload', 'true');
+                     this.$emit('reload','true');
                  })
             }
             if(!this.payment.name){
