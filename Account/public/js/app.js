@@ -5459,7 +5459,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   data: function data() {
     return {
-      loading: false,
+      loading: true,
       loadedChart: false,
       loadedChart2: false,
       reload: 0,
@@ -5572,19 +5572,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee2);
       }))();
     },
-    logout: function logout() {
-      var _this3 = this;
-
-      axios__WEBPACK_IMPORTED_MODULE_1___default().post('api/auth/logout', {
-        token: this.$store.state.token
-      }).then(function (res) {
-        _this3.$store.commit('clearToken');
-
-        _this3.$router.push('/login');
-      });
-    },
     expData: function expData() {
-      var _this4 = this;
+      var _this3 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3() {
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
@@ -5592,23 +5581,23 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context3.prev = _context3.next) {
               case 0:
                 _context3.next = 2;
-                return axios__WEBPACK_IMPORTED_MODULE_1___default().get('api/expense/show/' + _this4.user.id, {
-                  token: _this4.$store.state.token
+                return axios__WEBPACK_IMPORTED_MODULE_1___default().get('api/expense/show/' + _this3.user.id, {
+                  token: _this3.$store.state.token
                 }).then(function (res) {
-                  _this4.data2 = res.data;
+                  _this3.data2 = res.data;
                 });
 
               case 2:
-                _this4.data2.forEach(function (b) {
+                _this3.data2.forEach(function (b) {
                   var EXDATE = b.date;
                   var EXVALUE = b.value;
 
-                  _this4.expenseChart.push({
+                  _this3.expenseChart.push({
                     date: EXDATE,
                     total: EXVALUE
                   });
 
-                  _this4.loadedChart2 = true;
+                  _this3.loadedChart2 = true;
                 });
 
               case 3:
@@ -5620,7 +5609,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }))();
     },
     incomData: function incomData() {
-      var _this5 = this;
+      var _this4 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee4() {
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee4$(_context4) {
@@ -5628,23 +5617,23 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context4.prev = _context4.next) {
               case 0:
                 _context4.next = 2;
-                return axios__WEBPACK_IMPORTED_MODULE_1___default().get('api/income/show/' + _this5.user.id, {
-                  token: _this5.$store.state.token
+                return axios__WEBPACK_IMPORTED_MODULE_1___default().get('api/income/show/' + _this4.user.id, {
+                  token: _this4.$store.state.token
                 }).then(function (res) {
-                  _this5.data = res.data;
+                  _this4.data = res.data;
                 });
 
               case 2:
-                _this5.data.forEach(function (d) {
+                _this4.data.forEach(function (d) {
                   var date = d.date;
                   var value = d.value;
 
-                  _this5.incomeChart.push({
+                  _this4.incomeChart.push({
                     date: date,
                     total: value
                   });
 
-                  _this5.loadedChart = true;
+                  _this4.loadedChart = true;
                 });
 
               case 3:
@@ -7755,12 +7744,21 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "listusers",
   data: function data() {
     return {
       users: [],
+      filters: {
+        nip: {
+          value: '',
+          keys: ['nip']
+        }
+      },
       currentPage: 1,
       totalPages: 0
     };
@@ -7858,7 +7856,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     return {
       user: [],
       role: localStorage.getItem('role') || '',
-      admin: 'admin'
+      admin: 'admin',
+      loading: true
     };
   },
   mounted: function mounted() {
@@ -7870,7 +7869,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           switch (_context.prev = _context.next) {
             case 0:
               if (!(_this.$store.state.token !== '')) {
-                _context.next = 3;
+                _context.next = 5;
                 break;
               }
 
@@ -7886,6 +7885,15 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               });
 
             case 3:
+              _context.next = 7;
+              break;
+
+            case 5:
+              _this.loading = false;
+
+              _this.$router.push('/login');
+
+            case 7:
             case "end":
               return _context.stop();
           }
@@ -7904,6 +7912,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
         _this2.$router.push('/login');
 
+        localStorage.clear();
         _this2.load = false;
       });
     },
@@ -89788,6 +89797,29 @@ var render = function () {
       },
     },
     [
+      _c("label", [_vm._v("Filtruj po NIP:")]),
+      _vm._v(" "),
+      _c("input", {
+        directives: [
+          {
+            name: "model",
+            rawName: "v-model",
+            value: _vm.filters.nip.value,
+            expression: "filters.nip.value",
+          },
+        ],
+        staticClass: "form-control",
+        domProps: { value: _vm.filters.nip.value },
+        on: {
+          input: function ($event) {
+            if ($event.target.composing) {
+              return
+            }
+            _vm.$set(_vm.filters.nip, "value", $event.target.value)
+          },
+        },
+      }),
+      _vm._v(" "),
       _c(
         "v-table",
         {
@@ -89796,6 +89828,7 @@ var render = function () {
             data: _vm.users,
             currentPage: _vm.currentPage,
             pageSize: 25,
+            filters: _vm.filters,
             id: "dataTable",
           },
           on: {

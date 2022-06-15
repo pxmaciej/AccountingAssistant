@@ -1,9 +1,12 @@
 <template>
 <div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
+    <label>Filtruj po NIP:</label>
+      <input class="form-control" v-model="filters.nip.value"/>
 <v-table :data="users"
         :currentPage.sync="currentPage"
         :pageSize="25"
         @totalPagesChanged="totalPages = $event"
+        :filters="filters"
         class="table" id="dataTable">
      <thead slot="head">
          <tr>
@@ -42,6 +45,9 @@ export default {
     data(){
         return{
             users: [],
+            filters: {
+                nip: { value: '', keys: ['nip'] }
+            },
             currentPage: 1,
             totalPages: 0
         }

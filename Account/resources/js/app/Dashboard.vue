@@ -79,7 +79,7 @@ export default {
     },
     data(){
         return{
-            loading :false,
+            loading :true,
             loadedChart: false,
             loadedChart2: false,
             reload: 0,
@@ -143,13 +143,6 @@ export default {
                 this.reload += 1;
 
             },
-        logout(){
-         axios.post('api/auth/logout', { token : this.$store.state.token })
-         .then( res => {
-             this.$store.commit('clearToken');
-             this.$router.push('/login');
-         })
-        },
         async expData(){
         await axios.get('api/expense/show/'+this.user.id, { token : this.$store.state.token}).then(res => {
             this.data2 = res.data;

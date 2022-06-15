@@ -19,7 +19,7 @@
                 <div class="text-center d-none d-md-inline">
                     <button class="btn rounded-circle border-0" @click="toggle" id="sidebarToggle" type="button"><i class="fa fa-angle-left" style="color:white"></i></button></div>
                 </div>
-        </nav>
+        </nav>   
 </template>
 <script>
 
@@ -29,7 +29,8 @@ export default {
       return{
           user:[],
           role:localStorage.getItem('role')||'',
-          admin:'admin'
+          admin:'admin',
+          loading: true,
       };
     },
   async  mounted(){
@@ -37,22 +38,26 @@ export default {
            await axios.post('api/auth/checkToken', { token : this.$store.state.token} )
             .then( res => {
                 if(res.data.success){
-                 
+        
                 }
             })
             .catch(err => {
                 this.$store.commit('clearToken');
                 this.$router.push('/login');
             })
+        }else{
+            this.loading = false;
+            this.$router.push('/login');
         }
-      
     },
+
     methods: {
         logout(){
          axios.post('api/auth/logout', { token : this.$store.state.token })
          .then( res => {
              this.$store.commit('clearToken');
              this.$router.push('/login');
+            localStorage.clear();
              this.load = false;
          })
         },
