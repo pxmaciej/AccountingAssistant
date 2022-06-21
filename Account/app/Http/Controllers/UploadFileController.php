@@ -151,22 +151,25 @@ class UploadFileController extends Controller
      */
     public function store(Request $request)
     {
-     //   $rules = ['file' => 'required|mimes:jpeg,png,jpg,gif,svg'];
-      //  $validator = Validator::make($request->all(), $rules);
+       $rules = ['files[*]' => 'required|mimes:jpeg,png,jpg,gif,svg,zip,pdf'];
+       $validator = Validator::make($request->all(), $rules);
+       if ($validator->fails()) {
+        return response()->json(['error' => $validator->messages()],401);
+        }else{
+            foreach ($request->file('files') as $file){
+                $filename = $file->getClientOriginalName();
+                $filename = time().'.'. $filename;
+                $fileuser = $request->user;
+                $file->storeAs('public', $filename);
+                UploadFile::create([
+                   'user_id' => $fileuser,
+                   'file' => $filename,
+               ]);
 
-                foreach ($request->file('files') as $file){
-                    $filename = $file->getClientOriginalName();
-                    $filename = time().'.'. $filename;
-                    $fileuser = $request->user;
-                    $file->storeAs('public', $filename);
-                    UploadFile::create([
-                       'user_id' => $fileuser,
-                       'file' => $filename,
-                   ]);
-
-                }
-                $status = true;
-                return $status;
+            }
+            $status = true;
+            return $status;
+        }
     }
 
     /**

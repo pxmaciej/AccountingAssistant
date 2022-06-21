@@ -48,11 +48,16 @@ export default {
                     console.log(res)
                     this.errors.splice(0);
                     this.success = true;
+                    this.reset();
                 })
                 }else{
                this.errors.push('Nie wybrano plików');
-            }  
-
+            }
+        },
+        reset(){
+            for(let i = 0; i < this.files.length; i++){
+                this.files[i] = null
+            }
         }
     }
 

@@ -9,6 +9,7 @@ import Erning from './Erning';
 import Expense from './Expense';
 import Users from './Users';
 import SelectedUser from './SelectedUser';
+import Register from './Register';
 
 Vue.use(VueRouter);
 
@@ -51,4 +52,8 @@ export const routes = [
         path : '/selecteduser',
         component: SelectedUser,
     },
+    {
+        path : '/register',
+        component: Register,
+    }
 ];

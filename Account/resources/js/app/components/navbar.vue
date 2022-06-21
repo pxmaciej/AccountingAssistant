@@ -13,7 +13,8 @@
                     <li class="nav-item"><a class="nav-link" href="/expense"><i class="fa fa-calculator"></i><span>Dodaj Wydatek</span></a></li>
                     <li class="nav-item"><a class="nav-link" href="/payment"><i class="fa fa-calendar-check-o"></i><span>Dodaj Płatność</span></a></li>
                     <li class="nav-item"><a class="nav-link" href="/F-upload"><i class="fa fa-cloud-upload"></i><span>Wyślij Pliki</span></a></li>
-                    <li  v-if="role==admin" class="nav-item"><a class="nav-link" href="/users"><i class="fa fa-cloud-upload"></i><span>Admin Panel</span></a></li>
+                    <li  v-if="role==admin" class="nav-item"><a class="nav-link" href="/users"><i class="fa fa-users"></i><span>Admin Panel</span></a></li>
+                    <li  v-if="role==admin" class="nav-item"><a class="nav-link" href="/register"><i class="fa fa-users"></i><span>Rejestracja</span></a></li>
                     <li class="nav-item"><a class="nav-link" @click="logout"><i class="far fa-user-circle"></i><span>Wyloguj</span></a></li>
                 </ul>
                 <div class="text-center d-none d-md-inline">
