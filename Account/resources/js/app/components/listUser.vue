@@ -24,7 +24,7 @@
               <td>{{users.nip}}</td>
               <td>{{users.role}}</td>
               <td>{{users.company}}</td>
-              <td><button class="btn btn-danger mr-1" type="button" @click="deleteUser(users.id)" >Usuń</button><a href="/selecteduser"><button class="btn btn-primary" type="button" @click="selectedUser(users.id)">Wybierz</button></a></td>
+              <td><button class="btn btn-danger mr-1" type="button" @click="deleteUser(users.id)" >Usuń</button><a href="/selecteduser"><button class="btn btn-primary" type="button" @click="selectedUser(users.id)">Wybierz</button></a><a href="/reset"><button class="btn btn-primary" type="button" @click="selectedUser(users.id)">Profil</button></a></td>
          </tr>
      </tbody>
 </v-table>

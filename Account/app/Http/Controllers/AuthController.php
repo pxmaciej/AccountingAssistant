@@ -316,7 +316,13 @@ class AuthController extends Controller
     public function userProfile() {
         return response()->json(auth()->user());
     }
-
+    /**
+    * Get the selected User.
+    */
+    public function selectedUser($user_id) {
+        $user = User::find($user_id);
+        return $user;
+    }
     /**
      * Get the all user profile.
      *

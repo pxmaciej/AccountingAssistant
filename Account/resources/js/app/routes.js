@@ -10,6 +10,7 @@ import Expense from './Expense';
 import Users from './Users';
 import SelectedUser from './SelectedUser';
 import Register from './Register';
+import Reset from './Reset';
 
 Vue.use(VueRouter);
 
@@ -55,5 +56,9 @@ export const routes = [
     {
         path : '/register',
         component: Register,
+    },
+    {
+        path : '/reset',
+        component: Reset,
     }
 ];
