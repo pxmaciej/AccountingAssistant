@@ -7466,29 +7466,28 @@ __webpack_require__.r(__webpack_exports__);
         fd.append('files[' + i + ']', file);
       }
 
-      if (this.files.length > 0) {
-        fd.append('user', this.user);
-        axios__WEBPACK_IMPORTED_MODULE_0___default().post('api/file/store', fd, {
-          headers: {
-            "Authorization": "Bearer ".concat(this.$store.state.token),
-            "Content-type": "multipart/form-data"
-          }
-        }).then(function (res) {
-          console.log(res);
+      fd.append('user', this.user);
+      axios__WEBPACK_IMPORTED_MODULE_0___default().post('api/file/store', fd, {
+        headers: {
+          "Authorization": "Bearer ".concat(this.$store.state.token),
+          "Content-type": "multipart/form-data"
+        }
+      }).then(function (res) {
+        console.log(res);
 
-          _this.errors.splice(0);
+        _this.errors.splice(0);
 
-          _this.success = true;
+        _this.success = true;
 
-          _this.reset();
-        });
-      } else {
-        this.errors.push('Nie wybrano plików');
-      }
+        _this.reset();
+      })["catch"](function (err) {
+        alert(err.response.data.message);
+      });
     },
     reset: function reset() {
       for (var i = 0; i < this.files.length; i++) {
         this.files[i] = null;
+        document.getElementById('file').value = "";
       }
     }
   }
@@ -90505,7 +90504,7 @@ var render = function () {
       : _vm._e(),
     _vm._v(" "),
     _c("input", {
-      attrs: { type: "file", name: "file", multiple: "" },
+      attrs: { type: "file", id: "file", name: "file", multiple: "" },
       on: { change: _vm.onFileSelected },
     }),
     _vm._v(" "),

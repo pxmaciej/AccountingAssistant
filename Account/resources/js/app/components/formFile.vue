@@ -7,7 +7,7 @@
                 <li v-for="error in errors">{{ error }}</li>
             </ul>
         </p>
-<input type="file" @change="onFileSelected" name="file" multiple>
+<input type="file" @change="onFileSelected" id="file" name="file" multiple>
 <button type="button" class="btn btn-outline-success" @click="onUpload">Wyślij</button>
 </div>
 
@@ -41,7 +41,7 @@ export default {
                     let file = this.files[i];
                     fd.append('files['+ i +']', file);
                 }
-                if(this.files.length > 0){
+
                 fd.append('user', this.user)
                 axios.post('api/file/store',fd,{ headers: {"Authorization" : `Bearer ${this.$store.state.token}`,"Content-type": "multipart/form-data"} })
                 .then(res=>{
@@ -49,17 +49,17 @@ export default {
                     this.errors.splice(0);
                     this.success = true;
                     this.reset();
+                }).catch(err => {
+                    alert(err.response.data.message);
                 })
-                }else{
-               this.errors.push('Nie wybrano plików');
-            }
         },
         reset(){
             for(let i = 0; i < this.files.length; i++){
                 this.files[i] = null
+                document.getElementById('file').value = "";
             }
         }
     }
 
-};
+}
 </script>
