@@ -8,56 +8,6 @@
             <div id="content" class="mt-5">
                 <div class="container-fluid">
             <div class="row">
-                <div class="col-md-6 col-xl-3 mb-4">
-                    <div class="card shadow border-left-success py-2">
-                        <div class="card-body">
-                            <div class="row align-items-center no-gutters">
-                                <div class="col mr-2">
-                                    <div class="text-uppercase text-success font-weight-bold text-xs mb-1"><span>Przychód miesięcznie:</span></div>
-                                    <div class="text-dark font-weight-bold h5 mb-0"><span>$215,000</span></div>
-                                </div>
-                                <div class="col-auto"><i class="fas fa-dollar-sign fa-2x text-gray-300"></i></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-xl-3 mb-4">
-                    <div class="card shadow border-left-info py-2">
-                        <div class="card-body">
-                            <div class="row align-items-center no-gutters">
-                                <div class="col mr-2">
-                                    <div class="text-uppercase text-info font-weight-bold text-xs mb-1"><span>Tasks</span></div>
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col-auto">
-                                            <div class="text-dark font-weight-bold h5 mb-0 mr-3"><span>50%</span></div>
-                                        </div>
-                                        <div class="col">
-                                            <div class="progress progress-sm">
-                                                <div class="progress-bar bg-info" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width: 50%;"><span class="sr-only">50%</span></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                    <div class="col-auto"><i class="fas fa-clipboard-list fa-2x text-gray-300"></i></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-xl-3 mb-4">
-                    <div class="card shadow border-left-warning py-2">
-                        <div class="card-body">
-                            <div class="row align-items-center no-gutters">
-                                <div class="col mr-2">
-                                    <div class="text-uppercase text-warning font-weight-bold text-xs mb-1"><span>Pending Requests</span></div>
-                                    <div class="text-dark font-weight-bold h5 mb-0"><span>18</span></div>
-                                </div>
-                                <div class="col-auto"><i class="fas fa-comments fa-2x text-gray-300"></i></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
                 <div v-if="loadedChart" class="col-lg-6 col-xl-4">
                     <div class="card shadow mb-4">
                           <div class="card-header d-flex justify-content-between align-items-center">
@@ -129,7 +79,7 @@ export default {
     },
     data(){
         return{
-            loading :false,
+            loading :true,
             loadedChart: false,
             loadedChart2: false,
             reload: 0,
@@ -193,13 +143,6 @@ export default {
                 this.reload += 1;
 
             },
-        logout(){
-         axios.post('api/auth/logout', { token : this.$store.state.token })
-         .then( res => {
-             this.$store.commit('clearToken');
-             this.$router.push('/login');
-         })
-        },
         async expData(){
         await axios.get('api/expense/show/'+this.user.id, { token : this.$store.state.token}).then(res => {
             this.data2 = res.data;

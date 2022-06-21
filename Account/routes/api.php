@@ -28,6 +28,7 @@ Route::group([
     Route::patch('update', [App\Http\Controllers\AuthController::class, 'update']);
     Route::post('logout', [App\Http\Controllers\AuthController::class, 'logout']);
     Route::post('refresh', [App\Http\Controllers\AuthController::class, 'refresh']);
+    Route::post('selectedUser/{user_id}',[App\Http\Controllers\AuthController::class, 'selectedUser']);
     Route::post('profile', [App\Http\Controllers\AuthController::class, 'userProfile']);
     Route::delete('destroy/{user_id}', [App\Http\Controllers\AuthController::class, 'destroy']);
 });
@@ -79,6 +80,6 @@ Route::group([
     Route::get('index', [App\Http\Controllers\PaymentController::class, 'index'])->middleware('roles:admin');
     Route::post('store', [App\Http\Controllers\PaymentController::class, 'store']);
     Route::get('show/{user_id}', [App\Http\Controllers\PaymentController::class, 'show']);
-    Route::patch('update', [App\Http\Controllers\PaymentController::class, 'update'])->middleware('roles:admin');
-    Route::delete('destroy/{payment_id}', [App\Http\Controllers\PaymentController::class, 'destroy'])->middleware('roles:admin');
+    Route::patch('update', [App\Http\Controllers\PaymentController::class, 'update']);
+    Route::delete('destroy/{payment_id}', [App\Http\Controllers\PaymentController::class, 'destroy']);
 });

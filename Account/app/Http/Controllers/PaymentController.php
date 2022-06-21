@@ -209,9 +209,9 @@ class PaymentController extends Controller
      * @param  \App\Models\Payment  $payment
      * @return \Illuminate\Http\Response
      */
-    public function edit(Payment $payment)
+    public function edit(Payment $request)
     {
-        //
+
     }
 
     /**
@@ -223,7 +223,7 @@ class PaymentController extends Controller
      */
     public function update(Request $request, Payment $payment)
     {
-        $edited = Payment::find($request->user_id);
+        $edited = Payment::find($request->id);
         $edited->name = $request->name;
         $edited->category = $request->category;
         $edited->value = $request->value;
@@ -239,9 +239,9 @@ class PaymentController extends Controller
      * @param  \App\Models\Payment  $payment
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Payment $payment)
+    public function destroy($payment_id)
     {
-        $destroy = Payment::find($payment);
+        $destroy = Payment::find($payment_id);
         $destroy->delete();
         return response()->json(['200' => 'success']);
     }

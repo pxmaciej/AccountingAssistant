@@ -1,23 +1,31 @@
 <template>
-<div>
- <table class="table table-info">
-     <thead>
+<div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
+ <v-table :data="files"
+        :currentPage.sync="currentPage"
+        :pageSize="5"
+        @totalPagesChanged="totalPages = $event"
+        class="table" id="dataTable">>
+     <thead slot="head">
          <tr>
              <th scope="col">Nazwa</th>
              <th scope="col">Data przesłania</th>
          </tr>
      </thead>
-     <tbody>
-         <tr v-for="file of files" :key="file.id">
+     <tbody slot="body" slot-scope="{displayData}">
+         <tr v-for="file of displayData" :key="file.id">
               <td><a :href="'../storage/'+file.file" download>{{file.file}}</a></td>
               <td>{{file.created_at | dateParse('YYYY.MM.DD') | dateFormat('DD.MM.YYYY')}}</td>
-              <td><button type="button" class="btn btn-primary" @click="deleteFile(file.id)">Usuń</button></td>
+              <td><button type="button" class="btn btn-danger" @click="deleteFile(file.id)">Usuń</button></td>
          </tr>
 
 
      </tbody>
 
- </table>
+ </v-table>
+ <smart-pagination
+        :currentPage.sync="currentPage"
+        :totalPages="totalPages"
+      />
 </div>
 
 
@@ -30,7 +38,9 @@ export default {
     props: ['user'],
     data() {
         return{
-            files : []
+            files : [],
+            currentPage: 1,
+            totalPages: 0
         }
     },
    mounted(){

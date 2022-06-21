@@ -10,6 +10,7 @@ export const store = new Vuex.Store( {
         user: localStorage.getItem('id')||'',
         role: localStorage.getItem('role')||'',
         userdata: localStorage.getItem('user')||[],
+        selected: localStorage.getItem('selected')||'',
     },
     mutations : {
         setToken (state,token){
@@ -31,6 +32,10 @@ export const store = new Vuex.Store( {
         setUserData (state,userdata){
             localStorage.setItem('user',JSON.stringify(userdata));
             state.userdata = userdata;
+        },
+        setSelected (state,selected){
+            localStorage.setItem('selected',selected );
+            state.selected = selected;
         }
     }
 })

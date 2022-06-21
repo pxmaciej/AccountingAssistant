@@ -12,7 +12,7 @@
                                 <h6 class="text-primary font-weight-bold m-0">Dodaj Płatności</h6>
                             </div>
                             <div class="card-body">
-                                <formPayment v-if="user.id" v-bind:user="user.id" v-on:reload="change"></formPayment>
+                                <formPayment v-if="user.id" v-bind:user="user.id" v-on:reload="reload++"></formPayment>
                             </div>
                         </div>
                     </div>
@@ -22,7 +22,7 @@
                                 <h6 class="text-primary font-weight-bold m-0">Lista Płatności</h6>
                             </div>
                             <div class="card-body">
-                                <listPayment :key="reload"></listPayment>
+                                <listPayment :key="reload" v-bind:user="user.id"></listPayment>
                             </div>
                         </div>
                     </div>
@@ -52,14 +52,10 @@ export default {
             user:{
              id: localStorage.getItem('id')||'',
             },
-            reload: 0
+            reload: 0,
         }
       },
-    methods:{
-        change(reload){
-            this.reload += 1;
-        }
+  async mounted(){
     }
-
 };
 </script>
