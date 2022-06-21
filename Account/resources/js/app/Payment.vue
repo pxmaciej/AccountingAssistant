@@ -56,19 +56,6 @@ export default {
         }
       },
   async mounted(){
-          if(this.$store.state.token !== ''){
-           await axios.post('api/auth/checkToken', { token : this.$store.state.token} )
-            .then( res => {
-                if(res.data.success){
-                    this.loading = false;
-                }
-            })
-            .catch(err => {
-                this.loading = false;
-                this.$store.commit('clearToken');
-                this.$router.push('/login');
-            })
-        }
     }
 };
 </script>

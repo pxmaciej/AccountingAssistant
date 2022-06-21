@@ -15,7 +15,7 @@
          <tr v-for="file of displayData" :key="file.id">
               <td><a :href="'../storage/'+file.file" download>{{file.file}}</a></td>
               <td>{{file.created_at | dateParse('YYYY.MM.DD') | dateFormat('DD.MM.YYYY')}}</td>
-              <td><button type="button" class="btn btn-primary" @click="deleteFile(file.id)">Usuń</button></td>
+              <td><button type="button" class="btn btn-danger" @click="deleteFile(file.id)">Usuń</button></td>
          </tr>
 
 

@@ -8,7 +8,7 @@
      <thead slot="head">
          <tr>
              <th scope="col">Nazwa Płatności</th>
-             <th scope="col">Termin Płatności</th>
+             <th scope="col" class="bg-warning">Termin Płatności</th>
              <th scope="col">Kategoria</th>
              <th scope="col">Wartość</th>
              <th scope="col">Zapłacono</th>
@@ -17,10 +17,10 @@
      <tbody slot="body" slot-scope="{displayData}">
          <tr v-for="payment in displayData"  :key="payment.id">
               <td>{{payment.name}}</td>
-              <td class="border border-warning">{{payment.deadline | dateParse('YYYY.MM.DD') | dateFormat('DD.MM.YYYY')}}</td>
+              <td class="border bg-warning">{{payment.deadline | dateParse('YYYY.MM.DD') | dateFormat('DD.MM.YYYY')}}</td>
               <td>{{payment.category}}</td>
               <td>{{payment.value}}</td>
-              <td><button class="btn btn-primary mt-1" type="button" @click="statusPayment(payment.id)" >Zapłacone</button></td>
+              <td><button class="btn btn-danger mt-1" type="button" @click="statusPayment(payment.id)" >Zapłacone</button></td>
          </tr>
      </tbody>
 </v-table>

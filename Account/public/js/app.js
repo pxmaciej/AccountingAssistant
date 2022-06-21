@@ -5727,41 +5727,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     };
   },
   mounted: function mounted() {
-    var _this = this;
-
     return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              if (!(_this.$store.state.token !== '')) {
-                _context.next = 5;
-                break;
-              }
-
-              _context.next = 3;
-              return axios.post('api/auth/checkToken', {
-                token: _this.$store.state.token
-              }).then(function (res) {
-                if (res.data.success) {
-                  _this.loading = false;
-                }
-              })["catch"](function (err) {
-                _this.loading = false;
-
-                _this.$store.commit('clearToken');
-
-                _this.$router.push('/login');
-              });
-
-            case 3:
-              _context.next = 6;
-              break;
-
-            case 5:
-              _this.$router.push('/login');
-
-            case 6:
             case "end":
               return _context.stop();
           }
@@ -5851,41 +5821,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     };
   },
   mounted: function mounted() {
-    var _this = this;
-
     return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              if (!(_this.$store.state.token !== '')) {
-                _context.next = 5;
-                break;
-              }
-
-              _context.next = 3;
-              return axios.post('api/auth/checkToken', {
-                token: _this.$store.state.token
-              }).then(function (res) {
-                if (res.data.success) {
-                  _this.loading = false;
-                }
-              })["catch"](function (err) {
-                _this.loading = false;
-
-                _this.$store.commit('clearToken');
-
-                _this.$router.push('/login');
-              });
-
-            case 3:
-              _context.next = 6;
-              break;
-
-            case 5:
-              _this.$router.push('/login');
-
-            case 6:
             case "end":
               return _context.stop();
           }
@@ -5956,41 +5896,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     };
   },
   mounted: function mounted() {
-    var _this = this;
-
     return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              if (!(_this.$store.state.token !== '')) {
-                _context.next = 5;
-                break;
-              }
-
-              _context.next = 3;
-              return axios.post('api/auth/checkToken', {
-                token: _this.$store.state.token
-              }).then(function (res) {
-                if (res.data.success) {
-                  _this.loading = false;
-                }
-              })["catch"](function (err) {
-                _this.loading = false;
-
-                _this.$store.commit('clearToken');
-
-                _this.$router.push('/login');
-              });
-
-            case 3:
-              _context.next = 6;
-              break;
-
-            case 5:
-              _this.$router.push('/login');
-
-            case 6:
             case "end":
               return _context.stop();
           }
@@ -6183,34 +6093,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     };
   },
   mounted: function mounted() {
-    var _this = this;
-
     return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              if (!(_this.$store.state.token !== '')) {
-                _context.next = 3;
-                break;
-              }
-
-              _context.next = 3;
-              return axios.post('api/auth/checkToken', {
-                token: _this.$store.state.token
-              }).then(function (res) {
-                if (res.data.success) {
-                  _this.loading = false;
-                }
-              })["catch"](function (err) {
-                _this.loading = false;
-
-                _this.$store.commit('clearToken');
-
-                _this.$router.push('/login');
-              });
-
-            case 3:
             case "end":
               return _context.stop();
           }
@@ -6596,27 +6483,15 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              if (!(_this.$store.state.token !== '')) {
-                _context.next = 3;
-                break;
-              }
-
-              _context.next = 3;
-              return axios.post('api/auth/checkToken', {
-                token: _this.$store.state.token
-              }).then(function (res) {
-                if (res.data.success) {
-                  _this.loading = false;
-                }
-              })["catch"](function (err) {
+              if (_this.$store.state.role != 'admin') {
                 _this.loading = false;
 
                 _this.$store.commit('clearToken');
 
                 _this.$router.push('/login');
-              });
+              }
 
-            case 3:
+            case 1:
             case "end":
               return _context.stop();
           }
@@ -6859,7 +6734,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       this.success = false;
       this.errors.splice(0);
 
-      if (this.editeduser.name && this.editeduser.surname && this.editeduser.country && this.editeduser.adress && this.editeduser.city && this.editeduser.nip && this.editeduser.company && this.editeduser.login && this.editeduser.password && this.role) {
+      if (this.editeduser.length != 0) {
         axios__WEBPACK_IMPORTED_MODULE_2___default().patch('api/auth/update', this.editeduser, {
           headers: {
             "Authorization": "Bearer ".concat(this.$store.state.token)
@@ -8466,9 +8341,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   data: function data() {
     return {
       user: [],
-      role: localStorage.getItem('role') || '',
-      admin: 'admin',
-      loading: true
+      admin: true
     };
   },
   mounted: function mounted() {
@@ -8488,7 +8361,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               return axios.post('api/auth/checkToken', {
                 token: _this.$store.state.token
               }).then(function (res) {
-                if (res.data.success) {}
+                axios.post('api/auth/profile', {
+                  token: _this.$store.state.token
+                }).then(function (res) {
+                  if (res.data.role == "admin") {
+                    _this.admin = false;
+                  }
+                });
               })["catch"](function (err) {
                 _this.$store.commit('clearToken');
 
@@ -8524,7 +8403,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         _this2.$router.push('/login');
 
         localStorage.clear();
-        _this2.load = false;
       });
     },
     toggle: function toggle() {
@@ -88172,7 +88050,7 @@ var render = function () {
                                 attrs: {
                                   type: "text",
                                   "aria-describedby": "login",
-                                  placeholder: "Enter Login Address...",
+                                  placeholder: "Podaj Login...",
                                   name: "login",
                                 },
                                 domProps: { value: _vm.credentials.login },
@@ -88204,7 +88082,7 @@ var render = function () {
                                 staticClass: "form-control form-control-user",
                                 attrs: {
                                   type: "password",
-                                  placeholder: "Password",
+                                  placeholder: "Hasło",
                                   name: "password",
                                 },
                                 domProps: { value: _vm.credentials.password },
@@ -88279,7 +88157,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "text-center" }, [
-      _c("h4", { staticClass: "text-dark mb-4" }, [_vm._v("Welcome Back!")]),
+      _c("h4", { staticClass: "text-dark mb-4" }, [_vm._v("Witamy!")]),
     ])
   },
   function () {
@@ -88287,11 +88165,9 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "text-center" }, [
-      _c(
-        "a",
-        { staticClass: "small", attrs: { href: "forgot-password.html" } },
-        [_vm._v("Forgot Password?")]
-      ),
+      _c("a", { attrs: { href: "/kontakt" } }, [
+        _vm._v("Zapomniałeś Hasła Skontaktuj sie z Administratorem"),
+      ]),
     ])
   },
 ]
@@ -90569,7 +90445,7 @@ var render = function () {
     _c(
       "button",
       {
-        staticClass: "btn btn-primary mt-3",
+        staticClass: "btn btn-warning mt-3",
         attrs: { type: "button" },
         on: {
           click: function ($event) {
@@ -90636,7 +90512,7 @@ var render = function () {
     _c(
       "button",
       {
-        staticClass: "btn btn-outline-primary",
+        staticClass: "btn btn-outline-success",
         attrs: { type: "button" },
         on: { click: _vm.onUpload },
       },
@@ -90808,7 +90684,7 @@ var render = function () {
       _c(
         "button",
         {
-          staticClass: "btn btn-primary mt-1",
+          staticClass: "btn btn-danger mt-1",
           attrs: { type: "button" },
           on: { click: _vm.store },
         },
@@ -91585,7 +91461,7 @@ var render = function () {
                         _c(
                           "button",
                           {
-                            staticClass: "btn btn-primary",
+                            staticClass: "btn btn-danger",
                             attrs: { type: "button" },
                             on: {
                               click: function ($event) {
@@ -91700,7 +91576,7 @@ var render = function () {
                     return _c("tr", { key: payment.id }, [
                       _c("td", [_vm._v(_vm._s(payment.name))]),
                       _vm._v(" "),
-                      _c("td", { staticClass: "border border-warning" }, [
+                      _c("td", { staticClass: "border bg-warning" }, [
                         _vm._v(
                           _vm._s(
                             _vm._f("dateFormat")(
@@ -91722,7 +91598,7 @@ var render = function () {
                         _c(
                           "button",
                           {
-                            staticClass: "btn btn-primary mt-1",
+                            staticClass: "btn btn-danger mt-1",
                             attrs: { type: "button" },
                             on: {
                               click: function ($event) {
@@ -91748,7 +91624,7 @@ var render = function () {
                 _vm._v("Nazwa Płatności"),
               ]),
               _vm._v(" "),
-              _c("th", { attrs: { scope: "col" } }, [
+              _c("th", { staticClass: "bg-warning", attrs: { scope: "col" } }, [
                 _vm._v("Termin Płatności"),
               ]),
               _vm._v(" "),
@@ -91894,7 +91770,7 @@ var render = function () {
                           _c(
                             "button",
                             {
-                              staticClass: "btn btn-primary",
+                              staticClass: "btn btn-success mr-1",
                               attrs: { type: "button" },
                               on: {
                                 click: function ($event) {
@@ -92016,11 +91892,11 @@ var render = function () {
             _vm._v(" "),
             _vm._m(6),
             _vm._v(" "),
-            _vm.role == _vm.admin
+            !_vm.admin
               ? _c("li", { staticClass: "nav-item" }, [_vm._m(7)])
               : _vm._e(),
             _vm._v(" "),
-            _vm.role == _vm.admin
+            !_vm.admin
               ? _c("li", { staticClass: "nav-item" }, [_vm._m(8)])
               : _vm._e(),
             _vm._v(" "),

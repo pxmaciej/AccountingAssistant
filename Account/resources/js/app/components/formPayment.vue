@@ -23,7 +23,7 @@
     <label for="exampleInputEmail1" class="form-label">Termin Płatności</label>
     <input type="date" class="form-control" v-model="payment.deadline">
     </div>
-    <button class="btn btn-primary mt-1" type="button" @click="store" >Wyślij</button>
+    <button class="btn btn-danger mt-1" type="button" @click="store" >Wyślij</button>
 </form>
 </div>
 

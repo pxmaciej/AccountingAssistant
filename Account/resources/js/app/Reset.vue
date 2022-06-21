@@ -180,7 +180,7 @@ export default {
         edit(){
             this.success = false;
             this.errors.splice(0);
-            if(this.editeduser.name&&this.editeduser.surname&&this.editeduser.country&&this.editeduser.adress&&this.editeduser.city&&this.editeduser.nip&&this.editeduser.company&&this.editeduser.login&&this.editeduser.password&&this.role){
+            if(this.editeduser.length != 0 ){
                  axios.patch('api/auth/update',this.editeduser,{ headers: {"Authorization" : `Bearer ${this.$store.state.token}`} }).then(res => {
                     this.errors.splice(0);
                     this.getProfile();
@@ -239,7 +239,5 @@ export default {
 
 
     }
-
-
 }
 </script>

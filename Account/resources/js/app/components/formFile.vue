@@ -8,7 +8,7 @@
             </ul>
         </p>
 <input type="file" @change="onFileSelected" name="file" multiple>
-<button type="button" class="btn btn-outline-primary" @click="onUpload">Wyślij</button>
+<button type="button" class="btn btn-outline-success" @click="onUpload">Wyślij</button>
 </div>
 
 
