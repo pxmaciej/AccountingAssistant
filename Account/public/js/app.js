@@ -7482,11 +7482,13 @@ __webpack_require__.r(__webpack_exports__);
         _this.reset();
       })["catch"](function (err) {
         alert(err.response.data.message);
+
+        _this.reset();
       });
     },
     reset: function reset() {
       for (var i = 0; i < this.files.length; i++) {
-        this.files[i] = null;
+        this.files.splice(i);
         document.getElementById('file').value = "";
       }
     }

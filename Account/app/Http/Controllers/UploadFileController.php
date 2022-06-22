@@ -151,8 +151,9 @@ class UploadFileController extends Controller
      */
     public function store(Request $request)
     {
-       $rules = ['files[*]' => 'required|mimes:jpeg,png,jpg,gif,svg,zip,pdf'];
-       $validator = Validator::make($request->all(), $rules);
+        $validator = Validator::make($request->all(), [
+            'files.*' => 'required|file|mimes:png,gif,jpeg,bmp,pdf,zip'
+        ]);
        if ($validator->fails()) {
         return response()->json(['error' => $validator->messages()],401);
         }else{

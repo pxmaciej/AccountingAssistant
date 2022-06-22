@@ -51,11 +51,12 @@ export default {
                     this.reset();
                 }).catch(err => {
                     alert(err.response.data.message);
+                    this.reset();
                 })
         },
         reset(){
             for(let i = 0; i < this.files.length; i++){
-                this.files[i] = null
+                this.files.splice(i);
                 document.getElementById('file').value = "";
             }
         }
