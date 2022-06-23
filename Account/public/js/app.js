@@ -91688,7 +91688,7 @@ var render = function () {
       },
     },
     [
-      _c("label", [_vm._v("Filtruj po NIP:")]),
+      _c("label", [_vm._v("Sortuj po NIP:")]),
       _vm._v(" "),
       _c("input", {
         directives: [
