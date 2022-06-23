@@ -26,12 +26,13 @@
 import axios from 'axios';
 export default {
     name: "formErning",
+    props: ['user'],
     data(){
         return{
             success: false,
             errors:[],
             income:{
-                user_id: localStorage.getItem('id')||'',
+                user_id: this.user,
                 name:'',
                 value:'',
                 date:'',

@@ -36,11 +36,13 @@ import axios from 'axios';
 
 export default {
     name: "listErning",
-    props: ['reload'],
+    props: {
+        user: Number,
+        reload: Boolean
+        },
     data(){
         return{
             ernings: [],
-            user: localStorage.getItem('id')||'',
             currentPage: 1,
             totalPages: 0
         }

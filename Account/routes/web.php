@@ -18,6 +18,15 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('pages.index');
 });
+Route::get('/ksiegowosc', function () {
+    return view('pages.ksiegowosc');
+});
+Route::get('/kadry', function () {
+    return view('pages.kadry');
+});
+Route::get('/online', function () {
+    return view('pages.online');
+});
 Route::get('/kontakt',function(){
     return view('pages.kontakt');
 });
@@ -27,5 +36,6 @@ Route::get('/oferta',function(){
 Route::get('/polityka-prywatnosci',function(){
     return view('pages.polityka');
 });
+
 
 Route::view('/{app?}', 'pages.home')->where('app', '.*')->middleware('api');

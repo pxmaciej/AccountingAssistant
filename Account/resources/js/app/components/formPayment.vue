@@ -23,7 +23,7 @@
     <label for="exampleInputEmail1" class="form-label">Termin Płatności</label>
     <input type="date" class="form-control" v-model="payment.deadline">
     </div>
-    <button class="btn btn-primary mt-1" type="button" @click="store" >Wyślij</button>
+    <button class="btn btn-danger mt-1" type="button" @click="store" >Wyślij</button>
 </form>
 </div>
 
@@ -39,7 +39,7 @@ export default {
         return{
             errors: [],
             payment :{
-                user_id : localStorage.getItem('id')||'',
+                user_id : this.user,
                 name : '',
                 category: '',
                 value: '',
@@ -59,7 +59,7 @@ export default {
                 .then( res=>{
                      console.log(res)
                      this.errors.splice(0);
-                     this.$emit('reload', 'true');
+                     this.$emit('reload','true');
                  })
             }
             if(!this.payment.name){

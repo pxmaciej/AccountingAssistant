@@ -7,6 +7,10 @@ import Profile from './Profile';
 import Payment from './Payment';
 import Erning from './Erning';
 import Expense from './Expense';
+import Users from './Users';
+import SelectedUser from './SelectedUser';
+import Register from './Register';
+import Reset from './Reset';
 
 Vue.use(VueRouter);
 
@@ -40,5 +44,21 @@ export const routes = [
     {
         path : '/expense',
         component: Expense,
+    },
+    {
+        path : '/users',
+        component: Users,
+    },
+    {
+        path : '/selecteduser',
+        component: SelectedUser,
+    },
+    {
+        path : '/register',
+        component: Register,
+    },
+    {
+        path : '/reset',
+        component: Reset,
     }
 ];

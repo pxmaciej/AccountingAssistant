@@ -17,16 +17,16 @@
                             <div class="col-lg-6">
                                 <div class="p-5">
                                     <div class="text-center">
-                                        <h4 class="text-dark mb-4">Welcome Back!</h4>
+                                        <h4 class="text-dark mb-4">Witamy!</h4>
                                     </div>
                                     <form class="user">
-                                            <div class="form-group"> <input class="form-control form-control-user" type="text"  aria-describedby="login" placeholder="Enter Login Address..." name="login" v-model="credentials.login"></div>
-                                            <div class="form-group"> <input class="form-control form-control-user" type="password"  placeholder="Password" name="password" v-model="credentials.password"></div>
+                                            <div class="form-group"> <input class="form-control form-control-user" type="text"  aria-describedby="login" placeholder="Podaj Login..." name="login" v-model="credentials.login"></div>
+                                            <div class="form-group"> <input class="form-control form-control-user" type="password"  placeholder="Hasło" name="password" v-model="credentials.password"></div>
 
 
                                         <button class="btn btn-primary btn-block btn-user" type="button" @click.prevent="login">Login</button>
                                     </form>
-                                    <div class="text-center"><a class="small" href="forgot-password.html">Forgot Password?</a></div>
+                                    <div class="text-center"><a href="/kontakt">Zapomniałeś Hasła Skontaktuj sie z Administratorem</a></div>
                                 </div>
                             </div>
                         </div>

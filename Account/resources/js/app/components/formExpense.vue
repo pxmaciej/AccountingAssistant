@@ -23,7 +23,7 @@
     <label class="form-label">Data</label>
     <input type="date" class="form-control" v-model="expense.date">
     </div>
-    <button class="btn btn-primary mt-3" type="button" @click.prevent="store" >Wyślij</button>
+    <button class="btn btn-warning mt-3" type="button" @click.prevent="store" >Wyślij</button>
 </form>
 
 </template>
@@ -37,7 +37,7 @@ export default {
         return{
             errors:[],
             expense:{
-                user_id: localStorage.getItem('id')||'',
+                user_id: this.user,
                 name:'',
                 value:'',
                 category:'',
