@@ -35,7 +35,6 @@
                                     <div class="card shadow mb-3">
                                         <div class="card-header py-3">
                                             <p class="text-primary m-0 font-weight-bold">Ustawienia</p>
-                                            <p v-if="response" class="text-success">Success</p>
                                              <p v-if="errors.length">
                                             <b>Please correct the following error(s):</b>
                                             <ul>
@@ -164,7 +163,7 @@ export default {
         edit(){
             this.success = false;
             this.errors.splice(0);
-            if(this.editeduser.name&&this.editeduser.surname&&this.editeduser.country&&this.editeduser.adress&&this.editeduser.city&&this.editeduser.nip&&this.editeduser.company&&this.editeduser.login&&this.editeduser.password&&this.role){
+            if(this.editeduser.length != 0){
                  axios.patch('api/auth/update',this.editeduser,{ headers: {"Authorization" : `Bearer ${this.$store.state.token}`} }).then(res => {
                     this.errors.splice(0);
                     this.getProfile();
