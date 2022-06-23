@@ -6242,7 +6242,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -6324,7 +6323,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       this.success = false;
       this.errors.splice(0);
 
-      if (this.editeduser.name && this.editeduser.surname && this.editeduser.country && this.editeduser.adress && this.editeduser.city && this.editeduser.nip && this.editeduser.company && this.editeduser.login && this.editeduser.password && this.role) {
+      if (this.editeduser.length != 0) {
         axios__WEBPACK_IMPORTED_MODULE_2___default().patch('api/auth/update', this.editeduser, {
           headers: {
             "Authorization": "Bearer ".concat(this.$store.state.token)
@@ -88426,12 +88425,6 @@ var render = function () {
                         { staticClass: "text-primary m-0 font-weight-bold" },
                         [_vm._v("Ustawienia")]
                       ),
-                      _vm._v(" "),
-                      _vm.response
-                        ? _c("p", { staticClass: "text-success" }, [
-                            _vm._v("Success"),
-                          ])
-                        : _vm._e(),
                       _vm._v(" "),
                       _vm.errors.length
                         ? _c("p", [
