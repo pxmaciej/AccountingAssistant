@@ -1,25 +1,25 @@
 @extends('layouts.app')
 @section('content')
 <div class="jarallax">
-  <header class="my-5 text-white text-center jarallax-img" style="background: url({{ URL::asset('image/baner.jpg') }});background-size: cover; background-attachment: fixed;">
-      <div class="mask rgba-gradient align-items-center">
-      <div class="overlay">
-              <div class="container">
-                  <div class="row">
-                      <div class="col-xl-12 mx-auto m-5 justify-content-lg-center">
-                      <h1 class="headertext mb-2 text-justify">Naszą ofertę kierujemy do osób prowadzących działalność gospodarczą, rozliczających się z podatku za pomocą księgi przychodów lub ewidencji ryczałtowej</h1>
-                      </div>
-                      <div class="col-md-10 col-lg-8 col-xl-7 mx-auto mb-5">
-                          <form>
-                              <div class="form-row">
-                                  <div class="col-12 col-md-9 mb-2 mb-md-0"><input class="form-control form-control-lg" type="email" placeholder="Wpisz email"></div>
-                                  <div class="col-12 col-md-3"><button class="btn btn-primary btn-block btn-lg mb-3" type="Sign-up">Zapisz się!</button></div>
-                              </div>
-                          </form>
-                      </div>
-              </div>
-      </div>
-  </header>
+    <header class="my-5 text-white text-center jarallax-img" style="background: url({{ URL::asset('image/baner.jpg') }});background-size: cover; background-attachment: fixed;">
+        <div class="mask rgba-gradient align-items-center">
+            <div class="overlay">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xl-12 mx-auto m-5 justify-content-lg-center">
+                            <h1 class="headertext mb-2 text-justify">Naszą ofertę kierujemy do osób prowadzących działalność gospodarczą, rozliczających się z podatku za pomocą księgi przychodów lub ewidencji ryczałtowej</h1>
+                        </div>
+                        <div class="col-md-10 col-lg-8 col-xl-7 mx-auto mb-5">
+                            <form>
+                                <div class="form-row">
+                                    <div class="col-12 col-md-9 mb-2 mb-md-0"><input class="form-control form-control-lg" type="email" placeholder="Wpisz email"></div>
+                                    <div class="col-12 col-md-3"><button class="btn btn-primary btn-block btn-lg mb-3" type="Sign-up">Zapisz się!</button></div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+    </header>
 </div>
 <div class="continer">
     <div class="row my-5 mx-auto">
@@ -33,7 +33,7 @@
         </p>
         <p class="lead" style="text-align: justify;">
             Zajmiemy się również Twoimi rozliczeniami z tytułu podatku VAT oraz wysyłaniem plików JPK i deklaracji do urzędu, jeśli jesteś czynnym podatnikiem tego podatku. Pomożemy również w rejestracji jako czynnego podatnika VAT, jeżeli się na to zdecydujesz lub będziesz do tego zobligowany przez przepisy.
-        </p> 
+        </p>
         <table class="table table-striped mt-5 mb-5">
             <thead>
               <tr>
@@ -64,7 +64,7 @@
                   <td>200 zł</td>
                 </tr>
             </tbody>
-        </table>   
+        </table>
        </div>
        <div class="col-lg-3">
         <div class="mx-auto features-icons-item mb-5 mb-lg-0 mb-lg-3">

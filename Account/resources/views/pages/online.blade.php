@@ -3,11 +3,11 @@
 <div class="jarallax">
     <header class="my-5 text-white text-center jarallax-img" style="background: url({{ URL::asset('image/baner.jpg') }});background-size: cover; background-attachment: fixed;">
         <div class="mask rgba-gradient align-items-center">
-        <div class="overlay">
+            <div class="overlay">
                 <div class="container">
                     <div class="row">
                         <div class="col-xl-12 mx-auto m-5 justify-content-lg-center">
-                        <h1 class="headertext mb-2 text-justify">Naszą ofertę kierujemy do osób prowadzących działalność gospodarczą, rozliczających się z podatku za pomocą księgi przychodów lub ewidencji ryczałtowej</h1>
+                            <h1 class="headertext mb-2 text-justify">Naszą ofertę kierujemy do osób prowadzących działalność gospodarczą, rozliczających się z podatku za pomocą księgi przychodów lub ewidencji ryczałtowej</h1>
                         </div>
                         <div class="col-md-10 col-lg-8 col-xl-7 mx-auto mb-5">
                             <form>
@@ -17,18 +17,18 @@
                                 </div>
                             </form>
                         </div>
+                    </div>
                 </div>
-        </div>
     </header>
 </div>
 <div class="continer">
     <div class="row my-5 mx-auto">
        <div class="col-lg-8 pt-5">
         <h2 class="text-center">Księgowość ONLINE</h2>
-        <p class="lead" style="text-align: justify;">     
+        <p class="lead" style="text-align: justify;">
             Udostępniamy naszym klientom przystępny panel klienta, który umożliwi Ci jeszcze łatwiejszą komunikację z nami oraz śledzenie Twojej księgowości online. W każdej chwili możesz sprawdzić swoje aktualne zobowiązania podatkowe czy podsumowania księgi przychodów i rozchodów w danym okresie.
         </p>
-         
+
        </div>
        <div class="col-lg-3">
         <div class="mx-auto features-icons-item mb-5 mb-lg-0 mb-lg-3">

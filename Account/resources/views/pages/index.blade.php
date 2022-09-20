@@ -3,11 +3,11 @@
 <div class="jarallax">
     <header class="my-5 text-white text-center jarallax-img" style="background: url({{ URL::asset('image/baner.jpg') }});background-size: cover; background-attachment: fixed;">
         <div class="mask rgba-gradient align-items-center">
-        <div class="overlay">
+            <div class="overlay">
                 <div class="container">
                     <div class="row">
                         <div class="col-xl-12 mx-auto m-5 justify-content-lg-center">
-                        <h1 class="headertext mb-2 text-justify">Naszą ofertę kierujemy do osób prowadzących działalność gospodarczą, rozliczających się z podatku za pomocą księgi przychodów lub ewidencji ryczałtowej</h1>
+                            <h1 class="headertext mb-2 text-justify">Naszą ofertę kierujemy do osób prowadzących działalność gospodarczą, rozliczających się z podatku za pomocą księgi przychodów lub ewidencji ryczałtowej</h1>
                         </div>
                         <div class="col-md-10 col-lg-8 col-xl-7 mx-auto mb-5">
                             <form>
@@ -17,11 +17,10 @@
                                 </div>
                             </form>
                         </div>
+                    </div>
                 </div>
-        </div>
     </header>
 </div>
-
 <section class="features-icons bg-light text-center">
     <div class="container">
             <h1>Biuro rachunkowe Legnica</h1>
@@ -46,7 +45,7 @@
         stronie, my zapraszamy do zapoznania się z nim w zakładce <a href="https://mojaksiegowosc.com/oferta">Oferta</a></p>
         <h2>Księgowość Legnica</h2>
         <p class="lead" style="text-align: justify;">Wszyscy pracownicy biura stale podnoszą swoje kompetencje oraz są na bieżąco z aktualizacjami przepisów. Wszystko to z myślą o dostarczaniu naszym klientom usług na najwyższym poziomie. Oferta Biura Rachunkowego Dominika Kozłowskiego jest skierowana do osób fizycznych oraz do firm z Legnicy oraz pobliskich miejscowości z województwa dolnośląskiego. Jeśli szukają Państwo profesjonalnej firmy z zakresu księgowości i kadr, cenią sobie czas oraz nowoczesne technologie, a także zależy na dobrej cenie, zdecydowanie warto wybrać nas.</p><br><br>
-               
+
     </div>
 </section>
 <section class="showcase mb-3">
